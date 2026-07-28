@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>토닥토닥 — StyleSeed v2</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   STYLESEED.md lock — warm-paper skin · terracotta #9B5132
+   consumer-service grammar · Float motion · soft radius
+   ============================================================ */
+:root{
+  /* surfaces (warm paper) */
+  --bg-page:#FAF7F2;
+  --bg-card:#FFFFFF;
+  --bg-subtle:#F3EEE6;
+  /* warm 5-level text ramp — no pure black */
+  --text-strong:#2B2521;
+  --text-primary:#3D362E;
+  --text-secondary:#6F6559;
+  --text-tertiary:#9C9184;
+  --text-disabled:#C6BCAF;
+  /* brand */
+  --brand:#9B5132;
+  --brand-press:#7F3F27;
+  --brand-tint:rgba(155,81,50,.10);
+  --brand-tint-strong:rgba(155,81,50,.16);
+  /* semantics — destructive kept clearly redder than accent, rare use */
+  --destructive:#C33B2B;
+  --destructive-tint:rgba(195,59,43,.09);
+  --warning:#B97D2A;
+  --warning-tint:rgba(185,125,42,.10);
+  /* imagery palette (content art only — never UI accents) */
+  --img-hanji:#F1E6D4; --img-persimmon:#C97B4A; --img-ink:#4A4038; --img-pine:#6B7F6A;
+  /* lines */
+  --border:#EAE2D6;
+  --border-strong:#D8CDBD;
+  /* radius personality: soft */
+  --r-ctrl:10px; --r-inner:12px; --r-card:16px;
+  /* elevation — one light source, above-left, ≤8-10% */
+  --shadow-card:0 1px 3px rgba(0,0,0,.04);
+  --shadow-elevated:0 4px 12px rgba(0,0,0,.06);
+  --shadow-modal:0 8px 24px rgba(0,0,0,.10);
+  /* motion — Float */
+  --dur-fast:100ms; --dur:200ms; --dur-slow:350ms;
+  --ease:cubic-bezier(.25,.1,.25,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --phone-w:390px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  background:#F1EDE6; color:var(--text-primary);
+  letter-spacing:0; /* Korean: no positive tracking */
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:"Noto Serif KR","Apple SD Gothic Neo",serif}
+
+/* ---------- prototype chrome ---------- */
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 48px}
+.proto-head{display:flex;align-items:baseline;gap:10px;margin:4px 2px 14px;flex-wrap:wrap}
+.proto-head h1{font-size:16px;font-weight:700;margin:0;color:var(--text-strong)}
+.proto-head span{font-size:12px;color:var(--text-tertiary);font-weight:500}
+.navchips{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}
+.navchips::-webkit-scrollbar{display:none}
+.navchips button{
+  flex:0 0 auto;height:36px;padding:0 12px;border-radius:var(--r-ctrl);
+  border:1px solid var(--border);background:var(--bg-card);
+  font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;
+  font-family:inherit;display:inline-flex;align-items:center;gap:6px;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease);
+}
+.navchips button em{font-style:normal;font-size:11px;font-weight:600;color:var(--text-disabled)}
+.navchips button.active{background:var(--text-strong);border-color:var(--text-strong);color:#fff}
+.navchips button.active em{color:rgba(255,255,255,.5)}
+.navchips .sep{flex:0 0 auto;align-self:center;font-size:11px;color:var(--text-tertiary);font-weight:600;padding:0 4px}
+.stage{display:flex;justify-content:center}
+
+/* ---------- phone frame ---------- */
+.phone{
+  width:var(--phone-w);height:844px;background:var(--bg-page);
+  border:8px solid #2A2724;border-radius:44px;
+  box-shadow:var(--shadow-modal);overflow:hidden;position:relative;
+}
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:126px;height:24px;background:#2A2724;border-radius:0 0 16px 16px;z-index:9}
+
+/* ---------- screen scaffold ---------- */
+.screen{height:100%;overflow-y:auto;display:flex;flex-direction:column;background:var(--bg-page);scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+.body{flex:1;padding:0 24px 12px;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:5;flex:0 0 auto;
+  height:82px;padding:26px 8px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg-page);
+}
+.icon-btn{
+  width:44px;height:44px;border:0;background:transparent;border-radius:var(--r-ctrl);
+  display:grid;place-items:center;cursor:pointer;color:var(--text-primary);
+}
+.icon-btn svg{width:22px;height:22px}
+.icon-btn:active{background:var(--bg-subtle)}
+.topbar .ctx{font-size:13px;font-weight:600;color:var(--text-tertiary);padding:0 12px}
+
+/* Float entrance — gentle, staggered */
+.body>*{animation:floatIn var(--dur-slow) var(--ease-out) both}
+.body>*:nth-child(2){animation-delay:40ms}
+.body>*:nth-child(3){animation-delay:80ms}
+.body>*:nth-child(4){animation-delay:120ms}
+.body>*:nth-child(5){animation-delay:160ms}
+.body>*:nth-child(n+6){animation-delay:200ms}
+@keyframes floatIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* ---------- typography (mobile-tight scale) ---------- */
+.h-page{font-size:23px;line-height:1.4;letter-spacing:-.01em;font-weight:700;margin:6px 0 10px;color:var(--text-strong)}
+.lead{font-size:15px;line-height:1.62;color:var(--text-secondary);margin:0 0 24px;font-weight:400}
+.caption{font-size:12px;line-height:1.55;font-weight:500;color:var(--text-tertiary);margin:10px 0 0}
+.field-label{font-size:14px;line-height:1.4;font-weight:600;color:var(--text-primary);margin:28px 0 10px}
+h3{font-size:16px;line-height:1.45;font-weight:700;margin:0 0 4px;color:var(--text-strong)}
+.icon{width:22px;height:22px;flex:0 0 auto}
+
+/* ---------- buttons — one height set 52/48/44, radius 10 ---------- */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  border:0;cursor:pointer;font-family:inherit;border-radius:var(--r-ctrl);
+  transition:background var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease);
+}
+.btn:focus-visible,.chip:focus-visible,.icon-btn:focus-visible,textarea:focus-visible,.choice:focus-visible,.tap:focus-visible{
+  outline:2px solid var(--brand);outline-offset:2px;
+}
+.btn-cta{height:52px;font-size:16px;font-weight:700}
+.btn-l{height:48px;font-size:15px;font-weight:700}
+.btn-m{height:44px;font-size:14px;font-weight:600}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:active{background:var(--brand-press)}
+.btn-secondary{background:var(--bg-subtle);color:var(--text-primary)}
+.btn-secondary:active{background:#EAE3D7}
+.btn-ghost{background:transparent;color:var(--brand)}
+.btn-ghost:active{background:var(--brand-tint)}
+.btn[disabled]{opacity:.35;pointer-events:none}
+.btn + .btn{margin-top:8px}
+.btn-row{display:flex;gap:8px}.btn-row .btn{flex:1}.btn-row .btn+.btn{margin-top:0}
+
+/* sticky CTA (form pattern — allowed on flow screens) */
+.cta-bar{
+  position:sticky;bottom:0;z-index:6;flex:0 0 auto;
+  margin:auto -24px 0;padding:24px 24px 22px;
+  background:linear-gradient(180deg,rgba(250,247,242,0) 0,var(--bg-page) 22px);
+}
+
+/* ---------- cards ---------- */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-card);padding:16px;box-shadow:var(--shadow-card)}
+.card+.card{margin-top:12px}
+.card-lg{padding:24px}
+.card-tint{background:var(--brand-tint);border-color:transparent;box-shadow:none}
+.card-subtle{background:var(--bg-subtle);border-color:transparent;box-shadow:none}
+.mini-label{font-size:12px;line-height:1.3;font-weight:600;color:var(--text-tertiary);margin:0 0 8px}
+.card-tint .mini-label{color:var(--brand)}
+.body-text{font-size:14px;line-height:1.6;margin:0;color:var(--text-primary)}
+.body-text .dim{color:var(--text-tertiary);font-size:13px}
+.sub-text{font-size:13px;line-height:1.6;margin:0;color:var(--text-secondary)}
+/* signature move — deity utterances only */
+.deity-quote{font-family:"Noto Serif KR",serif;font-size:19px;line-height:1.65;font-weight:600;margin:0;color:var(--text-strong)}
+.deity-quote-lg{font-family:"Noto Serif KR",serif;font-size:21px;line-height:1.62;font-weight:600;margin:0;color:var(--text-strong)}
+.gift-sentence{font-size:16px;line-height:1.6;font-weight:700;margin:0;color:var(--text-strong)}
+.tap{cursor:pointer;transition:background var(--dur) var(--ease)}
+.tap:active{background:var(--bg-subtle)}
+
+/* ---------- icon badge — brand 10% tint + brand stroke icon ---------- */
+.ibadge{width:44px;height:44px;border-radius:var(--r-inner);background:var(--brand-tint);color:var(--brand);display:grid;place-items:center;flex:0 0 auto}
+.ibadge svg{width:22px;height:22px}
+.ibadge-lg{width:64px;height:64px;border-radius:var(--r-card)}
+.ibadge-lg svg{width:30px;height:30px}
+.ibadge-neutral{background:var(--bg-subtle);color:var(--text-secondary)}
+
+/* ---------- hero (landing) ---------- */
+.hero{
+  border-radius:var(--r-card);background:var(--bg-subtle);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:32px 24px 24px;margin:4px 0 24px;
+}
+.hero-title{font-size:13px;color:var(--text-secondary);font-weight:600;margin-top:16px}
+
+/* ---------- entry choices ---------- */
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 8px}
+.choice{
+  border:1px solid var(--border);background:var(--bg-card);border-radius:var(--r-card);
+  padding:16px;min-height:150px;text-align:left;cursor:pointer;font-family:inherit;color:var(--text-primary);
+  box-shadow:var(--shadow-card);display:flex;flex-direction:column;align-items:flex-start;gap:0;
+  transition:background var(--dur) var(--ease);
+}
+.choice:active{background:var(--bg-subtle)}
+.choice .ibadge{width:40px;height:40px;margin-bottom:12px}
+.choice .ibadge svg{width:20px;height:20px}
+.choice b{display:block;font-size:15px;font-weight:700;line-height:1.35;margin-bottom:6px;color:var(--text-strong)}
+.choice p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);margin:0;font-weight:400}
+
+/* ---------- chips — soft radius (one personality), ≥44px targets ---------- */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  min-height:44px;padding:10px 16px;border-radius:var(--r-ctrl);
+  border:1px solid var(--border);background:var(--bg-card);
+  font-size:14px;font-weight:500;color:var(--text-secondary);cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.chip.active{background:var(--brand-tint);border-color:var(--brand);color:var(--brand);font-weight:600}
+
+/* ---------- textarea ---------- */
+textarea{
+  width:100%;min-height:140px;border:1px solid var(--border);border-radius:var(--r-inner);
+  background:var(--bg-card);padding:16px;font-family:inherit;
+  font-size:15px;line-height:1.62;color:var(--text-primary);
+  resize:none;outline:0;transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+textarea::placeholder{color:var(--text-disabled)}
+textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-tint)}
+
+/* ---------- deity list ---------- */
+.deity-card{
+  display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-card);
+  padding:16px;box-shadow:var(--shadow-card);cursor:pointer;
+  transition:background var(--dur) var(--ease);
+}
+.deity-card+.deity-card{margin-top:12px}
+.deity-card:active{background:var(--bg-subtle)}
+.deity-name{font-size:16px;font-weight:700;color:var(--text-strong);margin-bottom:2px}
+.deity-fit{font-size:12px;line-height:1.5;color:var(--text-tertiary);font-weight:500;margin-bottom:4px}
+.deity-role{font-size:13px;line-height:1.55;color:var(--text-secondary);margin-bottom:12px}
+.line-sample{font-family:"Noto Serif KR",serif;font-size:14px;line-height:1.7;font-weight:500;background:var(--bg-subtle);border-radius:var(--r-inner);padding:12px 14px;color:var(--text-primary)}
+.selected-deity{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  background:var(--brand-tint);border-radius:var(--r-inner);padding:12px 14px;margin:0 0 16px;
+}
+.selected-deity strong{font-size:13px;font-weight:600;color:var(--brand)}
+.selected-deity button{border:0;background:transparent;color:var(--brand);font-weight:600;font-size:12px;cursor:pointer;font-family:inherit;flex:0 0 auto;opacity:.8;min-height:44px}
+
+/* ---------- progress ---------- */
+.progress{height:4px;background:var(--bg-subtle);border-radius:999px;margin:2px 0 24px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--brand);border-radius:999px;transition:width var(--dur-slow) var(--ease-out)}
+
+/* ---------- loading — 3-dot, gentle (Float) ---------- */
+.dots{display:flex;gap:8px;justify-content:center;margin:52px 0 24px}
+.dots i{width:9px;height:9px;border-radius:999px;background:var(--border-strong);animation:dot 1.4s var(--ease) infinite}
+.dots i:nth-child(2){animation-delay:.18s}.dots i:nth-child(3){animation-delay:.36s}
+@keyframes dot{0%,60%,100%{opacity:.4;transform:none}30%{opacity:1;transform:translateY(-3px);background:var(--brand)}}
+.checklist{display:grid;gap:8px;margin:16px 0 0}
+.check{display:flex;gap:10px;align-items:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-inner);padding:13px 14px;font-size:14px;font-weight:500;color:var(--text-secondary)}
+.check .tick{width:20px;height:20px;border-radius:999px;background:var(--brand-tint);color:var(--brand);display:grid;place-items:center;flex:0 0 auto}
+.check .tick svg{width:12px;height:12px}
+
+/* ---------- talisman art (content illustration — imagery palette only) ---------- */
+.talisman-art{
+  border-radius:var(--r-card);background:var(--img-hanji);
+  display:grid;place-items:center;padding:28px 0;margin:0 0 12px;
+}
+
+/* ---------- score ---------- */
+.score{display:flex;gap:8px;margin-top:12px}
+.score button{
+  flex:1;height:48px;border-radius:var(--r-ctrl);border:1px solid var(--border);
+  background:var(--bg-card);font-size:15px;font-weight:600;color:var(--text-secondary);cursor:pointer;font-family:inherit;
+  transition:background var(--dur) var(--ease);
+}
+.score button.on{background:var(--brand-tint);border-color:var(--brand);color:var(--brand);font-weight:700}
+
+/* ---------- toast ---------- */
+.toast{
+  position:absolute;bottom:22px;left:20px;right:20px;z-index:20;
+  background:#332D27;color:#fff;border-radius:var(--r-inner);
+  padding:14px 16px;font-size:14px;font-weight:500;line-height:1.5;
+  box-shadow:var(--shadow-modal);display:flex;gap:10px;align-items:center;
+  opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out);
+}
+.toast.show{opacity:1;transform:none}
+.toast svg{width:18px;height:18px;flex:0 0 auto;color:#E8C79B}
+
+.spacer{flex:1}
+.gap-32{height:32px;flex:0 0 auto}
+
+@media(max-width:520px){
+  .wrap{padding:12px 10px 32px}
+  .phone{width:100%;max-width:390px;height:800px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="proto-head"><h1>토닥토닥 · StyleSeed v2</h1><span>consumer-service × warm-paper · terracotta lock — 390px</span></div>
+  <div class="navchips" id="nav"></div>
+  <div class="stage">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen" id="screen"></div>
+      <div class="toast" id="toast" role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span id="toastMsg"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- one line-icon family: 24 grid · 1.8 stroke · round caps · currentColor ---------- */
+const I=(p,vb='0 0 24 24')=>`<svg class="icon" viewBox="${vb}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const ICONS={
+  back:I('<path d="M14.5 5.5L8 12l6.5 6.5"/>'),
+  home:I('<path d="M4 11l8-7 8 7"/><path d="M6 9.8V20h12V9.8"/><path d="M10 20v-5h4v5"/>'),
+  door:I('<path d="M6 20V5.5a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 18 5.5V20"/><path d="M4 20h16"/><circle cx="14.6" cy="12.2" r="0.9" fill="currentColor" stroke="none"/>'),
+  house:I('<path d="M4 11l8-7 8 7"/><path d="M6 9.8V20h12V9.8"/><path d="M10 20v-5h4v5"/>'),
+  flame:I('<path d="M12 3.5c1.6 2.6 5.5 5 5.5 9.3A5.5 5.5 0 0 1 12 18.3a5.5 5.5 0 0 1-5.5-5.5c0-2.1 1-3.7 2.2-5.2.4 1 .9 1.7 1.8 2.3-.2-2.5.4-4.6 1.5-6.4z"/>'),
+  sprout:I('<path d="M12 20v-7"/><path d="M12 13c0-3.5-2.5-6-6-6 0 3.5 2.5 6 6 6z"/><path d="M12 11c0-2.8 2.2-5 5-5 0 2.8-2.2 5-5 5z"/>'),
+  pen:I('<path d="M4 20l1-4L16.5 4.5a1.9 1.9 0 0 1 2.7 0l.3.3a1.9 1.9 0 0 1 0 2.7L8 19l-4 1z"/><path d="M14.5 6.5l3 3"/>'),
+  lantern:I('<path d="M12 3v2"/><path d="M8.5 5h7"/><path d="M9 5c-2 1.6-3 3.8-3 6.5S7 16.4 9 18h6c2-1.6 3-3.8 3-6.5S17 6.6 15 5"/><path d="M9 18h6v2H9z"/>'),
+  check:I('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
+  shield:I('<path d="M12 3l7 2.8v5.4c0 4.4-3 8.1-7 9.8-4-1.7-7-5.4-7-9.8V5.8L12 3z"/><path d="M9.2 12l2 2 3.6-3.8"/>'),
+  lock:I('<rect x="5.5" y="10.5" width="13" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>'),
+  retry:I('<path d="M4.5 12a7.5 7.5 0 1 1 2.2 5.3"/><path d="M4.5 17.5V12H10"/>'),
+  save:I('<path d="M12 4v10"/><path d="M8 10.5l4 3.5 4-3.5"/><path d="M5 19.5h14"/>'),
+  heart:I('<path d="M12 19.5C7 15.8 4 12.9 4 9.6A3.9 3.9 0 0 1 8 5.7c1.6 0 3 .8 4 2.2 1-1.4 2.4-2.2 4-2.2a3.9 3.9 0 0 1 4 3.9c0 3.3-3 6.2-8 9.9z"/>'),
+  chat:I('<path d="M4.5 6.5A2.5 2.5 0 0 1 7 4h10a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 17 16H9.5L5.5 19.5c-.6.5-1-.1-1-.7V6.5z"/>'),
+};
+const deitySvg={seongju:ICONS.house,jowang:ICONS.flame,samsin:ICONS.sprout};
+
+/* hero illustration — imagery palette only (hanji/persimmon/ink/pine) */
+const heroArt=`
+<svg width="150" height="132" viewBox="0 0 150 132" fill="none" aria-hidden="true">
+  <circle cx="75" cy="64" r="56" fill="#FFFFFF"/>
+  <rect x="49" y="30" width="52" height="72" rx="5" fill="#F1E6D4" stroke="#4A4038" stroke-width="2.4"/>
+  <rect x="57" y="40" width="36" height="24" rx="2.5" fill="none" stroke="#4A4038" stroke-width="1.6" opacity=".45"/>
+  <rect x="57" y="70" width="36" height="24" rx="2.5" fill="none" stroke="#4A4038" stroke-width="1.6" opacity=".45"/>
+  <circle cx="91" cy="67" r="2.6" fill="#4A4038"/>
+  <path d="M30 102h90" stroke="#4A4038" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="117" cy="43" r="7" fill="#C97B4A"/>
+  <path d="M117 30v-5M128 47h5M125.5 34.5l3.5-3.5" stroke="#C97B4A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M36 84c4-2 7-6 8-11 1 5 4 9 8 11-4 2-7 6-8 11-1-5-4-9-8-11z" fill="#6B7F6A" opacity=".8"/>
+</svg>`;
+
+/* talisman illustration — imagery palette only */
+const talismanArt=`
+<svg width="176" height="216" viewBox="0 0 176 216" fill="none" aria-hidden="true">
+  <rect x="14" y="10" width="148" height="196" rx="10" fill="#FFFDF8" stroke="#4A4038" stroke-width="2.6"/>
+  <rect x="26" y="22" width="124" height="172" rx="6" fill="none" stroke="#4A4038" stroke-width="1.4" opacity=".4"/>
+  <rect x="64" y="52" width="48" height="70" rx="4" fill="#F1E6D4" stroke="#4A4038" stroke-width="2"/>
+  <circle cx="103" cy="88" r="2.2" fill="#4A4038"/>
+  <path d="M52 130h72" stroke="#4A4038" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="88" cy="40" r="6" fill="#C97B4A"/>
+  <path d="M88 30v-3M96.5 43h3M94.5 33.5l2.5-2.5" stroke="#C97B4A" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="88" y="162" text-anchor="middle" font-family="'Noto Serif KR',serif" font-size="13" font-weight="600" fill="#4A4038">문지방의 작은 불빛</text>
+  <rect x="126" y="170" width="20" height="20" rx="4" fill="#C97B4A"/>
+  <path d="M132 176l4 0m-4 4h8m-8 4h6" stroke="#FFFDF8" stroke-width="1.6" stroke-linecap="round"/>
+</svg>`;
+
+let appState={selectedDeity:null};
+const deityMap={
+  seongju:{name:'성주신',label:'성주신에게 고민을 건네고 있어요',role:'관계 안에서 내 자리를 살피는 신'},
+  jowang:{name:'조왕신',label:'조왕신과 함께 이 고민을 정리해볼게요',role:'식어버린 일상과 마음의 온도를 다시 데우는 신'},
+  samsin:{name:'삼신할미',label:'삼신할미에게 시작 앞의 마음을 건네고 있어요',role:'새로 시작하고 싶은 마음을 조심스럽게 돌보는 신'}
+};
+function topbar(backGo,ctx,home){return `<div class="topbar">${backGo?`<button class="icon-btn" data-go="${backGo}" aria-label="${home?'홈으로':'뒤로'}">${home?ICONS.home:ICONS.back}</button>`:'<span style="width:44px"></span>'}<span class="ctx">${ctx||''}</span></div>`}
+function cta(label,go,opts={}){return `<div class="cta-bar"><button class="btn btn-cta btn-primary" ${opts.disabled?'disabled':''} ${go?`data-go="${go}"`:''} ${opts.toast?`data-toast="${opts.toast}"`:''}>${label}</button></div>`}
+
+const screens=[
+{id:'landing',title:'시작 화면',group:'main',body:()=>`
+  ${topbar(null,'알파 테스트')}
+  <div class="body">
+    <div class="hero">${heroArt}<div class="hero-title">문 앞에서 마음을 맞이하는 토착신</div></div>
+    <h2 class="h-page">오늘 마음에<br>걸리는 일이 있나요?</h2>
+    <p class="lead">고민을 적으면 토착신이 지금 마음을 읽고, 오늘 해볼 작은 실천을 건네드려요. 원한다면 그 결과를 나만의 부적으로 남길 수 있어요.</p>
+    <div class="choice-grid">
+      <button class="choice" data-go="input" data-flow="worry"><span class="ibadge">${ICONS.pen}</span><b>고민부터 시작하기</b><p>내 이야기를 먼저 적고, 어울리는 토착신의 해석을 받아요.</p></button>
+      <button class="choice" data-go="deities"><span class="ibadge ibadge-neutral">${ICONS.lantern}</span><b>토착신 먼저 보기</b><p>토착신의 말투와 관점을 보고, 마음에 가까운 신에게 고민을 건네요.</p></button>
+    </div>
+    <button class="btn btn-m btn-ghost" data-toast="고민 입력, 토착신 해석, 작은 실천 순서로 진행돼요. 부적은 원할 때만 만들어요.">이 서비스는 어떻게 진행되나요?</button>
+    <p class="caption" style="text-align:center">미래를 맞히거나 결정을 대신하는 서비스가 아니라, 오늘의 고민을 정리하기 위한 참고예요.</p>
+  </div>`},
+{id:'deities',title:'토착신 리스트',group:'main',body:()=>`
+  ${topbar('landing','토착신 먼저 보기')}
+  <div class="body">
+    <h2 class="h-page">어떤 토착신에게<br>고민을 건네볼까요?</h2>
+    <p class="lead">무엇을 기준으로 고르면 좋을지 먼저 보여드릴게요. 토착신을 골라도 결과 전에는 고민 입력이 필요해요.</p>
+    ${deityCard('seongju','관계 · 가족 · 서운함 · 내 자리','관계를 지키는 일과 나를 지우는 일은 달라요.')}
+    ${deityCard('jowang','번아웃 · 루틴 · 쉼 · 무기력','오늘은 큰 불을 피우지 않아도 돼요.')}
+    ${deityCard('samsin','시작 · 변화 · 용기 · 자기비난','처음부터 열매를 보려 하지 말고 씨앗 하나만 쥐어보자.')}
+    <button class="btn btn-m btn-ghost" data-go="input" data-flow="worry" style="margin-top:12px">고민부터 먼저 적을래요</button>
+  </div>`},
+{id:'deityDetail',title:'토착신 상세',group:'main',body:()=>{const id=appState.selectedDeity||'seongju';const d=deityMap[id];return `
+  ${topbar('deities',d.name)}
+  <div class="body">
+    <span class="ibadge ibadge-lg" style="margin:2px 0 16px">${deitySvg[id]}</span>
+    <h2 class="h-page">${d.name}은 이런 고민에<br>잘 맞아요</h2>
+    <p class="lead">${d.role}. 선택 후에는 고민을 입력해야 상담 결과를 받을 수 있어요.</p>
+    <div class="card card-tint"><p class="mini-label">말투 미리보기</p><p class="deity-quote">${sampleLine(id)}</p></div>
+    <div class="card"><p class="mini-label">많이 건네는 고민</p><p class="sub-text">${sampleConcerns(id)}</p></div>
+    <div class="card"><p class="mini-label">부적에 자주 담기는 상징</p><p class="body-text">${symbolWords(id)}</p></div>
+    <button class="btn btn-l btn-secondary" data-go="deities" style="margin-top:16px">다른 토착신 보기</button>
+  </div>
+  ${cta(d.name+'에게 고민 말하기','input')}`}},
+{id:'input',title:'공통 고민 입력',group:'main',body:()=>{const d=appState.selectedDeity?deityMap[appState.selectedDeity]:null;return `
+  ${topbar('landing','고민 입력')}
+  <div class="body">
+    ${d?`<div class="selected-deity"><strong>${d.label}</strong><button data-go="deities">다른 토착신 선택</button></div>`:''}
+    <h2 class="h-page">지금 마음에 남아 있는 말을<br>편하게 적어주세요</h2>
+    <p class="lead" style="margin-bottom:16px">짧게 적어도 괜찮아요. 한 문장이어도 충분해요.</p>
+    <textarea placeholder="예: 친구에게 서운한데 말하면 멀어질까 봐 계속 참고 있어요. 제가 예민한 건지 모르겠어요." aria-label="고민 입력"></textarea>
+    <p class="caption">실명, 연락처, 주소는 적지 않아도 괜찮아요.</p>
+    <p class="field-label">지금 마음에 가까운 감정</p>
+    <div class="chips"><button class="chip">서운함</button><button class="chip">불안함</button><button class="chip">막막함</button><button class="chip">화남</button><button class="chip">지침</button><button class="chip">잘 모르겠음</button></div>
+    <p class="field-label">오늘 결과를 보고 원하는 변화</p>
+    <div class="chips"><button class="chip">마음 정리</button><button class="chip">내 탓 줄이기</button><button class="chip">말할 문장 하나</button><button class="chip">오늘 할 일 하나</button></div>
+    <button class="btn btn-m btn-ghost" data-go="reflect" style="margin-top:24px">마음 한 번 더 확인하기</button>
+    <p class="caption" style="text-align:center;margin-top:0">고민부터 시작했든, 토착신을 먼저 골랐든 여기서부터는 같은 방식으로 진행돼요.</p>
+  </div>
+  ${cta('결과 받아보기','loading')}`}},
+{id:'reflect',title:'마음 한 번 더 확인',group:'main',body:()=>`
+  ${topbar('input','고민 정리 1/3')}
+  <div class="body">
+    <div class="progress"><span style="width:33%"></span></div>
+    <h2 class="h-page">이 마음이 맞나요?</h2>
+    <p class="lead">말하고 싶은 마음도 있는데, 관계가 멀어질까 봐 조심스러운 마음도 함께 있어 보여요.</p>
+    <div class="btn-row"><button class="btn btn-l btn-primary" data-go="capacity">맞아요</button><button class="btn btn-l btn-secondary" data-go="input">이해한 내용 수정하기</button></div>
+    <button class="btn btn-m btn-ghost" data-go="loading" style="margin-top:8px">바로 결과 보기</button>
+    <p class="caption">지금 입력한 내용만으로도 결과를 받아볼 수 있어요. 수정해도 기존 입력값은 유지돼요.</p>
+    <div class="gap-32"></div>
+    <p class="field-label" style="margin-top:0">이 고민에 이름을 붙인다면?</p>
+    <div class="chips"><button class="chip">말하지 못한 서운함</button><button class="chip">관계를 지키려는 망설임</button><button class="chip">내 탓으로 돌리는 마음</button></div>
+  </div>`},
+{id:'capacity',title:'오늘 가능한 정도',group:'main',body:()=>`
+  ${topbar('reflect','고민 정리 2/3')}
+  <div class="body">
+    <div class="progress"><span style="width:66%"></span></div>
+    <h2 class="h-page">오늘은 어느 정도까지<br>괜찮을까요?</h2>
+    <p class="lead">작은 실천은 지금 마음의 여력에 맞춰 제안할게요. 무리하게 바꾸라는 말은 하지 않아요.</p>
+    <div class="card tap" data-go="summary" role="button" tabindex="0"><h3>읽기만 해도 괜찮아요</h3><p class="sub-text">오늘은 행동보다 마음 정리가 먼저 필요해요.</p></div>
+    <div class="card tap" data-go="summary" role="button" tabindex="0"><h3>한 문장 정도는 써볼 수 있어요</h3><p class="sub-text">보내지 않을 문장, 메모 한 줄처럼 작게 시작해요.</p></div>
+    <div class="card tap" data-go="summary" role="button" tabindex="0"><h3>3분 정도 정리해볼 수 있어요</h3><p class="sub-text">감정이나 내 몫과 상대 몫을 짧게 나눠봐요.</p></div>
+    <button class="btn btn-m btn-ghost" data-go="loading" style="margin-top:12px">바로 결과 보기</button>
+  </div>`},
+{id:'summary',title:'정리 확인',group:'main',body:()=>`
+  ${topbar('capacity','고민 정리 3/3')}
+  <div class="body">
+    <div class="progress"><span style="width:100%"></span></div>
+    <h2 class="h-page">지금 고민은 이렇게<br>결과에 반영돼요</h2>
+    <p class="lead" style="margin-bottom:16px">확인하고 바꾸고 싶은 부분이 있으면 알려주세요.</p>
+    <div class="card"><p class="mini-label">고민의 중심</p><p class="body-text">관계에서 말하지 못한 서운함<br><span class="dim">→ 결과 카드의 ‘오늘의 고민 이름’에 반영돼요.</span></p></div>
+    <div class="card"><p class="mini-label">함께 있는 마음</p><p class="body-text">말하고 싶은 마음과 멀어질까 봐 조심스러운 마음<br><span class="dim">→ ‘지금 마음의 결’에 반영돼요.</span></p></div>
+    <div class="card card-tint"><p class="mini-label">오늘 가능한 정도</p><p class="body-text">한 문장 정도<br><span class="dim">→ 작은 실천의 크기를 맞추는 데 사용돼요.</span></p></div>
+    <button class="btn btn-l btn-secondary" data-go="input" style="margin-top:16px">정리 조금 바꾸기</button>
+  </div>
+  ${cta('이대로 결과 받아보기','loading')}`},
+{id:'loading',title:'결과 생성 중',group:'main',body:()=>`
+  ${topbar(null,'결과 준비 중')}
+  <div class="body">
+    <div class="dots" aria-label="결과 생성 중"><i></i><i></i><i></i></div>
+    <h2 class="h-page" style="text-align:center">토착신이 지금 마음의 결을<br>살펴보고 있어요</h2>
+    <p class="lead" style="text-align:center">흩어진 말을 모으고, 오늘 해볼 수 있는<br>작은 실천을 찾고 있어요.</p>
+    <div class="checklist">
+      <div class="check"><span class="tick">${ICONS.check}</span>말 속에 담긴 감정 확인</div>
+      <div class="check"><span class="tick">${ICONS.check}</span>토착신의 관점으로 고민 해석</div>
+      <div class="check"><span class="tick">${ICONS.check}</span>오늘 해볼 수 있는 작은 실천 정리</div>
+    </div>
+    <p class="caption" style="text-align:center">잠시 뒤 상담 결과가 자동으로 열려요.</p>
+  </div>`},
+{id:'result',title:'상담 결과',group:'main',body:()=>`
+  ${topbar('input','상담 결과')}
+  <div class="body">
+    <div class="card card-tint card-lg">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <span class="ibadge" style="width:32px;height:32px;border-radius:8px;background:rgba(155,81,50,.14)"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M4 11l8-7 8 7"/><path d="M6 9.8V20h12V9.8"/><path d="M10 20v-5h4v5"/></svg></span>
+        <p class="mini-label" style="margin:0">성주신이 이렇게 읽었어요</p>
+      </div>
+      <p class="deity-quote-lg">“관계를 지키려는 마음이 커질수록, 내 마음이 설 자리가 좁아졌을 수 있어요.”</p>
+    </div>
+    <div class="card"><p class="mini-label">지금 마음의 결</p><p class="body-text">말하고 싶은 마음과, 관계가 멀어질까 봐 조심스러운 마음이 함께 있어 보여요.</p></div>
+    <div class="card"><p class="mini-label">오늘의 고민 이름</p><p class="body-text"><b>말하지 못한 서운함</b><br><span style="color:var(--text-secondary)">이건 당신이 예민하다는 뜻이 아니라, 마음을 둘 자리가 필요하다는 신호에 가까워요.</span></p></div>
+    <div class="card card-subtle"><p class="mini-label">오늘 새로 붙일 문장</p><p class="gift-sentence">나는 관계를 망치는 사람이 아니라, 내 마음을 조심스럽게 꺼내는 법을 배우는 중이에요.</p></div>
+    <div class="card">
+      <p class="mini-label">오늘 해볼 작은 실천</p>
+      <h3>보내지 않을 문장 하나 써보기</h3>
+      <p class="caption" style="margin:2px 0 12px">시간 3분 · 혼자 가능 · 바로 보내지 않기</p>
+      <ol style="margin:0;padding-left:18px;font-size:14px;line-height:1.75;color:var(--text-secondary)">
+        <li>하고 싶었던 말을 그대로 적어요.</li>
+        <li>전송하지 않고 10분 동안 그대로 둬요.</li>
+        <li>마지막에 “내가 진짜 원하는 건 ___”을 한 줄 더 적어요.</li>
+      </ol>
+    </div>
+    <button class="btn btn-l btn-secondary" data-go="input" style="margin-top:16px">새로운 고민 상담하기</button>
+    <button class="btn btn-m btn-ghost" data-go="resultFeedback">결과 피드백 남기기</button>
+    <p class="caption" style="text-align:center">부적은 자동 생성되지 않아요. 이 결과를 남기고 싶을 때 직접 선택할 수 있어요.</p>
+  </div>
+  ${cta('이 결과를 부적으로 남기기','talismanLoading')}`},
+{id:'talismanLoading',title:'부적 생성 중',group:'main',body:()=>`
+  ${topbar(null,'부적 생성 중')}
+  <div class="body">
+    <div class="dots" aria-label="부적 생성 중"><i></i><i></i><i></i></div>
+    <h2 class="h-page" style="text-align:center">상담 결과를 바탕으로<br>부적에 담을 상징을 정리하고 있어요</h2>
+    <p class="lead" style="text-align:center">오늘의 고민 이름, 토착신의 상징, 작은 실천을 모아<br>나만의 부적을 만들고 있어요.</p>
+    <div class="checklist">
+      <div class="check"><span class="tick">${ICONS.check}</span>오늘의 고민 이름 정리</div>
+      <div class="check"><span class="tick">${ICONS.check}</span>토착신 상징 반영</div>
+      <div class="check"><span class="tick">${ICONS.check}</span>작은 실천 문장 반영</div>
+      <div class="check"><span class="tick">${ICONS.check}</span>금지 표현 확인</div>
+      <div class="check"><span class="tick">${ICONS.check}</span>부적 이미지 생성 준비</div>
+    </div>
+    <p class="caption" style="text-align:center">잠시 뒤 나만의 부적이 자동으로 열려요.</p>
+  </div>`},
+{id:'talisman',title:'나만의 부적',group:'main',body:()=>`
+  ${topbar('landing','나만의 부적',true)}
+  <div class="body">
+    <h2 class="h-page serif">문지방의 작은 불빛</h2>
+    <p class="lead" style="margin-bottom:16px">관계를 끊지 않으면서도, 내 마음이 머물 자리를 남겨두기 위한 부적이에요.</p>
+    <div class="talisman-art">${talismanArt}</div>
+    <div class="card"><p class="mini-label">부적에 담은 의미</p><p class="sub-text">닫히지 않은 문은 관계를 포기하지 않으면서도 내 마음이 사라지지 않게 남겨두는 선택을 뜻해요. 작은 불빛은 바로 보내지 않은 문장처럼, 급하게 결론 내리지 않고 마음을 살피는 시간을 의미해요.</p></div>
+    <div class="card card-tint"><p class="mini-label">오늘 다시 기억할 작은 실천</p><p class="body-text">보내지 않을 문장 하나를 먼저 써보기.</p></div>
+    <button class="btn btn-l btn-secondary" data-go="input" style="margin-top:16px">새로운 고민 상담하기</button>
+    <button class="btn btn-m btn-ghost" data-go="talismanFeedback">부적 피드백 남기기</button>
+    <p class="caption" style="text-align:center">이 부적은 어떤 일을 반드시 이루게 하는 약속이 아니라, 오늘의 마음과 작은 실천을 기억하기 위한 상징이에요.</p>
+  </div>
+  ${cta('저장/공유하기','share')}`},
+{id:'share',title:'저장/공유',group:'main',body:()=>`
+  ${topbar('talisman','저장/공유')}
+  <div class="body">
+    <h2 class="h-page">저장할 이미지가<br>준비됐어요</h2>
+    <p class="lead">고민 원문은 포함하지 않고, 부적과 오늘의 문장만 담았어요.</p>
+    <div class="card card-tint"><p class="mini-label">기본 포함</p><p class="body-text" style="line-height:1.75">부적 이미지<br>오늘 새로 붙일 문장<br>오늘 해볼 작은 실천<br>토착신 이름</p></div>
+    <div class="card"><p class="mini-label">기본 미포함</p><p class="body-text" style="line-height:1.75;color:var(--text-secondary)">고민 원문<br>실명, 연락처, 주소 등 민감한 개인 정보</p></div>
+    <button class="btn btn-l btn-secondary" data-toast="공유 이미지를 만들었어요." style="margin-top:16px">공유 이미지 만들기</button>
+    <button class="btn btn-m btn-ghost" data-go="input">새로운 고민 상담하기</button>
+  </div>
+  ${cta('저장하기',null,{toast:'저장됐어요. 고민 원문은 포함하지 않았어요.'})}`},
+{id:'talismanFeedback',title:'부적 피드백',group:'main',body:()=>`
+  ${topbar('talisman','부적 피드백')}
+  <div class="body">
+    <h2 class="h-page">이 부적을 어떻게<br>느꼈나요?</h2>
+    <p class="lead">부적이 상담 결과와 연결되어 보였는지, 간직하고 싶은지 확인해요.</p>
+    <div class="card"><p class="mini-label">디자인 만족도</p><h3 style="font-size:15px">오늘 받은 부적이 간직하고 싶게 느껴졌나요?</h3><div class="score"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div></div>
+    <div class="card"><p class="mini-label">부적 연결성</p><h3 style="font-size:15px;margin-bottom:12px">상담 결과와 연결되어 보였나요?</h3><div class="chips"><button class="chip">연결돼 보여요</button><button class="chip">예쁘지만 연결은 약해요</button><button class="chip">잘 모르겠어요</button></div></div>
+    <div class="card"><p class="mini-label">사용 맥락</p><h3 style="font-size:15px;margin-bottom:12px">어떤 형태라면 더 갖고 싶나요?</h3><div class="chips"><button class="chip">휴대폰 배경</button><button class="chip">고화질 이미지</button><button class="chip">인스타 스토리</button><button class="chip">개인 기록</button><button class="chip">실물 부적/엽서</button></div></div>
+  </div>
+  ${cta('피드백 저장하기','share')}`},
+{id:'resultFeedback',title:'전체 피드백',group:'main',body:()=>`
+  ${topbar('result','결과 피드백')}
+  <div class="body">
+    <h2 class="h-page">오늘 결과는<br>어땠나요?</h2>
+    <p class="lead">먼저 가볍게만 알려주세요. 더 자세한 의견은 선택으로 남길 수 있어요.</p>
+    <div class="btn-row"><button class="btn btn-l btn-secondary" data-toast="내 이야기 같았다는 반응을 기록했어요.">내 이야기 같았어요</button><button class="btn btn-l btn-secondary" data-toast="조금 달랐다는 반응을 기록했어요.">조금 달랐어요</button></div>
+    <p class="field-label">더 확인하고 싶은 것</p>
+    <div class="chips"><button class="chip">토착신 매칭</button><button class="chip">작은 실천</button><button class="chip">말투</button><button class="chip">과한 표현</button></div>
+  </div>
+  ${cta('피드백 보내기','landing')}`},
+{id:'safe',title:'안전 안내',group:'exception',body:()=>`
+  ${topbar('input','안전 안내')}
+  <div class="body">
+    <h2 class="h-page">이 고민은 일반 결과로<br>바로 다루기 어려워요</h2>
+    <p class="lead">지금 안전이나 전문적인 판단이 먼저 필요할 수 있어요. 이 경우에는 토착신 결과나 부적을 만들지 않아요.</p>
+    <div class="card" style="background:var(--destructive-tint);border-color:transparent;box-shadow:none">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <span style="color:var(--destructive);flex:0 0 auto;margin-top:1px">${ICONS.shield}</span>
+        <div><p class="mini-label" style="color:var(--destructive)">먼저 확인해주세요</p>
+        <p class="sub-text" style="color:var(--text-primary)">스스로를 해치고 싶거나 누군가를 해칠 수 있다고 느껴진다면, 지금 혼자 버티지 말고 가까운 사람이나 전문 기관의 도움을 받아주세요.</p></div>
+      </div>
+    </div>
+    <button class="btn btn-l btn-secondary" data-go="landing" style="margin-top:16px">처음으로 돌아가기</button>
+  </div>
+  ${cta('일반 고민으로 다시 작성하기','input')}`},
+{id:'asset',title:'내부 요청 안내',group:'exception',body:()=>`
+  ${topbar('input','안내')}
+  <div class="body">
+    <span class="ibadge ibadge-lg ibadge-neutral" style="margin:2px 0 16px">${ICONS.lock}</span>
+    <h2 class="h-page">서비스 안쪽 내용은<br>공개할 수 없어요</h2>
+    <p class="lead">토착신이 고민을 읽고 부적을 만드는 세부 방식은 공개할 수 없어요. 대신 이 서비스를 어떻게 이용하면 좋은지 알려드릴게요.</p>
+    <div class="card"><p class="mini-label">공개 가능한 내용</p><p class="sub-text">고민을 적으면 토착신의 해석, 오늘 해볼 작은 실천, 원할 경우 결과를 담은 부적을 받을 수 있어요.</p></div>
+    <button class="btn btn-l btn-secondary" data-go="landing" style="margin-top:16px">사용 방법 보기</button>
+  </div>
+  ${cta('고민으로 다시 시작하기','input')}`},
+{id:'error',title:'생성 실패/지연',group:'exception',body:()=>`
+  ${topbar('input','잠시 지연')}
+  <div class="body">
+    <h2 class="h-page">결과를 만드는 데<br>시간이 조금 더 걸리고 있어요</h2>
+    <p class="lead">입력한 내용은 유지되어 있어요. 다시 시도하거나 이전 화면으로 돌아갈 수 있어요.</p>
+    <div class="card" style="background:var(--warning-tint);border-color:transparent;box-shadow:none"><p class="mini-label" style="color:var(--warning)">상담 결과 생성 지연</p><p class="sub-text" style="color:var(--text-primary)">입력한 고민은 유지돼요. 다시 시도하거나 이전 입력으로 돌아갈 수 있어요.</p></div>
+    <div class="card"><p class="mini-label">부적 생성 실패</p><p class="sub-text">상담 결과는 그대로 유지되어 있어요. 부적만 다시 만들거나 결과 화면으로 돌아갈 수 있어요.</p></div>
+    <button class="btn btn-l btn-secondary" data-go="input" style="margin-top:16px">이전 입력으로 돌아가기</button>
+    <button class="btn btn-m btn-ghost" data-go="landing">처음으로 돌아가기</button>
+  </div>
+  ${cta('다시 시도하기',null,{toast:'다시 시도합니다.'})}`},
+];
+
+function deityCard(id,tags,line){const d=deityMap[id];return `<div class="deity-card tap" data-go="deityDetail" data-deity="${id}" role="button" tabindex="0"><span class="ibadge">${deitySvg[id]}</span><div><div class="deity-name">${d.name}</div><div class="deity-fit">${tags}</div><div class="deity-role">${d.role}</div><div class="line-sample">“${line}”</div></div></div>`}
+function sampleLine(id){return{seongju:'“관계를 지키는 일과 나를 지우는 일은 달라요.”',jowang:'“오늘은 큰 불을 피우지 않아도 돼요. 꺼지지 않을 만큼만 데워봐요.”',samsin:'“아가, 처음부터 열매를 보려 하지 말고 씨앗 하나만 손에 쥐어보자.”'}[id]}
+function sampleConcerns(id){return{seongju:'“내가 예민한 건지 모르겠어요.”<br>“서운한데 말하면 관계가 어색해질까 봐 못 말하겠어요.”',jowang:'“계속 미루기만 해요.”<br>“생활 리듬이 무너졌는데 다시 시작하기가 어려워요.”',samsin:'“시작하고 싶은데 자꾸 겁나요.”<br>“잘 안 될 것 같아서 계속 미루고 있어요.”'}[id]}
+function symbolWords(id){return{seongju:'문지방, 작은 등불, 닫히지 않은 문, 내 마음이 머물 자리',jowang:'작은 불씨, 솥, 따뜻한 김, 꺼지지 않는 온기',samsin:'씨앗, 보따리, 실, 아직 열리지 않은 새싹'}[id]}
+
+const nav=document.getElementById('nav'),screenEl=document.getElementById('screen'),toast=document.getElementById('toast'),toastMsg=document.getElementById('toastMsg');
+function renderNav(activeId){
+  const main=screens.filter(s=>s.group==='main'),exc=screens.filter(s=>s.group==='exception');
+  nav.innerHTML=main.map((s,i)=>`<button class="${s.id===activeId?'active':''}" data-nav="${s.id}"><em>${String(i+1).padStart(2,'0')}</em>${s.title}</button>`).join('')
+    +'<span class="sep">예외</span>'
+    +exc.map(s=>`<button class="${s.id===activeId?'active':''}" data-nav="${s.id}">${s.title}</button>`).join('');
+  nav.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>render(b.getAttribute('data-nav'))));
+}
+let autoTimer=null;
+function render(id='landing'){
+  const s=screens.find(x=>x.id===id)||screens[0];
+  renderNav(s.id);
+  screenEl.innerHTML=s.body();
+  screenEl.scrollTop=0;
+  wire();
+  if(autoTimer){clearTimeout(autoTimer);autoTimer=null}
+  const next={loading:'result',talismanLoading:'talisman'}[s.id];
+  if(next){autoTimer=setTimeout(()=>render(next),1700)}
+}
+function showToast(msg){toastMsg.textContent=msg;toast.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('show'),2200)}
+function wire(){
+  screenEl.querySelectorAll('[data-go],[data-toast]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const deity=el.getAttribute('data-deity');if(deity)appState.selectedDeity=deity;
+      if(el.getAttribute('data-flow')==='worry')appState.selectedDeity=null;
+      const msg=el.getAttribute('data-toast');if(msg)showToast(msg);
+      const target=el.getAttribute('data-go');if(target)render(target);
+    });
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});
+  });
+  screenEl.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',e=>{e.stopPropagation();ch.classList.toggle('active')}));
+  screenEl.querySelectorAll('.score button').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();btn.closest('.score').querySelectorAll('button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}));
+}
+render('landing');
+</script>
+</body>
+</html>
