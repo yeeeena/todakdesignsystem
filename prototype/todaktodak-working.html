@@ -438,8 +438,9 @@ const screens=[
     <button class="btn btn-xl btn-primary" data-go="input">${d.name}에게 고민 말하기</button>
   </div>`}},
 {id:'input',title:'공통 고민 입력',group:'main',body:()=>{const d=appState.selectedDeity?deityMap[appState.selectedDeity]:null;return `
-  ${topbar('landing','')}
+  ${topbar('landing','고민 정리 1/3')}
   <div class="body">
+    <div class="progress"><span style="width:33%"></span></div>
     ${d?`<div class="selected-deity"><strong>${d.label}</strong><button data-go="deities">다른 토착신 선택</button></div>`:''}
     <h2 class="h-page">지금 마음에 남아 있는 말을<br>편하게 적어주세요</h2>
     <p class="lead" style="margin-bottom:18px">짧게 적어도 괜찮아요. 한 문장이어도 충분해요.</p>
@@ -454,25 +455,12 @@ const screens=[
   <div class="bottom-bar">
     <p class="caption" style="text-align:center;margin:0">고민부터 시작했든, 토착신을 먼저 골랐든<br>여기서부터는 같은 방식으로 진행돼요.</p>
     <div class="bb-btns">
-      <button class="btn btn-secondary" data-go="reflect">마음 한번 더 확인하기</button>
+      <button class="btn btn-secondary" data-go="capacity">조금 더 정리하기</button>
       <button class="btn btn-primary" data-go="loading">결과 받아보기</button>
     </div>
   </div>`}},
-{id:'reflect',title:'마음 한 번 더 확인',group:'main',body:()=>`
-  ${topbar('input','고민 정리 1/3')}
-  <div class="body">
-    <div class="progress"><span style="width:33%"></span></div>
-    <h2 class="h-page">이 마음이 맞나요?</h2>
-    <p class="lead">말하고 싶은 마음도 있는데, 관계가 멀어질까 봐 조심스러운 마음도 함께 있어 보여요.</p>
-    <div class="btn-row"><button class="btn btn-l btn-primary" data-go="capacity">맞아요</button><button class="btn btn-l btn-secondary" data-go="input">이해한 내용 수정하기</button></div>
-    <button class="btn btn-m btn-ghost" data-go="loading" style="margin-top:10px">바로 결과 보기</button>
-    <p class="caption">지금 입력한 내용만으로도 결과를 받아볼 수 있어요. 수정해도 기존 입력값은 유지돼요.</p>
-    <div class="divider"></div>
-    <h3>이 고민에 이름을 붙인다면?</h3>
-    <div class="chips" style="margin-top:8px"><button class="chip">말하지 못한 서운함</button><button class="chip">관계를 지키려는 망설임</button><button class="chip">내 탓으로 돌리는 마음</button></div>
-  </div>`},
 {id:'capacity',title:'오늘 가능한 정도',group:'main',body:()=>`
-  ${topbar('reflect','고민 정리 2/3')}
+  ${topbar('input','고민 정리 2/3')}
   <div class="body">
     <div class="progress"><span style="width:66%"></span></div>
     <h2 class="h-page">오늘은 어느 정도까지<br>괜찮을까요?</h2>
