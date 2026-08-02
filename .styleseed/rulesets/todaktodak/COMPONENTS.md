@@ -1,6 +1,6 @@
 # 토닥토닥 — 컴포넌트 인벤토리
 
-> 소스: `prototype/todaktodak-working.html` (단일 파일 · CSS 클래스 135종 · 화면 16종)
+> 소스: `prototype/todaktodak-working.html` (단일 파일 · CSS 클래스 151종 · 화면 16종)
 > 시각 사양은 [reference-board.html](reference-board.html)에서 실제 렌더로 확인.
 > `[레거시]` = CSS는 남아 있으나 현재 화면에서 미사용. `[크롬]` = 프로토타입 셸, 제품 아님.
 
@@ -90,6 +90,7 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 | `.btn-m .btn-ghost` | 40px · r8 · 14/700 · 투명 | 3차 행동(바로 결과 보기 등) |
 | `.btn-pill` | 56px · r16 · 1px charcoal 테두리 · **하드섀도 4px 4px 0** · press translate(3,3) | 랜딩 전용 |
 | `.btn-row`·`.bb-btns` | gap 9–12, flex:1, 페어는 16px 라벨 | 하단 페어 |
+| `.bb-stack` | 주 CTA 1개(전폭) 위 + 보조 2개 한 줄 아래, gap 10 | 하단 3버튼(10) |
 | `.share-save`/`.share-sub` | 56/48px · r14 | 11 저장/공유 |
 | `.landing-link`·`.result-link` | 14/600 underline (result는 흰색) | 텍스트 링크 |
 | `.icon-btn` | 40×40 · r12 · 24px stroke 1.8 셰브런 | 뒤로/닫기 |
@@ -138,13 +139,25 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 
 - **글로벌 시트** `.sheet`(+`.sheet-veil`): phone 루트에 상주. r24 상단 · max-height 76% ·
   translateY(103%)→0, 320ms ease-out. 내용 = `.sheet-head`(64px symbol + 이름/역할) + fit 태그 + line-sample + CTA 2개.
-- **스텝 시트** `.sheet-panel`(04–06): 화면 하단 480px 고정 · r20 상단 ·
+- **스텝 시트** `.sheet-panel`(04–06): 상단이 `top:93.333cqw`(=피그마 364/390) — 화면 높이가 아니라
+  **폭에 비례**해야 일러스트와의 겹침이 기기 폭을 따라 유지된다. r20 상단 ·
   `.sheet-scroll`(내부 스크롤, pad 32/24) + `.sheet-foot`(고정, 상단 1px 헤어라인).
+- **신 선택 시트**(04, `.picker-*`): 글로벌 시트를 재사용하고 내용만 6신 목록으로 갈아끼운다.
+  `.picker-item`(40px symbol + 본문 + `.picker-go` 셰브런) 안에 `.picker-name`(15/700)
+  · `.picker-fit`(12 muted, `fitMap`) · `.picker-line`(13/500, ink-03 박스, `sampleLine`).
+  **이름은 신별 색을 쓰지 않고 `--text-primary` 검정으로 통일** — 목록에서 6신이 동등하게 읽혀야 한다.
+  현재 추천 신만 `.current`(테두리 `--dlabel` + ink-03 배경 + `지금 추천` 배지). 고르면 그 신으로 확정 후 04 재렌더.
 
 ### 2-8. 스텝 화면 (04–06)
 
-`.step-screen` = `.step-art`(상단 일러스트, 신별 `stepArt` 맵: common/chilseong/samsin, 폴백 common)
-+ `.step-hud` + `.sheet-panel`. 일러스트는 `assets/steps/{set}-0N@2x.png`.
+`.step-screen`(container-type:inline-size) = `.step-art`(상단 일러스트, 신별 `stepArt` 맵 7세트:
+common + 6신 전부, 폴백 common) + `.step-hud` + `.sheet-panel`. 일러스트는 `assets/steps/{set}-0N@2x.png`.
+
+**신 컨텍스트 블록**(04, `.deity-ctx`): 고민을 입력해야 뜬다(빈 입력이면 `hidden`).
+텍스트를 `matchKeywords`로 훑어 `matchDeity()`가 신을 고르고, 텍스트필드 바로 아래에 추천을 붙인다.
+`.deity-ctx-head`(symbol + `.deity-ctx-name` + `.deity-ctx-swap` "다른 신 의견 듣기")
+· `.deity-ctx-fit` · `.deity-ctx-line`. 신을 직접 고른 경로면 문구가 추천형("~이 잘 맞아요")에서
+확정형("~이 이 고민을 들을 거예요")으로 바뀐다. 스왑 버튼이 위 신 선택 시트를 연다.
 
 ### 2-9. 상담 결과 (08)
 
@@ -161,6 +174,9 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 - 진입 1회 `peek` 힌트(-20° 기울임). `.flip-hint` 캡션이 상태 문구 토글.
 - 앞/뒷면: `assets/talisman/{id}-front|back.png`(1264×1992 @4x).
 - 카드가 하단 고정 바에 가리지 않도록 상단 압축(`:has(.flip-scene)` 규칙, 카드-바 간격 7px).
+- 하단 3버튼 `.bb-stack`: **11 저장/공유(`.share-foot`)와 같은 위계** — 주 행동(저장/공유하기, primary)이
+  위 한 줄 전체 폭, 아래 `.bb-btns` 한 줄에 보조 둘(새로운 고민 상담하기 / 상담 결과 다시 보기, secondary).
+  08로 되돌아가는 경로는 이 버튼과 상단 바 `상담 결과로` 두 곳.
 
 ### 2-11. 저장/공유 (11)
 
@@ -199,7 +215,7 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 
 ---
 
-## 4. 자산 인벤토리 (60종)
+## 4. 자산 인벤토리 (72종)
 
 | 폴더 | 파일 | 해상도 | 스케일 | 용도 |
 |---|---|---|---|---|
@@ -208,7 +224,7 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 | deities/ | {6신 한글}.png ×6 | 288×288 | — | 아바타 아이콘(03·시트) |
 | loading/ | {id}.png ×6 | 608×608 | — | 로더 아바타 순환 |
 | shelf/ | mask-{id}.svg ×6 | 벡터 | — | 02 팝 실루엣(6px 팽창) |
-| steps/ | {common·chilseong·samsin}-{04·05·06}@2x.png ×9 | 780×798–861 | @2x | 04–06 상단 일러스트 |
+| steps/ | {common·6신}-{04·05·06}@2x.png ×21 | 780×763–882 | @2x | 04–06 상단 일러스트 |
 | loading-bg/ | loading-scene@4x.png | 1560×1358 | @4x | 07·09 배경(top 16px) |
 | result-peek/ | {id}.png ×6 | 556×596 | @4x | 08 빼꼼 캐릭터(투명) |
 | result-bg/ | {id}@2x.png ×6 | 780×1936 | @2x | 08 딥컬러+패턴 배경 |
@@ -216,13 +232,13 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 | talisman/ | {id}-front·back.png ×12 | 1264×1992 | @4x | 10 플립 앞/뒷면 |
 
 명명 규약: 영문 신 key(`seonang`…) + `@{scale}x`. 아바타 아이콘만 한글 파일명(레거시).
-미제작: steps의 서낭신·산신·용왕·문신 세트(→ common 폴백).
+steps는 6신 전 세트 완비(21장). 신 미선택 진입 시에만 common 세트 사용.
 
 ---
 
 ## 5. 부록 — 보조·상태 클래스 색인
 
-위 섹션에서 다루지 않은 파생 클래스 전체. (합쳐서 CSS 클래스 134종 = 전수)
+위 섹션에서 다루지 않은 파생 클래스 전체. (합쳐서 CSS 클래스 151종 = 전수)
 
 **상태 토글**
 `.active`(칩·네브 선택) · `.on`(score 선택) · `.open`(시트/베일) · `.show`(토스트)
