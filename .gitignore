@@ -2,5 +2,9 @@ node_modules/
 .DS_Store
 *.zip
 
+# 공유용 단일 HTML — assets/를 전부 내장한 빌드 산출물(20MB+).
+# 빌드할 때마다 히스토리가 통째로 불어나서 추적하지 않는다. 원본은 todaktodak-working.html.
+prototype/토닥토닥_프로토타입_단일파일.html
+
 # 로컬 전용 설정
 .claude/settings.local.json
