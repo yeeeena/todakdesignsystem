@@ -1,0 +1,40 @@
+{
+  "references": [
+    {
+      "id": "R1",
+      "source": "prototype/todaktodak-working.html",
+      "date": "2026-08-02",
+      "adapter": "mobile-app product-ui",
+      "viewport": "390x844",
+      "kind": "구현된 프로토타입 전체 (화면 16종, CSS 클래스 135, 자산 60)",
+      "preserve": "전부 — 이 파일이 곧 디자인 정본"
+    },
+    {
+      "id": "R2",
+      "source": "Figma ZnDrdZztaeO9qjmG3ckgL5 (토착신)",
+      "date": "2026-07-28 ~ 2026-08-01",
+      "kind": "원 디자인 (01·02 시작/신단, 04-06 스텝, 07-09 로딩, 08 결과 6신, 11 저장/공유 6신, 캐릭터영역·마스크)",
+      "note": "프로토타입에 이식 완료된 노드: 187:3344, 187:3306, 206:2193, 207:2228, 207:2316, 223:3940, 223:3214, 223:4003, 235:2181"
+    },
+    {
+      "id": "R3",
+      "source": "docs/신별_동적화_설계.md + STYLESEED.md(디자인 락)",
+      "kind": "콘텐츠 정본(6신 결과 6단) · 브랜드 결정 기록"
+    }
+  ],
+  "confidence": {
+    "tokens": "high — :root에서 직접 추출",
+    "components": "high — 전 화면 렌더 실측(세션 내 스크린샷·픽셀 검증)",
+    "deityTheme": "high — figma 223:4003 배경색 일치 확인",
+    "responsive": "medium — 390px 외 뷰포트 미검증",
+    "motionTiming": "high — keyframes 소스 그대로"
+  },
+  "unresolved": [
+    "스텝 일러스트 4신(서낭신·산신·용왕·문신) 미제작 → common 폴백 중",
+    "작은 실천 제목 5신분은 실천 문단 요약 초안 — 팀 확정 대상 (deityResult.silcheonTitle)",
+    "matchDeity(고민 텍스트 → 신 자동 배정) 미구현 — 설계 문서 §5",
+    "STYLESEED.md의 terracotta #9B5132 primary는 현 구현(charcoal CTA)과 불일치 — 락 문서 갱신 필요 여부 결정",
+    "명조(Noto Serif KR) 디스플레이 순간은 부적 카드 이미지 내부에만 존재 — 코드 타이포로는 미사용",
+    "피그마 신규 로더(07·09): 신별 파스텔 배경 로딩 전용 컷 6종 + 링 트랙 #cbc9c3 stroke6 — 구현(단일 배경 아바타 순환)에 미반영, 적용 여부 결정 필요 (figma 223:3982)"
+  ]
+}

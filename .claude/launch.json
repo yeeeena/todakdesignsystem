@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "meeting-assistant",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["vite", "--port", "4173"],
+      "name": "토닥토닥",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4173"],
       "port": 4173
     }
   ]

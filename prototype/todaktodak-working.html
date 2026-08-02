@@ -31,14 +31,15 @@
   --seed-color-fg-neutral-subtle:   var(--muted);
   --seed-color-fg-neutral-inverted: var(--offwhite);
   --seed-color-fg-brand:            var(--charcoal);   /* 모노 브랜드 */
-  --seed-color-fg-critical:         oklch(0.628 0.218 22);
+  --seed-color-fg-critical:          #fa342c; /* SEED red-700 — 기본 배경 위 경고 텍스트 */
+  --seed-color-fg-critical-contrast: #921708; /* SEED red-900 — critical-weak 배경 위 대비용 */
   --seed-color-fg-warning:          oklch(0.748 0.183 56);
   /* bg */
   --seed-color-bg-brand-solid:          var(--charcoal);
   --seed-color-bg-brand-solid-pressed:  #33302a;   /* 참고값 — 실제 pressed는 overlay 방식 */
   --seed-color-bg-neutral-solid:        var(--surface);
   --seed-color-bg-neutral-weak:         var(--ink-04);
-  --seed-color-bg-critical-weak:        oklch(0.965 0.02 22);
+  --seed-color-bg-critical-weak:        #fdf0f0; /* SEED red-100 */
   --seed-color-bg-warning-weak:         oklch(0.968 0.025 80);
   /* stroke */
   --seed-color-stroke-brand-solid:      var(--charcoal);
@@ -65,7 +66,7 @@
   --grey-50:  var(--seed-color-bg-layer-fill);
   --white: var(--seed-color-bg-neutral-solid);
   /* semantic — 안전/실패 화면 전용으로만 유지 */
-  --red-500:    oklch(0.628 0.218 22);
+  --red-500:    var(--seed-color-fg-critical);
   --green-500:  var(--seed-color-fg-neutral);   /* mono: 완료 체크도 차콜 */
   --orange-500: oklch(0.748 0.183 56);
   --yellow-500: var(--seed-color-bg-layer-default);
@@ -348,16 +349,174 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .flip-hint{font-size:12px;font-weight:500;color:var(--seed-color-fg-neutral-subtle);text-align:center;margin:12px 0 0}
 @media(prefers-reduced-motion:reduce){.flip-card{transition:none}.flip-card.peek{animation:none}}
 
-/* ---------- landing — figma 173:2202 반영 ---------- */
-.landing{flex:1;display:flex;flex-direction:column;padding:56px 24px 28px;background:var(--seed-color-bg-layer-default) url('assets/landing-bg@4x.png') center / cover no-repeat}
-.landing-title{font-size:24px;line-height:1.35;letter-spacing:-0.02em;font-weight:700;color:var(--text-primary);text-align:center;margin:0 0 12px}
-.landing-lead{font-size:15px;line-height:1.4;font-weight:600;color:var(--ink-83);text-align:center;margin:0}
+/* ---------- landing — figma 187:3344: 한옥 문 앞 칠성신 + 하단 그라디언트 ---------- */
+/* 배경은 아트 최상단 행 색 — 아트를 내렸을 때 위쪽 여백이 이어져 보이게 */
+.landing{flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:57px 24px 30px;background:linear-gradient(90deg,#e7d0d0 0%,#e4c9c9 50%,#e4c5c4 100%)}
+.landing-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transform:translateY(14px)} /* 390×844 풀블리드 아트 — 카피와 겹쳐 보이지 않게 14px 내림 */
+.landing-grad{position:absolute;left:0;right:0;bottom:0;height:196px;background:linear-gradient(180deg,rgba(227,197,167,0) 0,#e3c5a7 23%);pointer-events:none}
+.landing-title{position:relative;font-size:24px;line-height:1.35;letter-spacing:-0.02em;font-weight:700;color:var(--text-primary);text-align:center;margin:0 0 12px}
+.landing-lead{position:relative;font-size:15px;line-height:1.4;font-weight:600;color:var(--ink-83);text-align:center;margin:0}
 .landing-spacer{flex:1}
-.landing-btns{display:flex;gap:10px}
-.btn-pill{flex:1;height:52px;border-radius:12px;background:var(--seed-color-bg-neutral-solid);border:1px solid var(--seed-color-stroke-brand-solid);font-family:inherit;font-size:16px;font-weight:700;color:var(--text-primary);cursor:pointer;transition:background var(--dur-fast) var(--ease)}
-.btn-pill:active{background:#f1ede4}
-.landing-link{border:0;background:transparent;margin:22px auto 0;padding:8px;font-family:inherit;font-size:14px;font-weight:600;color:var(--text-primary);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.landing-caption{font-size:12px;line-height:1.6;font-weight:500;color:var(--seed-color-fg-neutral-subtle);text-align:center;margin:8px 0 0}
+.landing-btns{position:relative;display:flex;gap:10px}
+.btn-pill{
+  flex:1;height:56px;border-radius:16px;background:#fffdfa;
+  border:1px solid var(--charcoal);box-shadow:4px 4px 0 0 var(--charcoal);
+  font-family:inherit;font-size:16px;font-weight:700;color:var(--charcoal);cursor:pointer;
+  transition:transform var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease);
+}
+.btn-pill:active{transform:translate(3px,3px);box-shadow:1px 1px 0 0 var(--charcoal)}
+.landing-link{position:relative;border:0;background:transparent;margin:26px auto 0;padding:8px;font-family:inherit;font-size:14px;font-weight:600;color:var(--text-primary);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.landing-caption{position:relative;font-size:12px;line-height:1.55;font-weight:500;color:var(--seed-color-fg-neutral-subtle);text-align:center;margin:8px 0 0}
+
+/* ---------- 02 토착신 리스트 — figma 187:3306: 자주 배경 신단 일러스트 ---------- */
+.screen.shelf-dark{background:#5c281e}
+.shelf-dark .topbar{background:#5c281e}
+.shelf-dark .icon-btn{color:#fffdfc}
+.shelf-dark .icon-btn:active{background:rgba(255,253,252,.12)}
+.shelf-dark .h-page{color:#fffdfc;word-break:keep-all}
+.shelf-dark .lead{color:rgba(255,253,252,.82);line-height:1.6;margin-bottom:0}
+.screen.shelf-dark{position:relative}
+.shelf-dark .topbar{margin-top:24px;height:48px} /* 신단 위 빈 공간(~206px)에 타이틀+카피가 들어가도록 압축 */
+.shelf-dark .h-page{margin:2px 0 6px;font-size:23px}
+.shelf-dark .lead{font-size:14px}
+.shelf-dark .body{position:relative;z-index:1;pointer-events:none} /* 텍스트는 배경 위, 탭은 아래 셀로 통과 */
+.shelf-wrap{position:absolute;inset:0;transform:translateY(-4px)} /* 390×844 풀블리드 배경 일러스트 — 신단 4px 위로 */
+.shelf-wrap>img{width:100%;height:100%;display:block}
+/* 팝 조각 — 베이스 일러스트를 캐릭터 실루엣(알파 마스크)으로 오려낸 레이어. 평소엔 숨김 */
+.shelf-pop{
+  position:absolute;pointer-events:none;transform-origin:50% 62%;opacity:0;
+  background:url('assets/deities-screen@4x.png') no-repeat;
+  -webkit-mask-repeat:no-repeat;-webkit-mask-size:100% 100%;mask-repeat:no-repeat;mask-size:100% 100%;
+}
+.shelf-pop.pop{opacity:1;animation:charPop 280ms var(--ease);z-index:3}
+.shelf-cell{position:absolute;border:0;padding:0;background:transparent;cursor:pointer} /* figma 캐릭터영역 기준 탭 타깃 */
+/* 눌림 피드백 — 아주 살짝만 커졌다 돌아오는 정도 */
+@keyframes charPop{
+  0%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+  45%{transform:scale(1.06);filter:drop-shadow(0 4px 9px rgba(0,0,0,.28))}
+  100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+}
+@media(prefers-reduced-motion:reduce){.shelf-pop.pop{animation:none}}
+
+/* ---------- bottom sheet — 신 소개 ---------- */
+.sheet-veil{position:absolute;inset:0;z-index:30;background:var(--bg-overlay);opacity:0;pointer-events:none;transition:opacity var(--dur-base) var(--ease)}
+.sheet-veil.open{opacity:1;pointer-events:auto}
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;z-index:31;
+  background:var(--surface);border-radius:var(--r-3xl) var(--r-3xl) 0 0;
+  padding:10px 24px 24px;max-height:76%;overflow-y:auto;scrollbar-width:none;
+  transform:translateY(103%);transition:transform var(--dur-slow) var(--ease-out);
+}
+.sheet::-webkit-scrollbar{display:none}
+.sheet.open{transform:none}
+.sheet-grab{width:44px;height:4px;border-radius:var(--r-full);background:var(--grey-200);margin:2px auto 18px}
+.sheet-head{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.sheet-head .symbol{width:64px;height:64px;border-radius:var(--r-2xl)}
+.sheet-name{font-size:20px;font-weight:700;letter-spacing:-0.015em;margin:0 0 3px;line-height:1.3}
+.sheet-role{font-size:13px;line-height:1.5;color:var(--text-secondary);margin:0}
+.sheet .deity-fit{margin-bottom:10px}
+.sheet .line-sample{margin-bottom:12px}
+.sheet .card{margin-bottom:16px}
+.sheet .btn+.btn{margin-top:8px}
+
+/* ---------- 04~06 고민 정리 단계 — figma 206:2193 / 207:2228 / 207:2316 ---------- */
+.step-screen{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--seed-color-bg-layer-default)}
+.step-art{position:absolute;left:0;top:0;width:100%;display:block;pointer-events:none}
+.step-hud{position:absolute;left:50%;transform:translateX(-50%);top:24px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:4px}
+.step-hud b{display:flex;gap:4px;font-size:12px;line-height:1.6;font-weight:600;color:#fff}
+.step-bar{width:180px;height:6px;border-radius:var(--r-full);background:#4d515c;overflow:hidden}
+.step-bar i{display:block;height:100%;border-radius:var(--r-full);background:var(--seed-color-bg-layer-default)}
+.sheet-panel{
+  position:absolute;left:0;right:0;bottom:0;height:480px;z-index:1;
+  border-radius:var(--r-2xl) var(--r-2xl) 0 0;background:var(--seed-color-bg-layer-default);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sheet-scroll{flex:1;min-height:0;overflow-y:auto;padding:32px 24px 24px;scrollbar-width:none}
+.sheet-scroll::-webkit-scrollbar{display:none}
+.sheet-scroll>.h-page{margin:0}
+.sheet-scroll>.lead{margin:0}
+.sheet-foot{
+  flex:0 0 auto;padding:20px 24px;background:var(--seed-color-bg-layer-default);
+  border-top:1px solid var(--seed-color-stroke-neutral);display:flex;flex-direction:column;gap:12px;
+}
+.sheet-foot .btn{height:52px;border-radius:12px;font-size:16px;font-weight:700}
+.sheet-foot .btn+.btn{margin-top:0}
+.sheet-foot .btn-row{gap:12px}
+
+/* ---------- 08 상담 결과 — figma 223:4003 (신별 배경색 --dbg) ---------- */
+/* 배경 = 신별 딥컬러 + 패턴 이미지 (figma의 background 레이어를 그대로 익스포트) */
+.result-screen{
+  position:relative;flex:1 0 auto;display:flex;flex-direction:column;padding-top:28px;
+  background-color:var(--dbg);background-repeat:no-repeat;background-position:top center;background-size:cover;
+}
+.result-screen .topbar{background:transparent;margin-top:0;position:static}
+.result-screen .icon-btn{color:var(--surface)}
+.result-screen .icon-btn:active{background:rgba(255,253,252,.14)}
+.result-body{position:relative;display:flex;flex-direction:column;padding:0 24px 8px}
+/* 히어로 블록은 140px을 차지하고, 캐릭터는 그 위에 절대 배치되어 아래 카드와 9px 겹친다 (figma 223:3578) */
+.result-hero{position:relative;min-height:140px;display:flex;flex-direction:column;gap:4px}
+.result-eyebrow{font-size:13px;line-height:1.3;font-weight:600;color:rgba(255,253,252,.8);margin:0}
+.result-quote{font-size:20px;line-height:1.45;letter-spacing:-0.3px;font-weight:700;color:var(--surface);margin:0;word-break:keep-all}
+.result-peek{position:absolute;right:24px;top:0;z-index:2;width:139px;height:149px;display:block;pointer-events:none} /* 4배수 빼꼼 컷(556×596) */
+.rcard{
+  width:100%;background:var(--surface);border:2px solid var(--charcoal);border-radius:var(--r-xl);
+  padding:20px 18px;display:flex;flex-direction:column;gap:16px;
+}
+.rcard+.rcard{margin-top:12px}
+.rcard section{display:flex;flex-direction:column;gap:8px}
+.rcard h4{font-size:13px;line-height:1.25;font-weight:600;color:var(--muted);margin:0}
+.rcard p{font-size:15px;line-height:1.5;font-weight:500;color:var(--charcoal);margin:0}
+.rcard p.sub{color:var(--ink-82)}
+.rcard b{font-size:16px;line-height:1.5;font-weight:700;color:var(--charcoal)}
+.rcard .rule{height:1px;background:var(--ink-08);flex:0 0 auto}
+.rcard p.meta{font-size:13px;line-height:1.4;color:var(--muted)}
+.rsteps{display:flex;flex-direction:column;gap:2px;font-size:14px;line-height:1.7;font-weight:500;color:var(--ink-82)}
+.rstep{display:flex;gap:8px}
+.rstep i{font-style:normal;flex:0 0 auto}
+.result-link{
+  width:100%;height:40px;margin-top:12px;border:0;background:transparent;cursor:pointer;
+  font-family:inherit;font-size:14px;font-weight:700;color:var(--surface);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.result-foot{position:sticky;bottom:0;z-index:2;flex:0 0 auto;padding:20px 24px;background-color:var(--dbg)}
+.result-foot .btn-row{gap:12px}
+.result-foot .btn{height:52px;border-radius:12px;font-size:16px;font-weight:700}
+
+/* 10 나만의 부적 — 카드(498px)가 하단 고정 바에 가리지 않도록 상단 여백 압축 */
+.body:has(.flip-scene){padding-bottom:20px}
+.body:has(.flip-scene) .h-page{margin:0 0 6px}
+.body:has(.flip-scene) .lead{margin-bottom:2px}
+.screen:has(.flip-scene) .topbar{margin-top:14px;height:44px}
+
+/* ---------- 11 저장/공유 — figma 235:2181 (신별 부적 카드 + 블러 배경) ---------- */
+/* overflow는 배경 래퍼에만 — .share-screen에 걸면 하단 버튼 sticky가 죽는다 */
+.share-screen{position:relative;flex:1 0 auto;display:flex;flex-direction:column;background:var(--dbg)}
+.share-bgwrap{position:absolute;inset:0;overflow:hidden}
+.share-bg{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(48px);transform:scale(1.15)}
+.share-dim{position:absolute;inset:0;background:var(--dbg);opacity:.5}
+.share-screen .topbar{position:relative;z-index:1;margin-top:32px;height:56px;background:transparent;justify-content:flex-start;padding:0 16px}
+.share-screen .icon-btn{color:var(--surface)}
+.share-screen .icon-btn:active{background:rgba(255,253,252,.14)}
+.share-head{position:relative;z-index:1;padding:0 24px}
+.share-head h2{font-size:24px;line-height:1.35;letter-spacing:-0.48px;font-weight:700;color:var(--surface);margin:0 0 10px}
+.share-head p{font-size:15px;line-height:1.6;font-weight:500;color:rgba(255,253,252,.82);margin:0}
+/* figma 316/390 · 라운딩 16px — 익스포트 모서리에 남은 크림색을 잘라낸다 */
+.share-card{position:relative;z-index:1;display:block;width:81.03%;margin:36px auto 0;border-radius:16px}
+.share-foot{
+  position:sticky;bottom:0;z-index:3;margin-top:auto;padding:20px 24px 24px;
+  display:flex;flex-direction:column;gap:12px;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 0,var(--dbg) 28px);
+}
+.share-foot .btn-row{gap:12px}
+.share-save{height:56px;border-radius:14px;font-size:16px;font-weight:700;background:var(--charcoal);color:var(--seed-color-fg-neutral-inverted)}
+.share-save::after{background:rgba(252,251,248,.16)}
+.share-sub{height:48px;border-radius:14px;font-size:15px;font-weight:700;background:var(--surface);color:var(--charcoal)}
+
+/* ---------- 07·09 로딩 배경 일러스트 ---------- */
+.screen.has-bg-art{position:relative}
+.has-bg-art .topbar{background:transparent}
+.loading-bg{position:absolute;left:0;top:16px;width:100%;display:block;pointer-events:none;z-index:0}
+.has-bg-art .body{position:relative;z-index:1}
 
 .divider{height:1px;background:var(--border-secondary);margin:24px -24px}
 .spacer{flex:1}
@@ -377,6 +536,8 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
       <div class="notch"></div>
       <div class="screen" id="screen"></div>
       <div class="toast" id="toast"><span class="tick">✓</span><span id="toastMsg"></span></div>
+      <div class="sheet-veil" id="sheetVeil"></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="토착신 소개"></div>
     </div>
   </div>
 </div>
@@ -396,10 +557,26 @@ const backSvg='<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>';
 const homeSvg='<svg viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9h13v-9"/></svg>';
 function topbar(backGo,ctx,home){return `<div class="topbar">${backGo?`<button class="icon-btn" data-go="${backGo}">${home?homeSvg:backSvg}</button>`:'<span style="width:40px"></span>'}<span class="ctx">${ctx||''}</span></div>`}
 function cta(label,go,opts={}){return `<div class="cta-bar"><button class="btn btn-xl btn-primary" ${opts.disabled?'disabled':''} ${go?`data-go="${go}"`:''} ${opts.toast?`data-toast="${opts.toast}"`:''}>${label}</button></div>`}
+/* 고민 정리 단계 표시 — 일러스트 위 상단 오버레이 (figma 207:2224) */
+function stepHud(step){return `<div class="step-hud"><b><span>고민정리</span><span>${step}/3</span></b><div class="step-bar"><i style="width:${step*60}px"></i></div></div>`}
+/* 07·09 로딩 화면 배경 — figma 223:3940 / 223:3214 (image 113·114, 좌 -65 / 상 25) */
+function loadingBg(){return `<img class="loading-bg" src="assets/loading-bg/loading-scene@4x.png" alt="">`}
+/* 04~06 단계 일러스트 — 신별 세트 + 공통(신 미선택) 세트. figma 223:3931
+   아직 그려지지 않은 신은 공통 일러스트로 폴백된다. */
+const stepArt={
+  common:    {input:'common-04',    capacity:'common-05',    summary:'common-06'},
+  chilseong: {input:'chilseong-04', capacity:'chilseong-05', summary:'chilseong-06'},
+  samsin:    {input:'samsin-04',    capacity:'samsin-05',    summary:'samsin-06'}
+};
+function stepArtSrc(screen){
+  const set=stepArt[appState.selectedDeity]||stepArt.common;
+  return `assets/steps/${set[screen]}@2x.png`;
+}
 
 const screens=[
 {id:'landing',title:'시작 화면',group:'main',body:()=>`
   <div class="landing">
+    <img class="landing-art" src="assets/landing-screen@2x.png" alt="한옥 문 앞에서 초롱불을 든 칠성신">
     <h2 class="landing-title">오늘 마음에 걸리는 일이 있나요?</h2>
     <p class="landing-lead">고민을 적으면 토착신이 지금 마음을 읽고,<br>오늘 해볼 작은 실천을 건네드려요.<br>원한다면 그 결과를 나만의 부적으로 남길 수 있어요.</p>
     <div class="landing-spacer"></div>
@@ -410,18 +587,16 @@ const screens=[
     <button class="landing-link" data-toast="고민 입력 → 토착신 해석 → 오늘 해볼 작은 실천 → 원하면 부적 생성 순서로 진행돼요.">이 서비스는 어떻게 진행되나요?</button>
     <p class="landing-caption">미래를 맞히거나 결정을 대신하는 서비스가 아니라,<br>오늘의 고민을 정리하기 위한 참고예요.</p>
   </div>`},
-{id:'deities',title:'토착신 리스트',group:'main',body:()=>`
+{id:'deities',title:'토착신 리스트',group:'main',dark:true,body:()=>`
+  <div class="shelf-wrap">
+    <img src="assets/deities-screen@4x.png" alt="여섯 토착신이 모여 있는 신단 — 산신, 칠성신, 용왕, 문신, 삼신할미, 서낭신">
+    ${Object.keys(shelfChars).map(id=>{const t=shelfChars[id],M=6,c={x:t.x-M,y:t.y-M,w:t.w+2*M,h:t.h+2*M},bs=`${(SHELF.w/c.w*100).toFixed(3)}% ${(SHELF.h/c.h*100).toFixed(3)}%`,bp=`${(c.x/(SHELF.w-c.w)*100).toFixed(3)}% ${(c.y/(SHELF.h-c.h)*100).toFixed(3)}%`;return `<div class="shelf-pop" id="pop-${id}" style="left:${pct(c.x,SHELF.w)};top:${pct(c.y,SHELF.h)};width:${pct(c.w,SHELF.w)};height:${pct(c.h,SHELF.h)};background-size:${bs};background-position:${bp};-webkit-mask-image:url('assets/shelf/mask-${id}.svg');mask-image:url('assets/shelf/mask-${id}.svg')"></div>`}).join('')}
+    ${Object.keys(shelfChars).map(id=>{const t=shelfChars[id];return `<button class="shelf-cell" data-sheet="${id}" aria-label="${deityMap[id].name} 소개 보기" style="left:${pct(t.x,SHELF.w)};top:${pct(t.y,SHELF.h)};width:${pct(t.w,SHELF.w)};height:${pct(t.h,SHELF.h)}"></button>`}).join('')}
+  </div>
   ${topbar('landing','')}
   <div class="body">
-    <h2 class="h-page">어떤 토착신에게<br>고민을 건네볼까요?</h2>
-    <p class="lead">무엇을 기준으로 고르면 좋을지 먼저 보여드릴게요. 토착신을 골라도 결과 전에는 고민 입력이 필요해요.</p>
-    ${deityCard('seonang','관계 · 서운함 · 소속감 · 사람에 지침','“오가는 사람을 다 붙잡는 나무는 없어요. 지나갈 사람은 보내줘도 돼요.”')}
-    ${deityCard('sansin','번아웃 · 조급함 · 페이스 · 중심 잡기','“급히 오를수록 쉽게 엎어져. 흔들리지 않게 딛는 한 걸음이 먼저다.”')}
-    ${deityCard('samsin','시작 · 변화 · 용기 · 자기비난','“처음부터 열매를 보려 하지 말고 씨앗 하나만 쥐어보자.”')}
-    ${deityCard('munsin','거절 · 경계 · 내 공간 · 부탁 부담','“모든 문을 다 열어줄 필요는 없어요. 어떤 문은 닫아두는 게 지키는 거예요.”')}
-    ${deityCard('yongwang','감정 기복 · 불안 · 눈물 · 마음의 파도','“파도는 막는 게 아니라, 지나가게 두는 거예요.”')}
-    ${deityCard('chilseong','막막함 · 장래 불안 · 오래 품은 걱정','“오늘 다 해결하지 않아도 괜찮아. 별은 어두워진 뒤에야 보이는 법이니까.”')}
-    <button class="landing-link" data-go="input" data-flow="worry" style="margin-top:16px">고민부터 먼저 적을래요</button>
+    <h2 class="h-page">어떤 토착신에게 고민을 건네볼까요?</h2>
+    <p class="lead">무엇을 기준으로 고르면 좋을지 먼저 보여드릴게요.<br>토착신을 골라도 결과 전에는 고민 입력이 필요해요.</p>
   </div>`},
 {id:'deityDetail',title:'토착신 상세',group:'main',body:()=>{const id=appState.selectedDeity||'seonang';const d=deityMap[id];return `
   ${topbar('deities','')}
@@ -437,52 +612,78 @@ const screens=[
     <button class="btn btn-xl btn-secondary" data-go="deities">다른 토착신 보기</button>
     <button class="btn btn-xl btn-primary" data-go="input">${d.name}에게 고민 말하기</button>
   </div>`}},
-{id:'input',title:'공통 고민 입력',group:'main',body:()=>{const d=appState.selectedDeity?deityMap[appState.selectedDeity]:null;return `
-  ${topbar('landing','고민 정리 1/3')}
-  <div class="body">
-    <div class="progress"><span style="width:33%"></span></div>
-    ${d?`<div class="selected-deity"><strong>${d.label}</strong><button data-go="deities">다른 토착신 선택</button></div>`:''}
-    <h2 class="h-page">지금 마음에 남아 있는 말을<br>편하게 적어주세요</h2>
-    <p class="lead" style="margin-bottom:18px">짧게 적어도 괜찮아요. 한 문장이어도 충분해요.</p>
-    <textarea placeholder="예: 친구에게 서운한데 말하면 멀어질까 봐 계속 참고 있어요. 제가 예민한 건지 모르겠어요."></textarea>
-    <p class="caption"><svg class="info-svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="6.6" stroke-width="1.2"/><circle cx="8" cy="5.1" r="0.9" fill="currentColor" stroke="none"/><path d="M8 7.5v3.6" stroke-width="1.3" stroke-linecap="round"/></svg>실명, 연락처, 주소는 적지 않아도 괜찮아요.</p>
-    <div class="section-title">지금 마음에 가까운 감정</div>
-    <div class="chips"><button class="chip">서운함</button><button class="chip">불안함</button><button class="chip">막막함</button><button class="chip">화남</button><button class="chip">지침</button><button class="chip">잘 모르겠음</button></div>
-    <div class="section-title">오늘 결과를 보고 원하는 변화</div>
-    <div class="chips"><button class="chip">마음 정리</button><button class="chip">내 탓 줄이기</button><button class="chip">말할 문장 하나</button><button class="chip">오늘 할 일 하나</button></div>
-    <div class="spacer" style="min-height:24px"></div>
-  </div>
-  <div class="bottom-bar">
-    <p class="caption" style="text-align:center;margin:0">고민부터 시작했든, 토착신을 먼저 골랐든<br>여기서부터는 같은 방식으로 진행돼요.</p>
-    <div class="bb-btns">
-      <button class="btn btn-secondary" data-go="capacity">조금 더 정리하기</button>
-      <button class="btn btn-primary" data-go="loading">결과 받아보기</button>
+{id:'input',title:'공통 고민 입력',group:'main',body:()=>`
+  <div class="step-screen">
+    <img class="step-art" src="${stepArtSrc('input')}" alt="">
+    ${stepHud(1)}
+    <div class="sheet-panel">
+      <div class="sheet-scroll">
+        <h2 class="h-page">지금 마음에 남아 있는 말을<br>편하게 적어주세요</h2>
+        <div style="height:12px"></div>
+        <p class="lead">짧게 적어도 괜찮아요. 한 문장이어도 충분해요.</p>
+        <div style="height:18px"></div>
+        <textarea placeholder="예: 친구에게 서운한데 말하면 멀어질까 봐 계속 참고 있어요. 제가 예민한 건지 모르겠어요."></textarea>
+        <p class="caption"><svg class="info-svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="6.6" stroke-width="1.2"/><circle cx="8" cy="5.1" r="0.9" fill="currentColor" stroke="none"/><path d="M8 7.5v3.6" stroke-width="1.3" stroke-linecap="round"/></svg>실명, 연락처, 주소는 적지 않아도 괜찮아요.</p>
+        <div class="section-title">지금 마음에 가까운 감정</div>
+        <div class="chips"><button class="chip">서운함</button><button class="chip">불안함</button><button class="chip">막막함</button><button class="chip">화남</button><button class="chip">지침</button><button class="chip">잘 모르겠음</button></div>
+        <div class="section-title">오늘 결과를 보고 원하는 변화</div>
+        <div class="chips"><button class="chip">마음 정리</button><button class="chip">내 탓 줄이기</button><button class="chip">말할 문장 하나</button><button class="chip">오늘 할 일 하나</button></div>
+      </div>
+      <div class="sheet-foot">
+        <p class="caption" style="text-align:center;margin:0">고민부터 시작했든, 토착신을 먼저 골랐든<br>여기서부터는 같은 방식으로 진행돼요.</p>
+        <div class="btn-row">
+          <button class="btn btn-secondary" data-go="${appState.selectedDeity?'deities':'landing'}">뒤로 가기</button>
+          <button class="btn btn-primary" data-go="capacity">다음 단계</button>
+        </div>
+      </div>
     </div>
-  </div>`}},
+  </div>`},
 {id:'capacity',title:'오늘 가능한 정도',group:'main',body:()=>`
-  ${topbar('input','고민 정리 2/3')}
-  <div class="body">
-    <div class="progress"><span style="width:66%"></span></div>
-    <h2 class="h-page">오늘은 어느 정도까지<br>괜찮을까요?</h2>
-    <p class="lead">작은 실천은 지금 마음의 여력에 맞춰 제안할게요. 무리하게 바꾸라는 말은 하지 않아요.</p>
-    <div class="card tappable" data-go="summary"><h3>읽기만 해도 괜찮아요</h3><p class="body-text" style="color:var(--text-secondary);font-size:14px">오늘은 행동보다 마음 정리가 먼저 필요해요.</p></div>
-    <div class="card tappable" data-go="summary"><h3>한 문장 정도는 써볼 수 있어요</h3><p class="body-text" style="color:var(--text-secondary);font-size:14px">보내지 않을 문장, 메모 한 줄처럼 작게 시작해요.</p></div>
-    <div class="card tappable" data-go="summary"><h3>3분 정도 정리해볼 수 있어요</h3><p class="body-text" style="color:var(--text-secondary);font-size:14px">감정이나 내 몫/상대 몫을 짧게 나눠봐요.</p></div>
-    <button class="btn btn-m btn-ghost" data-go="loading" style="margin-top:8px">바로 결과 보기</button>
+  <div class="step-screen">
+    <img class="step-art" src="${stepArtSrc('capacity')}" alt="">
+    ${stepHud(2)}
+    <div class="sheet-panel">
+      <div class="sheet-scroll">
+        <h2 class="h-page">오늘은 어느 정도까지<br>괜찮을까요?</h2>
+        <div style="height:8px"></div>
+        <p class="lead">작은 실천은 지금 마음의 여력에 맞춰 제안할게요. 무리하게 바꾸라는 말은 하지 않아요.</p>
+        <div style="height:20px"></div>
+        <div class="card tappable" data-go="summary"><h3>읽기만 해도 괜찮아요</h3><p class="body-text" style="color:var(--text-secondary);font-size:14px">오늘은 행동보다 마음 정리가 먼저 필요해요.</p></div>
+        <div class="card tappable" data-go="summary"><h3>한 문장 정도는 써볼 수 있어요</h3><p class="body-text" style="color:var(--text-secondary);font-size:14px">보내지 않을 문장, 메모 한 줄처럼 작게 시작해요.</p></div>
+        <div class="card tappable" data-go="summary"><h3>3분 정도 정리해볼 수 있어요</h3><p class="body-text" style="color:var(--text-secondary);font-size:14px">감정이나 내 몫/상대 몫을 짧게 나눠봐요.</p></div>
+        <button class="btn btn-m btn-ghost" data-go="loading">바로 결과 보기</button>
+      </div>
+      <div class="sheet-foot">
+        <div class="btn-row">
+          <button class="btn btn-secondary" data-go="loading">바로 결과 보기</button>
+          <button class="btn btn-primary" data-go="summary">다음 단계</button>
+        </div>
+      </div>
+    </div>
   </div>`},
 {id:'summary',title:'정리 확인',group:'main',body:()=>`
-  ${topbar('capacity','고민 정리 3/3')}
-  <div class="body">
-    <div class="progress"><span style="width:100%"></span></div>
-    <h2 class="h-page">지금 고민은 이렇게<br>결과에 반영돼요</h2>
-    <p class="lead" style="margin-bottom:16px"></p>
-    <div class="card"><div class="mini-title">고민의 중심</div><p class="body-text">관계에서 말하지 못한 서운함<br><span class="dim">→ 결과 카드의 ‘오늘의 고민 이름’에 반영돼요.</span></p></div>
-    <div class="card"><div class="mini-title">함께 있는 마음</div><p class="body-text">말하고 싶은 마음과 멀어질까 봐 조심스러운 마음<br><span class="dim">→ ‘지금 마음의 결’에 반영돼요.</span></p></div>
-    <div class="card card-brand"><div class="mini-title">오늘 가능한 정도</div><p class="body-text">한 문장 정도<br><span class="dim">→ 작은 실천의 크기를 맞추는 데 사용돼요.</span></p></div>
-    <button class="btn btn-l btn-secondary" data-go="input" style="margin-top:6px">정리 조금 바꾸기</button>
-  </div>
-  ${cta('이대로 결과 받아보기','loading')}`},
-{id:'loading',title:'결과 생성 중',group:'main',body:()=>`
+  <div class="step-screen">
+    <img class="step-art" src="${stepArtSrc('summary')}" alt="">
+    ${stepHud(3)}
+    <div class="sheet-panel">
+      <div class="sheet-scroll">
+        <h2 class="h-page">지금 고민은 이렇게<br>결과에 반영돼요</h2>
+        <div style="height:24px"></div>
+        <div class="card"><div class="mini-title">고민의 중심</div><p class="body-text" style="font-size:14px;color:var(--text-secondary)">관계에서 말하지 못한 서운함<br>→ 결과 카드의 ‘오늘의 고민 이름’에 반영돼요.</p></div>
+        <div class="card"><div class="mini-title">함께 있는 마음</div><p class="body-text" style="font-size:14px;color:var(--text-secondary)">말하고 싶은 마음과 멀어질까 봐 조심스러운 마음<br>→ ‘지금 마음의 결’에 반영돼요.</p></div>
+        <div class="card card-brand"><div class="mini-title" style="color:var(--fg-tertiary)">오늘 가능한 정도</div><p class="body-text" style="font-size:14px;color:var(--text-secondary)">한 문장 정도<br>→ 작은 실천의 크기를 맞추는 데 사용돼요.</p></div>
+        <button class="btn btn-l btn-secondary" data-go="input">정리 조금 바꾸기</button>
+      </div>
+      <div class="sheet-foot">
+        <div class="btn-row">
+          <button class="btn btn-secondary" data-go="input">정리 조금 바꾸기</button>
+          <button class="btn btn-primary" data-go="loading">결과 받아보기</button>
+        </div>
+      </div>
+    </div>
+  </div>`},
+{id:'loading',title:'결과 생성 중',group:'main',bgArt:true,body:()=>`
+  ${loadingBg()}
   ${topbar(null,'결과 준비 중')}
   <div class="body">
     ${loaderHero()}
@@ -495,32 +696,42 @@ const screens=[
     </div>
     <p class="caption" style="text-align:center">잠시 뒤 상담 결과가 자동으로 열려요.</p>
   </div>`},
-{id:'result',title:'상담 결과',group:'main',body:()=>`
-  ${topbar('input','상담 결과')}
-  <div class="body">
-    <div class="card card-brand" style="padding:20px;border-radius:var(--r-2xl)">
-      <div class="mini-title">서낭신이 이렇게 읽었어요</div>
-      <p class="big-quote">“관계를 지키려는 마음이 커질수록, 내 마음이 설 자리가 좁아졌을 수 있어요.”</p>
+{id:'result',title:'상담 결과',group:'main',body:()=>{
+  const id=appState.selectedDeity||'seonang', d=deityMap[id], r=deityResult[id];
+  return `
+  <div class="result-screen" style="--dbg:${r.bg};background-image:url('assets/result-bg/${id}@2x.png')">
+    ${topbar('input','')}
+    <div class="result-body">
+      <div class="result-hero">
+        <p class="result-eyebrow">${d.name}${josa(d.name,'이','가')} 이렇게 읽었어요</p>
+        <p class="result-quote">${r.hanmadi}</p>
+      </div>
+      <img class="result-peek" src="assets/result-peek/${id}.png" alt="${d.name}">
+      <div class="rcard">
+        <section><h4>지금 마음의 결</h4><p>${r.maeum}</p></section>
+        <div class="rule"></div>
+        <section><h4>오늘의 고민 이름</h4><b>${r.gomin}</b><p class="sub">${r.gominNote}</p></section>
+      </div>
+      <div class="rcard">
+        <section><h4>오늘 새로 붙일 문장</h4><b>${r.munjang}</b></section>
+        <div class="rule"></div>
+        <section>
+          <h4>오늘 해볼 작은 실천</h4><b>${r.silcheonTitle}</b>
+          <p class="meta">${r.silcheonDesc}</p>
+          <div class="rsteps">${r.steps.map((s,i)=>`<div class="rstep"><i>${i+1}.</i><span>${s}</span></div>`).join('')}</div>
+        </section>
+      </div>
+      <button class="result-link" data-go="resultFeedback">결과 피드백 남기기</button>
     </div>
-    <div class="card"><div class="mini-title">지금 마음의 결</div><p class="body-text">말하고 싶은 마음과, 관계가 멀어질까 봐 조심스러운 마음이 함께 있어 보여요.</p></div>
-    <div class="card"><div class="mini-title">오늘의 고민 이름</div><p class="body-text"><b>말하지 못한 서운함</b><br><span style="color:var(--text-secondary)">이건 당신이 예민하다는 뜻이 아니라, 마음을 둘 자리가 필요하다는 신호에 가까워요.</span></p></div>
-    <div class="card card-soft"><div class="mini-title">오늘 새로 붙일 문장</div><p class="quote">나는 관계를 망치는 사람이 아니라, 내 마음을 조심스럽게 꺼내는 법을 배우는 중이에요.</p></div>
-    <div class="card" style="border-radius:var(--r-2xl)">
-      <div class="mini-title" style="color:var(--green-500)">오늘 해볼 작은 실천</div>
-      <h3>보내지 않을 문장 하나 써보기</h3>
-      <p class="body-text" style="font-size:13px;color:var(--fg-tertiary);margin-bottom:10px">시간 3분 · 혼자 가능 · 바로 보내지 않기</p>
-      <ol style="margin:0;padding-left:18px;font-size:14px;line-height:1.7;color:var(--text-secondary)">
-        <li>하고 싶었던 말을 그대로 적어요.</li>
-        <li>전송하지 않고 10분 동안 그대로 둬요.</li>
-        <li>마지막에 “내가 진짜 원하는 건 ___”을 한 줄 더 적어요.</li>
-      </ol>
+    <div class="result-foot">
+      <div class="btn-row">
+        <button class="btn btn-secondary" data-go="input">새로운 고민 상담하기</button>
+        <button class="btn btn-primary" data-go="talismanLoading">부적 만들기</button>
+      </div>
     </div>
-    <button class="btn btn-l btn-secondary" data-go="input" style="margin-top:6px">새로운 고민 상담하기</button>
-    <button class="btn btn-m btn-ghost" data-go="resultFeedback">결과 피드백 남기기</button>
-    <p class="caption" style="text-align:center">부적은 자동 생성되지 않아요. 이 결과를 남기고 싶을 때 직접 선택할 수 있어요.</p>
-  </div>
-  ${cta('이 결과를 부적으로 남기기','talismanLoading')}`},
-{id:'talismanLoading',title:'부적 생성 중',group:'main',body:()=>`
+  </div>`}},
+{id:'talismanLoading',title:'부적 생성 중',group:'main',bgArt:true,body:()=>`
+  ${loadingBg()}
   ${topbar(null,'부적 생성 중')}
   <div class="body">
     ${loaderHero()}
@@ -539,7 +750,7 @@ const screens=[
   <div class="topbar"><button class="icon-btn" data-go="landing" aria-label="닫기" style="font-size:20px;font-weight:600;line-height:1">✕</button><span class="ctx"></span></div>
   <div class="body">
     <h2 class="h-page">문지방의 작은 불빛</h2>
-    <p class="lead" style="margin-bottom:16px">관계를 끊지 않으면서도, 내 마음이 머물 자리를 남겨두기 위한 부적이에요.</p>
+    <p class="lead" style="margin-bottom:8px">관계를 끊지 않으면서도, 내 마음이 머물 자리를 남겨두기 위한 부적이에요.</p>
     <div class="flip-scene">
       <div class="flip-card" id="flipCard" role="button" tabindex="0" aria-label="부적 카드 — 탭하면 뒤집혀요">
         <img class="flip-face flip-front" src="assets/talisman/${id}-front.png" alt="부적 앞면 — ${d.name}">
@@ -558,17 +769,26 @@ const screens=[
       <button class="btn btn-primary" data-go="share">저장/공유하기</button>
     </div>
   </div>`}},
-{id:'share',title:'저장/공유',group:'main',body:()=>`
-  ${topbar('talisman','저장/공유')}
-  <div class="body">
-    <h2 class="h-page">저장할 이미지가<br>준비됐어요</h2>
-    <p class="lead">고민 원문은 포함하지 않고, 부적과 오늘의 문장만 담았어요.</p>
-    <div class="card card-brand"><div class="mini-title">기본 포함</div><p class="body-text" style="line-height:1.7">부적 이미지<br>오늘 새로 붙일 문장<br>오늘 해볼 작은 실천<br>토착신 이름</p></div>
-    <div class="card"><div class="mini-title">기본 미포함</div><p class="body-text" style="line-height:1.7;color:var(--text-secondary)">고민 원문<br>실명, 연락처, 주소 등 민감한 개인 정보</p></div>
-    <button class="btn btn-l btn-secondary" data-toast="공유 이미지를 만들었어요." style="margin-top:6px">공유 이미지 만들기</button>
-    <button class="btn btn-m btn-ghost" data-go="input">새로운 고민 상담하기</button>
-  </div>
-  ${cta('저장하기',null,{toast:'저장됐어요. 고민 원문은 포함하지 않았어요.'})}`},
+{id:'share',title:'저장/공유',group:'main',body:()=>{
+  const id=appState.selectedDeity||'seonang', r=deityResult[id];
+  const card=`assets/talisman-card/${id}@2x.png`;
+  return `
+  <div class="share-screen" style="--dbg:${r.bg}">
+    <div class="share-bgwrap"><div class="share-bg" style="background-image:url('${card}')"></div><div class="share-dim"></div></div>
+    <div class="topbar"><button class="icon-btn" data-go="talisman" aria-label="닫기" style="font-size:20px;font-weight:600;line-height:1">✕</button></div>
+    <div class="share-head">
+      <h2>저장할 이미지가 준비됐어요</h2>
+      <p>고민 원문은 포함하지 않고,<br>부적과 오늘의 문장만 담았어요.</p>
+    </div>
+    <img class="share-card" src="${card}" alt="저장될 부적 이미지">
+    <div class="share-foot">
+      <button class="btn share-save" data-toast="저장됐어요. 고민 원문은 포함하지 않았어요.">저장하기</button>
+      <div class="btn-row">
+        <button class="btn share-sub" data-go="input">다시 하기</button>
+        <button class="btn share-sub" data-toast="공유 이미지를 만들었어요.">부적 공유하기</button>
+      </div>
+    </div>
+  </div>`}},
 {id:'talismanFeedback',title:'부적 피드백',group:'main',body:()=>`
   ${topbar('talisman','부적 피드백')}
   <div class="body">
@@ -594,7 +814,7 @@ const screens=[
   <div class="body">
     <h2 class="h-page">이 고민은 일반 결과로<br>바로 다루기 어려워요</h2>
     <p class="lead">지금 안전이나 전문적인 판단이 먼저 필요할 수 있어요. 이 경우에는 토착신 결과나 부적을 만들지 않아요.</p>
-    <div class="card" style="border-color:transparent;background:var(--seed-color-bg-critical-weak)"><div class="mini-title" style="color:var(--seed-color-fg-critical)">먼저 확인해주세요</div><p class="body-text" style="font-size:14px">스스로를 해치고 싶거나 누군가를 해칠 수 있다고 느껴진다면, 지금 혼자 버티지 말고 가까운 사람이나 전문 기관의 도움을 받아주세요.</p></div>
+    <div class="card"><div class="mini-title" style="color:var(--seed-color-fg-critical)">먼저 확인해주세요</div><p class="body-text" style="font-size:14px">스스로를 해치고 싶거나 누군가를 해칠 수 있다고 느껴진다면, 지금 혼자 버티지 말고 가까운 사람이나 전문 기관의 도움을 받아주세요.</p></div>
     <button class="btn btn-l btn-secondary" data-go="landing" style="margin-top:6px">처음으로 돌아가기</button>
   </div>
   ${cta('일반 고민으로 다시 작성하기','input')}`},
@@ -620,7 +840,89 @@ const screens=[
   ${cta('다시 시도하기',null,{toast:'다시 시도합니다.'})}`},
 ];
 
-function deityCard(id,tags,line){const d=deityMap[id];return `<div class="deity-card" data-go="deityDetail" data-deity="${id}"><div class="symbol"><img src="${d.icon}" alt="${d.name}"></div><div><div class="deity-name">${d.name}</div><div class="deity-fit">잘 맞는 고민 · ${tags}</div><div class="deity-role">${d.role}</div><div class="line-sample">${line}</div></div></div>`}
+/* 02 신단 좌표 — 풀스크린 일러스트(390×844, deities-screen@4x) 기준. 마스크 프레임(188:4330 등) 바운즈 + 신단 오프셋(19, 186) */
+const SHELF={w:390,h:844};
+const shelfChars={
+  sansin:   {x:74.66, y:253.11,w:96.72, h:143.23},
+  chilseong:{x:230.74,y:260.64,w:77.02, h:135.56},
+  yongwang: {x:73.19, y:453.11,w:91.32, h:136.85},
+  munsin:   {x:223.15,y:456.60,w:102.40,h:133.64},
+  samsin:   {x:72.01, y:648.65,w:88.93, h:136.25},
+  seonang:  {x:227.48,y:650.89,w:94.46, h:133.74}
+};
+function pct(v,base){return (v/base*100).toFixed(3)+'%'}
+/* 받침 유무로 조사 선택 — '삼신할미가' / '서낭신이' */
+function josa(word,withBatchim,withoutBatchim){
+  const c=word.charCodeAt(word.length-1);
+  return (c-0xAC00)%28!==0 ? withBatchim : withoutBatchim;
+}
+/* 08 상담 결과 신별 콘텐츠 — 정본: docs/신별_동적화_설계.md §4 (결과 6단)
+   bg = figma 223:4003 각 프레임 배경색. silcheonTitle은 실천 문단에서 뽑은 초안(팀 확정 대상). */
+const deityResult={
+  seonang:{peek:[284,-78,23],bg:'#497dba',
+    hanmadi:'“어, 왔네. 며칠째 창만 띄워놨구나.”',
+    maeum:'솔직히 말해봐. 안 무서우면 가고 싶은 거지? 가고 싶은 마음이랑 멈추고 싶은 마음이 같이 있는 거잖아. 그래서 발이 안 떨어지는 거야.',
+    gomin:'가고 싶은 마음과 무서운 마음이 엉켜서 버튼을 못 누르는 고민',
+    gominNote:'어느 쪽이 맞는지는 나도 몰라. 배웅은 해도 같이 갈 수는 없거든. 다만 지금 회사에서 괴롭힘이나 부당한 일이 있는 거라면, 그건 참을 일이 아니야.',
+    munjang:'나는 결정을 못 하는 사람이 아니라, 안 다치고 가는 길을 찾는 중인 사람이야.',
+    silcheonTitle:'보내지 않을 첫걸음 하나만 정하기',
+    silcheonDesc:'오늘은 지원서 초안만 저장해. 제출 안 해도 돼. 지금 회사 그만두는 건 합격 후에. 생활비 몇 달치 버틸 수 있는지도 오늘 한 번 확인하고.',
+    steps:['가고 싶은 이유 하나를 적는다','제일 걸리는 실제 위험 하나를 확인한다','작은 첫걸음 하나와 돌아올 길 하나를 함께 정한다']},
+  munsin:{peek:[284,-73,17],bg:'#b52c2e',
+    hanmadi:'“누가 네 선 넘었네. 말해봐.”',
+    maeum:'거절하고 싶은 마음이랑, 상사라서 불이익 걱정되는 마음이 둘 다 있는 거지. 그거 네가 예민한 거 아니야. 업무 시간 끝나고 사적으로 넘어온 건 그쪽이야.',
+    gomin:'불편한데 ‘내가 예민한 건가’로 자꾸 삼켜버리는 고민',
+    gominNote:'난 상사를 나쁜 사람으로 판결하지 않아. 그쪽 의도는 몰라. 다만 네가 불편한 건 사실이고, 그 선을 지킬 권리는 너한테 있어.',
+    munjang:'나는 예민한 사람이 아니야. 내 선을 알아보기 시작한 사람이야.',
+    silcheonTitle:'주말 연락 하나만 막아보기',
+    silcheonDesc:'다 막을 필요 없어. 다음 주말에 사적인 카톡 오면 월요일에 답해. ‘주말엔 확인이 어려워서요’ 한 줄이면 돼. 그게 첫 번째 문이야.',
+    steps:['제일 불편한 침입 하나 고르기','내 책임인지 상대 몫인지 나누기','짧은 거절 문장 하나 준비하기']},
+  sansin:{peek:[300,-74,18],bg:'#4d8884',
+    hanmadi:'“…이틀 남았구나. 왔으면 됐어.”',
+    maeum:'이틀 앞두고 잠도 못 잘 만큼 잘하고 싶은 거잖아. 그 마음이 있으니까 무서운 거야. 지금 너를 누르는 건 ‘다 못 했다’는 목록이야. 그 목록이 문제지, 네가 부족한 게 아니야.',
+    gomin:'정상을 한 번에 오르려다, 첫 발이 안 떼지는 고민',
+    gominNote:'결과는 내 산 바깥 일이야. 난 붙여줄 수 없어. 넌 오늘 한 칸 오른 거고, 그거면 됐어.',
+    munjang:'나는 준비 안 된 놈이 아니야. 오늘 한 칸 오른 놈이야.',
+    silcheonTitle:'막히는 질문 3개만 고르기',
+    silcheonDesc:'오늘은 새로운 거 보지 마. 이미 본 것 중에 자꾸 막히는 질문 3개만 골라. 그 3개만 오늘 밤 산이야. 자소서는 덮어.',
+    steps:['오늘 집중할 것 하나 정하기','집중 타이머 50분 맞추기','막히는 것 3개만 적기']},
+  samsin:{peek:[287,-74,6],bg:'#de8f96',
+    hanmadi:'“어유, 며칠째 잠도 못 잤구나. 그 마음, 할미가 좀 보자.”',
+    maeum:'한쪽 마음은 다가가고 싶은데, 다른 한쪽은 지금의 편안한 사이를 잃을까 봐 조심스러운 거지. 이건 네가 겁이 많아서가 아니란다. 그 자리가 소중하니까 조심스러운 거야.',
+    gomin:'좋아하는 마음을 들킬까 봐, 그 마음을 자꾸 작게 접어두는 고민',
+    gominNote:'이 결과는 네 마음을 정리해보는 하나의 이야기야. 그 사람의 마음이 어떨지는 할미도 알 수 없어. 그건 만나가면서 천천히 알아가는 거란다.',
+    munjang:'나는 겁이 많아 못 하는 아이가 아니라, 소중한 걸 조심스럽게 심는 중인 거란다.',
+    silcheonTitle:'부담 없는 안부 한마디 보내기',
+    silcheonDesc:'오늘 고백할지 말지를 정하지 않아도 돼. ‘오늘 동아리 재밌었어요’ 정도면 충분해. 마음을 여는 게 아니라, 문을 살짝 열어두는 거야.',
+    steps:['오늘 할 수 있는 제일 작은 것 하나','‘오늘은 여기까지’ 먼저 정하기','남과 비교하지 않기로 오늘 하루 약속하기']},
+  yongwang:{peek:[270,-69,26],bg:'#7eb4d8',
+    hanmadi:'“자— 2주째 답장을 못 하고 있구나. 급할 거 없어.”',
+    maeum:'가고 싶은 마음도 진짜고, 지금 사람들한테 미안한 마음도 진짜야. 둘 다 진심이라 못 고르는 거지, 우유부단해서가 아니야. 물은 원래 갈림길에서 잠깐 고여.',
+    gomin:'두 물길이 다 좋아서, 어느 쪽으로도 노를 못 젓고 있는 고민',
+    gominNote:'어느 쪽으로 갈지는 내가 못 정해줘. 연봉이나 조건은 데이터랑 같이 봐야 하고. 난 그저 네 흐름이 지금 갈림길에 있다는 걸 보여줄 뿐이야.',
+    munjang:'나는 우유부단한 사람이 아니라, 두 물길을 다 소중히 여기는 사람이야.',
+    silcheonTitle:'두 물길을 종이에 적어보기',
+    silcheonDesc:'오늘 결정 안 해도 돼. 대신 A4 한 장에 지금 자리에서 얻는 것 3개, 새 자리에서 얻을 것 3개만 적어봐. 두 물길을 눈으로 보는 거야.',
+    steps:['시간·에너지가 어디로 가는지 적기','제일 갉아먹는 것 하나 끊거나 줄이기','오래 미뤄온 기회 하나 열기']},
+  chilseong:{peek:[284,-75,19],bg:'#8279b1',
+    hanmadi:'“일단 앉아. 요즘 잠은 좀 자?”',
+    maeum:'몇 주째 그렇게 지쳐있으면서도 계속 버텨온 거잖아. 그거 약해서가 아니야. 지금은 게으른 게 아니라 방전된 거야. 배터리가 0인데 안 켜진다고 자책하는 거랑 똑같아.',
+    gomin:'쉬어도 채워지지 않고, 쉬는 것마저 불안한 방전 상태',
+    gominNote:'이 방전이 너무 오래가거나 점점 심해지면, 그건 나 혼자 봐줄 수 있는 게 아니야. 그땐 꼭 전문가한테 기대야 해.',
+    munjang:'나는 게으른 사람이 아니야. 오래 버텨온 사람이야.',
+    silcheonTitle:'오늘 밤 11시에 화면 끄기',
+    silcheonDesc:'회복 계획 세우지 마. 그것도 일이야. 잠 안 와도 괜찮아, 누워있는 게 회복이야. 딱 그 한 칸만.',
+    steps:['정해진 시간에 화면 끄고 눕기','점심에 10분 눈 감기','‘쉬는 것도 회복 노동’ 되뇌기']}
+};
+/* 신별 잘 맞는 고민 태그 — 02 바텀시트/03 상세 공용 */
+const fitMap={
+  sansin:'번아웃 · 조급함 · 페이스 · 중심 잡기',
+  chilseong:'막막함 · 장래 불안 · 오래 품은 걱정',
+  yongwang:'감정 기복 · 불안 · 눈물 · 마음의 파도',
+  munsin:'거절 · 경계 · 내 공간 · 부탁 부담',
+  samsin:'시작 · 변화 · 용기 · 자기비난',
+  seonang:'관계 · 서운함 · 소속감 · 사람에 지침'
+};
 /* 신별 실천 기본값 — 부적_통합문서 §2 슬롯 기본값 */
 const practiceMap={
   seonang:'제일 걸리는 실제 위험 하나를 확인한다.',
@@ -664,10 +966,37 @@ function renderNav(activeId){
     +exc.map(s=>`<button class="${s.id===activeId?'active':''}" data-nav="${s.id}">${s.title}</button>`).join('');
   nav.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>render(b.getAttribute('data-nav'))));
 }
+/* ---------- bottom sheet — 신 소개 (02 신단에서 캐릭터 탭) ---------- */
+const sheetEl=document.getElementById('sheet'),sheetVeil=document.getElementById('sheetVeil');
+function openSheet(id){
+  const d=deityMap[id];
+  sheetEl.innerHTML=`
+    <div class="sheet-grab"></div>
+    <div class="sheet-head">
+      <div class="symbol"><img src="${d.icon}" alt="${d.name}"></div>
+      <div><h3 class="sheet-name">${d.name}</h3><p class="sheet-role">${d.role}</p></div>
+    </div>
+    <div class="deity-fit">잘 맞는 고민 · ${fitMap[id]}</div>
+    <div class="line-sample">${sampleLine(id)}</div>
+    <div class="card card-soft"><div class="mini-title">많이 건네는 고민</div><p class="body-text" style="font-size:14px;line-height:1.6">${sampleConcerns(id)}</p></div>
+    <button class="btn btn-xl btn-primary" data-go="input" data-deity="${id}">${d.name}에게 고민 말하기</button>
+    <button class="btn btn-m btn-ghost" data-go="deityDetail" data-deity="${id}">더 자세히 볼래요</button>`;
+  sheetEl.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>{
+    const deity=el.getAttribute('data-deity');if(deity)appState.selectedDeity=deity;
+    closeSheet();render(el.getAttribute('data-go'));
+  }));
+  sheetVeil.classList.add('open');sheetEl.classList.add('open');sheetEl.scrollTop=0;
+}
+function closeSheet(){sheetVeil.classList.remove('open');sheetEl.classList.remove('open')}
+sheetVeil.addEventListener('click',closeSheet);
+
 let autoTimer=null,loaderCycle=null;
 function render(id='landing'){
   const s=screens.find(x=>x.id===id)||screens[0];
+  closeSheet();
   renderNav(s.id);
+  screenEl.classList.toggle('shelf-dark',!!s.dark);
+  screenEl.classList.toggle('has-bg-art',!!s.bgArt);
   screenEl.innerHTML=s.body();
   screenEl.scrollTop=0;
   wire();
@@ -688,6 +1017,13 @@ function wire(){
       const target=el.getAttribute('data-go');if(target)render(target);
     });
   });
+  /* 신단 캐릭터 탭 — 실루엣으로 오려낸 조각만 1.5배로 튀어나온 뒤 소개 시트 오픈 */
+  screenEl.querySelectorAll('[data-sheet]').forEach(el=>el.addEventListener('click',()=>{
+    const id=el.getAttribute('data-sheet'),ch=screenEl.querySelector('#pop-'+id);
+    if(ch){ch.classList.remove('pop');void ch.offsetWidth;ch.classList.add('pop');
+      ch.addEventListener('animationend',()=>ch.classList.remove('pop'),{once:true});}
+    setTimeout(()=>openSheet(id),270); /* 팝(280ms)이 끝날 때쯤 시트 오픈 — 딤이 팝을 덮지 않게 */
+  }));
   screenEl.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',e=>{e.stopPropagation();ch.classList.toggle('active')}));
   screenEl.querySelectorAll('.score button').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();btn.closest('.score').querySelectorAll('button').forEach(b=>b.classList.remove('on'));btn.classList.add('on')}));
   /* 부적 flip — 탭/엔터로 앞뒤 전환, 진입 시 1회 peek 힌트 */

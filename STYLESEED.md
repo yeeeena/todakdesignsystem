@@ -5,10 +5,12 @@
 - App domain:        health/wellness (emotional care) + AI/chat secondary
 - Surface:           mobile-app (390px, product-ui adapter)
 - Page type:         onboarding / form / detail (flow product, not dashboard)
-- Output grammar:    consumer-service
-- Grammar path:      built-in:.styleseed/engine/RULESETS.md
+- Output grammar:    reference:todaktodak
+- Grammar path:      .styleseed/rulesets/todaktodak/RULESET.md
 - Grammar fallback:  consumer-service
-- Reference confidence: n/a
+- Reference confidence: high
+- Components doc:    .styleseed/rulesets/todaktodak/COMPONENTS.md
+- Visual board:      .styleseed/rulesets/todaktodak/reference-board.html  # 이미지 내장 단일 파일
 - Aesthetic profile: editorial (soft · airy · warm-muted · silk) — one display-type moment
 - Mood:              soft · minimal · airy · calm-warm   # edges · feel · density · tone
 - Skin:              custom (warm-paper) — NOT default indigo

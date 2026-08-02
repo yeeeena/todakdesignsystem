@@ -1,3 +1,6 @@
 node_modules/
 .DS_Store
 *.zip
+
+# 로컬 전용 설정
+.claude/settings.local.json
