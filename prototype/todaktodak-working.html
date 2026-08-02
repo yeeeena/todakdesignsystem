@@ -495,7 +495,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .deity-ctx[hidden]{display:none}
 .deity-ctx-head{display:flex;align-items:center;gap:10px}
 .deity-ctx .symbol{width:36px;height:36px;border-radius:var(--r-m);flex:0 0 auto}
-.deity-ctx-name{flex:1;font-size:14px;line-height:1.4;color:var(--text-secondary);font-weight:500}
+.deity-ctx-name{flex:1;min-width:0;font-size:14px;line-height:1.4;color:var(--text-secondary);font-weight:500;word-break:keep-all}
 .deity-ctx-name b{font-size:15px;font-weight:700;color:var(--dlabel)}
 .deity-ctx-swap{
   flex:0 0 auto;border:0;background:transparent;padding:6px 2px;cursor:pointer;font-family:inherit;
@@ -536,10 +536,9 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .picker-go{width:20px;height:20px;flex:0 0 auto;margin-top:10px;color:var(--fg-quaternary)}
 .picker-go svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform:rotate(180deg)}
 
-/* 10 길상화 해설 — 유래(본문) + 당신에게(강조 인용) */
+/* 10 길상화 해설 — 유래(본문) + 당신에게(강조 인용). 강조는 굵기로만, 좌측 라인 없음 */
 .gilsang-closing{
-  margin:12px 0 0;padding:2px 0 2px 12px;border-left:3px solid var(--charcoal);
-  font-size:14px;line-height:1.6;font-weight:600;color:var(--text-primary);
+  margin:12px 0 0;font-size:14px;line-height:1.6;font-weight:600;color:var(--text-primary);
 }
 /* 10 나만의 부적 — 카드(498px)가 하단 고정 바에 가리지 않도록 상단 여백 압축 */
 .body:has(.flip-scene){padding-bottom:20px}
@@ -602,7 +601,9 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 </div>
 
 <script>
-let appState={selectedDeity:null};
+/* deityEntry — 02 신단에서 신을 골라 들어왔는지. 04~06 아트와 '뒤로 가기' 목적지를 가른다.
+   04에서 '다른 신 의견 듣기'로 바꾼 건 여기 해당하지 않는다(공통 진입 유지). */
+let appState={selectedDeity:null,deityEntry:false};
 // 6신 체계 — 산신·칠성신 한마디는 피그마 부적 카드 카피, 나머지 카피는 동일 톤 초안(수정 대상)
 const deityMap={
   seonang:{name:'서낭신',label:'서낭신에게 고민을 건네고 있어요',icon:'assets/deities/서낭신.png',role:'마을 어귀에서 오가는 관계를 지켜보는 신'},
@@ -672,8 +673,11 @@ const stepArt={
   yongwang:  {input:'yongwang-04',  capacity:'yongwang-05',  summary:'yongwang-06'},
   chilseong: {input:'chilseong-04', capacity:'chilseong-05', summary:'chilseong-06'}
 };
+/* 신별 아트는 '신단에서 신을 골라 들어온' 경로에서만 쓴다.
+   공통 입력으로 들어와 '다른 신 의견 듣기'로 신을 바꾼 경우는 배경이 흔들리면
+   화면이 통째로 갈아치워진 것처럼 보여서, 아트는 공통 세트를 유지한다. */
 function stepArtSrc(screen){
-  const set=stepArt[appState.selectedDeity]||stepArt.common;
+  const set=(appState.deityEntry&&stepArt[appState.selectedDeity])||stepArt.common;
   return `assets/steps/${set[screen]}@2x.png`;
 }
 
@@ -735,9 +739,11 @@ const screens=[
         <div class="chips"><button class="chip">마음 정리</button><button class="chip">내 탓 줄이기</button><button class="chip">말할 문장 하나</button><button class="chip">오늘 할 일 하나</button></div>
       </div>
       <div class="sheet-foot">
-        <p class="caption" style="text-align:center;margin:0">고민부터 시작했든, 토착신을 먼저 골랐든<br>여기서부터는 같은 방식으로 진행돼요.</p>
+        <p class="caption" style="text-align:center;margin:0">${appState.selectedDeity
+          ? `적은 고민은 <b>${deityMap[appState.selectedDeity].name}</b>${josa(deityMap[appState.selectedDeity].name,'이','가')} 읽어요.<br>언제든 다른 신으로 바꿀 수 있어요.`
+          : '고민부터 시작했든, 토착신을 먼저 골랐든<br>여기서부터는 같은 방식으로 진행돼요.'}</p>
         <div class="btn-row">
-          <button class="btn btn-secondary" data-go="${appState.selectedDeity?'deities':'landing'}">뒤로 가기</button>
+          <button class="btn btn-secondary" data-go="${appState.deityEntry?'deities':'landing'}">뒤로 가기</button>
           <button class="btn btn-primary" data-go="capacity">다음 단계</button>
         </div>
       </div>
@@ -867,7 +873,7 @@ const screens=[
     <div class="card gilsang-card" style="margin-top:12px;margin-bottom:0">
       <div class="mini-title" style="color:${r.label}">배경에 담긴 그림 · ${r.gilsang.name}</div>
       <p class="sub-text" style="font-size:14px">${r.gilsang.body}</p>
-      <p class="gilsang-closing" style="border-left-color:${r.label}">${r.gilsang.closing}</p>
+      <p class="gilsang-closing">${r.gilsang.closing}</p>
     </div>
     <div class="card card-tint" style="margin-top:12px;margin-bottom:0"><div class="mini-title" style="color:${r.label}">오늘 다시 기억할 작은 실천</div><p class="body-text">${practiceMap[id]}</p></div>
     <button class="landing-link" data-go="talismanFeedback" style="margin-top:12px">부적 피드백 남기기</button>
@@ -1119,7 +1125,8 @@ function openSheet(id){
     <button class="btn btn-xl btn-primary" data-go="input" data-deity="${id}">${d.name}에게 고민 말하기</button>
     <button class="btn btn-m btn-ghost" data-go="deityDetail" data-deity="${id}">더 자세히 볼래요</button>`;
   sheetEl.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>{
-    const deity=el.getAttribute('data-deity');if(deity)appState.selectedDeity=deity;
+    const deity=el.getAttribute('data-deity');
+    if(deity){appState.selectedDeity=deity;appState.deityEntry=true}
     closeSheet();render(el.getAttribute('data-go'));
   }));
   sheetVeil.classList.add('open');sheetEl.classList.add('open');sheetEl.scrollTop=0;
@@ -1176,8 +1183,10 @@ function showToast(msg){toastMsg.textContent=msg;toast.classList.add('show');cle
 function wire(){
   screenEl.querySelectorAll('[data-go],[data-toast]').forEach(el=>{
     el.addEventListener('click',()=>{
-      const deity=el.getAttribute('data-deity');if(deity)appState.selectedDeity=deity;
-      if(el.getAttribute('data-flow')==='worry'){appState.selectedDeity=null;appState.matchedDeity=null;appState.worry=''}
+      const deity=el.getAttribute('data-deity');
+      if(deity){appState.selectedDeity=deity;appState.deityEntry=true}
+      /* '고민부터 시작하기' — 공통 진입이므로 신·매칭·입력을 초기화한다 */
+      if(el.getAttribute('data-flow')==='worry'){appState.selectedDeity=null;appState.matchedDeity=null;appState.deityEntry=false;appState.worry=''}
       /* 04에서 다음 단계로 넘어갈 때, 신을 안 골랐으면 매칭 결과를 확정한다 */
       if(!appState.selectedDeity&&appState.matchedDeity&&el.getAttribute('data-go')&&el.getAttribute('data-go')!=='deities')
         appState.selectedDeity=appState.matchedDeity;
@@ -1201,7 +1210,9 @@ function wire(){
       appState.worry=ta.value;
       const picked=!!appState.selectedDeity;
       const id=picked?appState.selectedDeity:matchDeity(ta.value);
-      if(!ta.value.trim()||!id){ctx.hidden=true;return}
+      /* 신을 직접 고르고 들어왔으면 바로 보여준다 — 확인할 게 이미 정해져 있다.
+         추천은 고민을 읽어야 나오므로 입력 전에는 숨긴다. */
+      if(!id||(!picked&&!ta.value.trim())){ctx.hidden=true;return}
       ctx.hidden=false;
       ctx.style.setProperty('--dlabel',deityResult[id].label);
       if(ctx.dataset.deity!==id||ctx.dataset.picked!==String(picked)){

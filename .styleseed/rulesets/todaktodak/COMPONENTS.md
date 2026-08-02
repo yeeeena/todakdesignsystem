@@ -1,6 +1,6 @@
 # 토닥토닥 — 컴포넌트 인벤토리
 
-> 소스: `prototype/todaktodak-working.html` (단일 파일 · CSS 클래스 151종 · 화면 16종)
+> 소스: `prototype/todaktodak-working.html` (단일 파일 · CSS 클래스 152종 · 화면 16종)
 > 시각 사양은 [reference-board.html](reference-board.html)에서 실제 렌더로 확인.
 > `[레거시]` = CSS는 남아 있으나 현재 화면에서 미사용. `[크롬]` = 프로토타입 셸, 제품 아님.
 
@@ -46,14 +46,19 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 
 ### 1-2. 신별 테마 (deityResult)
 
-| 신 | key | 딥컬러 `bg` | 쓰임 |
+| 신 | key | 딥컬러 `bg` | 라벨톤 `label` |
 |---|---|---|---|
-| 서낭신 | seonang | `#497dba` | 08 배경·11 딤 |
-| 문신 | munsin | `#b52c2e` | 〃 |
-| 산신 | sansin | `#4d8884` | 〃 |
-| 삼신할미 | samsin | `#de8f96` | 〃 |
-| 용왕 | yongwang | `#7eb4d8` | 〃 |
-| 칠성신 | chilseong | `#8279b1` | 〃 |
+| 서낭신 | seonang | `#497dba` | `#4478b4` |
+| 문신 | munsin | `#b52c2e` | `#b52c2e` |
+| 산신 | sansin | `#4d8884` | `#477e7b` |
+| 삼신할미 | samsin | `#de8f96` | `#c94854` |
+| 용왕 | yongwang | `#7eb4d8` | `#337aa9` |
+| 칠성신 | chilseong | `#8279b1` | `#766ca9` |
+
+- **딥컬러 `bg`** — 08 결과 배경·11 공유 딤. 배경 전용, 컨트롤 색으로 쓰지 않는다.
+- **라벨톤 `label`** — 딥컬러를 surface(`#FFFDFC`) 위 WCAG AA(4.5:1) 통과값으로 어둡게 조정한 것.
+  08·10 미니타이틀, 04 신 컨텍스트의 이름 강조에만. **목록·비교 UI에서는 금지**(6신이 동등해야 함).
+  문신은 두 값이 같아 룰셋 §6의 "배경 전용"과 충돌해 보인다 — `evidence.json` 미해결 참조.
 
 씬 전용: 02 신단 `#5c281e` · 랜딩 하단 그라디언트 `#e3c5a7` · HUD 트랙 `#4d515c`.
 
@@ -93,7 +98,7 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
 | `.bb-stack` | 주 CTA 1개(전폭) 위 + 보조 2개 한 줄 아래, gap 10 | 하단 3버튼(10) |
 | `.share-save`/`.share-sub` | 56/48px · r14 | 11 저장/공유 |
 | `.landing-link`·`.result-link` | 14/600 underline (result는 흰색) | 텍스트 링크 |
-| `.icon-btn` | 40×40 · r12 · 24px stroke 1.8 셰브런 | 뒤로/닫기 |
+| `.icon-btn` | 40×40 · r12 · 24px SVG stroke 1.8 (`backSvg` 셰브런 / `closeSvg` X) | 뒤로·닫기 — 문자 글리프 금지 |
 
 ### 2-2. 카드
 
@@ -143,21 +148,36 @@ SEED 역할 토큰(`--seed-color-*`)이 위 값을 감싸고, 레거시 TDS 별�
   **폭에 비례**해야 일러스트와의 겹침이 기기 폭을 따라 유지된다. r20 상단 ·
   `.sheet-scroll`(내부 스크롤, pad 32/24) + `.sheet-foot`(고정, 상단 1px 헤어라인).
 - **신 선택 시트**(04, `.picker-*`): 글로벌 시트를 재사용하고 내용만 6신 목록으로 갈아끼운다.
-  `.picker-item`(40px symbol + 본문 + `.picker-go` 셰브런) 안에 `.picker-name`(15/700)
-  · `.picker-fit`(12 muted, `fitMap`) · `.picker-line`(13/500, ink-03 박스, `sampleLine`).
-  **이름은 신별 색을 쓰지 않고 `--text-primary` 검정으로 통일** — 목록에서 6신이 동등하게 읽혀야 한다.
-  현재 추천 신만 `.current`(테두리 `--dlabel` + ink-03 배경 + `지금 추천` 배지). 고르면 그 신으로 확정 후 04 재렌더.
+  `.picker-item` = 카드 문법 그대로(surface + 1px ink-08 + r16 · pad 16 · 목록 gap 12) ·
+  40px symbol + `.picker-body` + `.picker-go`(**20px SVG 셰브런**, 문자 `›` 아님).
+  본문은 `.picker-name`(15/700 **charcoal**) · `.picker-fit`(12 muted, `fitMap`)
+  · `.line-sample`(14/600 grey-50 박스, `sampleLine` — 신 소개 시트와 **같은 부품 재사용**).
+  **이름에 신별 색을 쓰지 않는다** — 목록에서 6신이 동등하게 읽혀야 한다.
+  현재 추천 신만 `.current` = chip·score와 같은 선택 관용구(**charcoal 테두리 + ink-04 틴트**) + `지금 추천` 배지.
+  고르면 `selectedDeity`만 바꾸고 `deityEntry`는 건드리지 않는다(아트는 common 유지) → 04 재렌더, 입력값 보존.
 
 ### 2-8. 스텝 화면 (04–06)
 
 `.step-screen`(container-type:inline-size) = `.step-art`(상단 일러스트, 신별 `stepArt` 맵 7세트:
-common + 6신 전부, 폴백 common) + `.step-hud` + `.sheet-panel`. 일러스트는 `assets/steps/{set}-0N@2x.png`.
+common + 6신 전부) + `.step-hud` + `.sheet-panel`. 일러스트는 `assets/steps/{set}-0N@2x.png`.
 
-**신 컨텍스트 블록**(04, `.deity-ctx`): 고민을 입력해야 뜬다(빈 입력이면 `hidden`).
-텍스트를 `matchKeywords`로 훑어 `matchDeity()`가 신을 고르고, 텍스트필드 바로 아래에 추천을 붙인다.
+**아트는 진입 경로를 따른다** — `appState.deityEntry`(02 신단에서 골라 들어왔는지)가 기준이지
+`selectedDeity`가 아니다. 공통 입력으로 들어와 04에서 신을 바꾼 경우는 배경이 통째로 갈리면
+화면이 바뀐 것처럼 보이므로 common 세트를 유지한다. '뒤로 가기' 목적지(deities/landing)도 같은 값을 쓴다.
+
+**신 컨텍스트 블록**(04, `.deity-ctx`): 텍스트필드 바로 아래.
 `.deity-ctx-head`(symbol + `.deity-ctx-name` + `.deity-ctx-swap` "다른 신 의견 듣기")
-· `.deity-ctx-fit` · `.deity-ctx-line`. 신을 직접 고른 경로면 문구가 추천형("~이 잘 맞아요")에서
-확정형("~이 이 고민을 들을 거예요")으로 바뀐다. 스왑 버튼이 위 신 선택 시트를 연다.
+· `.deity-ctx-fit` · `.deity-ctx-line`. 스왑 버튼이 위 신 선택 시트를 연다.
+
+표시 조건이 경로마다 다르다 — **확인할 게 정해졌으면 바로, 아니면 읽고 나서**:
+
+| 경로 | 입력 전 | 문구 |
+|---|---|---|
+| 신을 이미 고름(신단 진입·시트 교체) | **바로 표시** | 확정형 "○○이 이 고민을 들을 거예요" |
+| 공통 입력 | 숨김 | 입력하면 `matchKeywords`→`matchDeity()`로 추천형 "이 고민은 ○○이 잘 맞아요" |
+
+하단 안내 문구도 같은 기준으로 갈린다 — 신을 골랐으면 "적은 고민은 ○○이 읽어요.",
+아니면 "고민부터 시작했든, 토착신을 먼저 골랐든…". 이름 조사는 `josa()`.
 
 ### 2-9. 상담 결과 (08)
 
@@ -232,13 +252,25 @@ common + 6신 전부, 폴백 common) + `.step-hud` + `.sheet-panel`. 일러스�
 | talisman/ | {id}-front·back.png ×12 | 1264×1992 | @4x | 10 플립 앞/뒷면 |
 
 명명 규약: 영문 신 key(`seonang`…) + `@{scale}x`. 아바타 아이콘만 한글 파일명(레거시).
-steps는 6신 전 세트 완비(21장). 신 미선택 진입 시에만 common 세트 사용.
+steps는 6신 전 세트 완비(21장). **02 신단 진입일 때만 신별 세트, 그 외엔 common**(§2-8).
+
+### 공유용 단일 HTML 빌드
+
+`prototype/토닥토닥_프로토타입_단일파일.html` — 자산 72종을 data URI로 내장해 파일 하나로 도는 산출물.
+빌드 결과물이라 깃에서 제외한다(`.gitignore`).
+
+- 알파가 거의 없는 컷(투명 <1% = 둥근 모서리뿐)은 **JPEG로 평탄화**. 모서리는 CSS `border-radius`가
+  이미 잘라내므로 흰 모서리가 보이지 않는다. 부적 12장이 여기 해당(10.2MB → 1.2MB).
+- 진짜 투명한 컷만 PNG 유지, **표시 크기의 2배**로 축소(부적 1000 · 로더/빼꼼 320 · 심볼 160).
+- 결과 8.2MB(이전 21MB). 런타임에 data URI → blob URL로 바꾸고 문자열 단위로 경로를 치환한다.
+- ⚠️ 시트를 연 **뒤에** `innerHTML`을 다시 쓰면 방금 붙인 클릭 핸들러가 날아간다. 시트 2종은
+  `deityMap[].icon`만 참조하고 그건 미리 blob으로 교체되므로, 시트 내용은 건드리지 않는다.
 
 ---
 
 ## 5. 부록 — 보조·상태 클래스 색인
 
-위 섹션에서 다루지 않은 파생 클래스 전체. (합쳐서 CSS 클래스 151종 = 전수)
+위 섹션에서 다루지 않은 파생 클래스 전체. (합쳐서 CSS 클래스 152종 = 전수)
 
 **상태 토글**
 `.active`(칩·네브 선택) · `.on`(score 선택) · `.open`(시트/베일) · `.show`(토스트)
@@ -255,9 +287,12 @@ steps는 6신 전 세트 완비(21장). 신 미선택 진입 시에만 common �
   · `.landing-grad`[레거시 — 그라디언트가 이미지에 포함되며 마크업에서 제거]
 - 결과(08): `.result-body`(카드 컬럼) · `.result-eyebrow`(13/600 rgba(surface,.8))
 - 시트: `.sheet-grab`(44×4 그래버) · `.sheet-role`(13 muted 역할 한 줄)
+- 신 선택 시트(04): `.picker-head`/`.picker-sub`(sheet-name·role 재사용, 여백만 목록용)
+  · `.picker-list`(세로 12px) · `.picker-body`(이름·fit·예시 컬럼)
 - 공유(11): `.share-head`(타이틀 24 + 서브 15, 흰색)
 - 로딩(07·09): `.has-bg-art`(screen 배경 아트 모드 — topbar 투명화)
 - 플립(10): `.flip-face`/`.flip-back`(양면 공통/뒷면 회전) · `.frame`[레거시 talisman-art 내부]
+  · `.gilsang-closing`(길상화 "당신에게" 강조 14/600 — **좌측 라인 없음**, 굵기로만 강조)
 
 **텍스트 보조**
 `.info-svg`(캡션 앞 15px 인포 아이콘) · `.sub-text`(14/1.6 보조 문단) · `.meta`(rcard 실천 메타 13 muted)

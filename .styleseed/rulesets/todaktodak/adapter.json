@@ -1,12 +1,16 @@
 {
   "adapter": "mobile-app",
   "contract": "product-ui",
-  "canvas": { "width": 390, "height": 844, "frame": "phone mock (prototype chrome, 제품 아님)" },
+  "canvas": {
+    "width": 390,
+    "height": 844,
+    "frame": "phone mock (prototype chrome, 제품 아님)"
+  },
   "overrides": {
-    "scroll": "화면 내부 스크롤(#screen). 넘침 화면은 sticky 푸터",
+    "scroll": "화면 내부 스크롤(#screen). 넘침 화면은 sticky 푸터. 04~06 시트는 .sheet-scroll 내부 스크롤",
     "safeArea": "상단 28px(노치) · 하단 20px 패딩으로 대체",
-    "stateResidency": "appState.selectedDeity가 02→06→08→11 테마를 관통",
+    "stateResidency": "appState.selectedDeity가 02→06→08→11 테마를 관통. appState.deityEntry(신단 진입 여부)가 04~06 아트·뒤로가기·하단 문구를 가른다. appState.worry는 재렌더 간 입력 보존.",
     "renderModel": "화면 = screens[] 배열의 body() 템플릿 리터럴, render(id)로 전환, wire()로 이벤트 재바인딩",
-    "singleFileBundle": "공유 시 빌드 스크립트로 자산 60종 내장(불투명 대형→jpeg78, 투명→png, 실루엣→svg; 한글 파일명 NFC 정규화; CSS 참조는 blob URL 오버라이드)"
+    "singleFileBundle": "공유 시 빌드 스크립트로 자산 72종 내장 → 8.2MB. 투명 <1%(둥근 모서리뿐)은 jpeg74로 평탄화(CSS radius가 모서리를 자름), 진짜 투명은 png 유지 + 표시 크기 2배로 축소, 실루엣은 svg. 한글 파일명 NFC 정규화. data URI → blob URL 치환은 DOM 삽입 전 문자열 단계에서. 시트 innerHTML은 재작성 금지(핸들러 소멸). 산출물은 .gitignore 대상. 상세는 COMPONENTS.md §4."
   }
 }
