@@ -1,6 +1,7 @@
 # 토닥토닥 — 컴포넌트 인벤토리
 
 > 소스: `prototype/todaktodak-working.html` (단일 파일 · CSS 클래스 152종 · 화면 16종)
+> 화면 번호는 Copy Master의 `screen_order`(01–16)를 따른다.
 > 시각 사양은 [reference-board.html](reference-board.html)에서 실제 렌더로 확인.
 > `[레거시]` = CSS는 남아 있으나 현재 화면에서 미사용. `[크롬]` = 프로토타입 셸, 제품 아님.
 
@@ -19,8 +20,11 @@
 | 09 | `talismanLoading` | 부적 생성 중 | 07과 동일 세트 |
 | 10 | `talisman` | 나만의 부적 | flip-* · bottom-bar |
 | 11 | `share` | 저장/공유 | share-* (블러 배경 + 카드) |
-| 12·13 | `talismanFeedback`·`resultFeedback` | 피드백 | score · chips · btn-row |
-| 예외 | `safe`·`asset`·`error` | 안내 3종 | card + critical/warning 라벨 |
+| 12 | `talismanFeedback` | 부적 피드백 | score · chips · btn-row |
+| 13 | `resultFeedback` | 전체 피드백 | score · chips · btn-row |
+| 14 | `safe` | 안전 안내 | card + critical 라벨 · **문구 전체 safety_locked** |
+| 15 | `asset` | 내부 요청 안내 | card + 라벨 · **문구 전체 safety_locked** |
+| 16 | `error` | 생성 실패/지연 | card + warning 라벨 |
 
 ---
 
@@ -186,7 +190,7 @@ common + 6신 전부) + `.step-hud` + `.sheet-panel`. 일러스트는 `assets/st
 - `.result-peek`: **139×149 절대배치(right 24), 카드와 9px 겹침** — `assets/result-peek/{id}.png`(556×596 @4x, 투명).
 - `.rcard` ×2 (마음의 결/고민 이름 · 새 문장/작은 실천 + `.rsteps` 번호 리스트).
 - `.result-foot`: sticky bottom · `--dbg` 채움 · 페어 버튼(새로운 고민 상담하기 / 부적 만들기).
-- 콘텐츠: `deityResult[id]` — hanmadi·maeum·gomin·gominNote·munjang·silcheon*·steps (정본: docs/신별_동적화_설계.md).
+- 콘텐츠: `deityResult[id]` — hanmadi·maeum·gomin·gominNote·munjang·silcheon*·steps (현재 기준: 구현 기준 문서 A/B/02. `참고자료/신별_동적화_설계.md`는 과거 설계 배경).
 
 ### 2-10. 나만의 부적 (10)
 
