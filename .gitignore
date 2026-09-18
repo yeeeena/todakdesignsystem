@@ -8,3 +8,7 @@ prototype/토닥토닥_프로토타입_단일파일.html
 
 # 로컬 전용 설정
 .claude/settings.local.json
+
+# 전달용 사본 — 원본은 docs/design-guide/, 공유 zip은 빌드 산출물
+전달/
+_workspace/

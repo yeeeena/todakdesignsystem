@@ -1,33 +1,55 @@
-# CLAUDE.md
+# 토닥토닥
 
-Project-specific guidance for AI coding agents.
+토착신 6명이 사용자의 고민을 읽고 작은 실천과 부적으로 남겨주는 **감정 케어 모바일 웹** 프로토타입.
+디자인 시스템: 자체 가이드(warm mono · Cream/Charcoal) + SEED 역할 토큰. 외부 컴포넌트 라이브러리 없음.
 
-<!-- ASTRYX:START -->
-Astryx v0.1.4 · 149 components
-CLI: run every command as `npx astryx <cmd>` (shown below as `astryx ...`).
+## 읽어야 할 문서 (작업 전에)
 
-SETUP (once, in your app entry e.g. main.tsx) — without these, components render unstyled:
-  import "@astryxdesign/core/reset.css";
-  import "@astryxdesign/core/astryx.css";
+| 작업 | 먼저 읽을 것 |
+|---|---|
+| **디자인 작업을 시작할 때 (항상)** | `docs/design-guide/DESIGN.md` — §0에서 무엇이 정본인지 먼저 확인 |
+| 새 화면을 설계할 때 | `docs/design-guide/RULESET.md` (판단 기준 12축) |
+| 화면·컴포넌트를 만들거나 고칠 때 | `docs/design-guide/COMPONENTS.md` · `tokens.json` |
+| 작업을 끝냈을 때 | `docs/design-guide/checks.md` (필수·금지·회귀 시나리오) |
+| 화면 구성·CTA·인터랙션 | `prototype/todaktodak-working.html` — 화면 정본의 소스 |
+| 화면 고정 문구 | **Copy Master (Notion)** — 문구를 새로 정의하지 않는다 |
+| 신별 콘텐츠·매칭·상태 분기 | 구현 기준·기능명세 (Notion) — `docs/`의 과거 설계 문서는 기준 아님 |
 
-WORKFLOW — discover, don't guess. Before writing UI:
-1. `astryx build "<idea>"` — START HERE: returns a kit (closest [page] + [block]s + [component]s). No args = full playbook.
-2. `astryx template <name> [--skeleton]` — scaffold the [page]/[block]s it named, or study their layout. Templates are reference code.
-3. `astryx component <Name>` — props + examples for every component you use.
+`docs/design-guide/`는 `.styleseed/rulesets/todaktodak/`의 심링크다. 편집은 어느 쪽에서 해도 같다.
 
-RULES:
-- No <div> — components do all layout/spacing. Full page → AppShell; sidebar nav → SideNav.
-- Frame first: pick the shell (AppShell / Layout+LayoutPanel) and budget regions in px BEFORE writing content (`astryx docs layout`).
-- Dense data = rows (Table, List/Item) edge-to-edge — never Card-wrapped list items. Card = dashboard widgets, galleries, settings groups only.
-- Status → StatusDot/Token; Badge only for counts and enumerated states, never decoration.
-- Custom styling: component props first; else style/className with tokens — var(--color-*|--spacing-*|--radius-*). No raw hex/px. (No StyleX/Tailwind compiler here — don't use xstyle/utility classes.)
-- Tokens for every value (`astryx docs tokens`). Brand/accent via `astryx theme` — never override --color-* in :root.
+## 절대 규칙
 
-MORE CLI:
-  search "<query>"   find any component / hook / doc / template / block
-  component --list   149 components by category
-  template --list    page + block recipes
-  docs <topic>       color, elevation, icons, illustrations, layout, migration, motion, principles, shape, spacing, styling, theme, tokens, typography
-  swizzle <Name>     eject component source for deep customization
-  upgrade --apply    run after any @astryxdesign/core bump
-<!-- ASTRYX:END -->
+1. **순검정 `#000` 금지, 새 색은 SEED 역할 토큰(`--seed-color-*`)으로만.** 이유: 위계를 색이 아니라 잉크 불투명도로 만드는 시스템이고, 별칭 토큰 중에는 이름과 값이 다른 것(`--blue-500`=차콜)이 있다.
+2. **신별 딥컬러는 배경 전용.** 버튼·테두리·목록의 이름에 쓰지 않는다. 이유: 신 선택처럼 6신을 비교하는 UI에서 한 신만 튀면 안 된다.
+3. **아이콘은 24px SVG stroke 1.8.** 문자 글리프(✕ ›)·이모지 금지.
+4. **`safety_locked` 문구의 자리(01·04·10·11·14·15)를 없애거나 가리지 않는다.** 문구 자체는 Copy Master 정본.
+5. **판단이 필요한데 문서에 없으면 추측하지 말고 묻는다.** 특히 제품 정책·상태 분기·신별 콘텐츠.
+
+## 작업 흐름
+
+1. 계획 먼저 — 바꿀 화면·컴포넌트·토큰을 제시하고 확인을 받는다.
+2. 구조 → 내용 → 스타일 순서로. 한 번에 하나씩.
+3. 브라우저로 확인한다. 프리뷰는 `.claude/launch.json`의 `토닥토닥` (python http.server :4173).
+   신별로 달라지는 화면(04–06·08·10·11)은 **6신 전부** 확인한다.
+4. 끝나면 `checks.md`를 통과시키고, 검수 3항목(누락 / UX / 시키지 않은 것)을 점검한다.
+5. 리뷰에서 두 번 나온 피드백은 `DESIGN.md` 판단 기록에 추가를 제안한다.
+
+## 주의
+
+- `prototype/todaktodak-working.html`을 바꾸면 **화면 정본 SHA-256이 달라진다.**
+  공유용 단일 파일(`prototype/토닥토닥_프로토타입_단일파일.html`)을 다시 빌드하고,
+  문구 관리 문서에 등록된 해시도 갱신해야 한다는 점을 사용자에게 알린다.
+- 공유용 단일 파일과 `전달/`은 빌드 산출물이라 깃에서 추적하지 않는다.
+
+## 프로젝트 구조
+
+```
+.claude/CLAUDE.md            ← 이 문서 (진입점)
+STYLESEED.md                 브랜드 락 (과거 결정 기록 — 주색 표기가 현재와 다름)
+docs/design-guide/           디자인 가이드 (DESIGN · RULESET · COMPONENTS · checks · tokens …)
+prototype/
+  todaktodak-working.html    화면 정본 소스 (단일 파일, 화면 16종)
+  assets/                    일러스트·캐릭터 72종
+.agents/ , .claude/skills/   StyleSeed · SEED 스킬
+_workspace/                  임시 산출물 (추적 안 함)
+```
