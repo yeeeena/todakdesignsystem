@@ -3,8 +3,8 @@
 > 이 문서는 **옵시디언 링크 허브**입니다. 디자인 기준 자체는 [[DESIGN]]부터 읽으세요.
 > 여기서는 파일 간 연결과 옵시디언 연동만 다룹니다.
 >
-> ⚠️ 자료는 3단입니다 — 🟢 현재 기준(DESIGN·RULESET·COMPONENTS·tokens·checks·reference-board) /
-> 🟡 참고(evidence·adapter·이 문서) / ⚪ 히스토리(패키지 내 프로토타입 스냅샷·참고자료). 상세는 [[DESIGN]] §0.
+> ⚠️ 자료는 3단입니다 — 🟢 현재 기준(DESIGN·RULESET·COMPONENTS·tokens·checks·reference-board·프로토타입) /
+> 🟡 참고(evidence·adapter·FOLLOWUP·이 문서) / ⚪ 히스토리(참고자료). 상세는 [[DESIGN]] §0.
 
 ## 파일 구성과 용도
 
@@ -72,11 +72,11 @@ STYLESEED.md (프로젝트 락, 루트)
 ## 현재 미해결
 
 확인 필요 항목은 [[DESIGN]] §7에 정리돼 있고, 기존 패키지에서 손봐야 할 것은 [[FOLLOWUP]]에 있습니다.
-아래는 `evidence.json`과 동기화된 요약입니다.
+아래는 `evidence.json`과 동기화된 요약입니다 (우선순위 순).
 
-- 작은 실천 제목·부적 리드 5신분 — 초안, 팀 확정 대상
-- 05·06 '다음 단계' 라벨 — "~하기" 규칙 예외, 라이팅 문서 쪽 결정 대기 (04 하단 안내는 경로별 분기로 해결)
-- 신별 라벨톤(08·10 강조 텍스트)이 룰셋 §6과 충돌 — 별도 티어로 기재 vs charcoal 통일 결정 필요
-- 체크리스트 ✓ 문자 유지 vs SVG 통일
-- 피그마 신규 로더(신별 파스텔 배경 로딩 컷, 트랙 #cbc9c3) — 구현 미반영, 적용 여부 결정 필요
-- STYLESEED.md 락의 terracotta primary(#9B5132) ↔ 실제 charcoal CTA 불일치
+- 🔴 04 빈 입력 진행 시 화면마다 다른 신 (08 서낭신 / 10 산신 / 11 서낭신)
+- 🔴 09 부적 생성 중 문구 2건이 Copy Master 교정본과 다름
+- 🔶 토큰 매핑 초안 검수 — [[TOKEN-MAPPING.draft]] 판단 4건
+- Copy Master 내보내기 `copy_id` 21건 URL 오염 — 원인 확인 필요
+- 신별 라벨톤 ↔ 룰셋 §6 충돌 · 키보드 포커스 링 · 다국어 길이 기준 · 로더 신규 컷 · 체크 아이콘
+- 브랜드 락(STYLESEED.md) 주색 불일치 · 작은 실천 제목·부적 리드 5신분 초안
