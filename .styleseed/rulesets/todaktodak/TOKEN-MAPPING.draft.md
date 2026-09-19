@@ -157,6 +157,6 @@ SEED 역할 (20)    --seed-color-{fg|bg|stroke}-{역할}-{변형}     ← 새 �
 1. ① 미사용 12개 삭제 · ② 19개 치환 · ③ 33곳 치환 — **값이 같으므로 화면 변화 없음**
 2. 🔶 판단 결과 반영 · ④ 씬 토큰 신설
 3. **16화면 × 6신 스크린샷을 적용 전후로 비교** — 판단 1·3 외에 픽셀 차이가 나오면 치환 실수
-4. `DESIGN.md` §2-1에 **"새 코드는 SEED 20 + 씬 색만"** 명시, `tokens.json` · `COMPONENTS.md` §1 갱신
+4. `DESIGN.md` frontmatter `colors`에 씬 색 추가(본문 Colors에는 이미 "새 코드는 SEED 역할 토큰만"이 있음), `tokens.json` · `COMPONENTS.md` §1 갱신
 5. ⚠️ `todaktodak-working.html`이 바뀌므로 **화면 정본 SHA-256이 달라집니다.**
    공유용 단일 파일 재빌드 + 문구 관리 문서의 등록 해시 갱신이 필요합니다.

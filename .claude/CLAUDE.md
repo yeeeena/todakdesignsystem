@@ -7,7 +7,7 @@
 
 | 작업 | 먼저 읽을 것 |
 |---|---|
-| **디자인 작업을 시작할 때 (항상)** | `docs/design-guide/DESIGN.md` — §0에서 무엇이 정본인지 먼저 확인 |
+| **UI를 만들거나 고치기 전에 (항상)** | `docs/design-guide/DESIGN.md` — frontmatter = 토큰 값, 본문 = 언제·왜 |
 | 새 화면을 설계할 때 | `docs/design-guide/RULESET.md` (판단 기준 12축) |
 | 화면·컴포넌트를 만들거나 고칠 때 | `docs/design-guide/COMPONENTS.md` · `tokens.json` |
 | 작업을 끝냈을 때 | `docs/design-guide/checks.md` (필수·금지·회귀 시나리오) |
@@ -16,6 +16,18 @@
 | 신별 콘텐츠·매칭·상태 분기 | 구현 기준·기능명세 (Notion) — `docs/`의 과거 설계 문서는 기준 아님 |
 
 `docs/design-guide/`는 `.styleseed/rulesets/todaktodak/`의 심링크다. 편집은 어느 쪽에서 해도 같다.
+
+## 디자인 하네스 — UI 작업 순서
+
+UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
+
+읽은 다음 구현을 시작하기 전에 멈추고 아래를 보고한다.
+- 이번 화면의 핵심 행동
+- 적용할 규칙 (DESIGN.md의 어느 문장인지)
+- 규칙에 없어서 임의로 정해야 하는 것
+- 규칙과 요구사항이 부딪히는 것
+
+사용자가 확인하기 전에는 코드를 쓰지 않는다.
 
 ## 절대 규칙
 
