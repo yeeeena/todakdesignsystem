@@ -104,7 +104,7 @@ layout:
   min-width: 360px
 ---
 
-이 문서는 AI와 사람이 토닥토닥 화면을 만들 때 따르는 판단 기준이다. 위 frontmatter는 정확한 값이고, 본문은 언제 왜 쓰는지다. 값과 규칙은 최종본 화면(prototype/todaktodak-working.html)을 실측해 뽑았고, 승인된 것만 담았다. 주제별 기준은 목차 docs/design-guide/INDEX.md 에서 찾고, 아직 정하지 않은 항목은 docs/design-guide/FOLLOWUP.md 에 있다.
+이 문서는 AI와 사람이 토닥토닥 화면을 만들 때 따르는 판단 기준이다. 위 frontmatter는 정확한 값이고, 본문은 언제 왜 쓰는지다. 값과 규칙은 최종본 화면(prototype/todaktodak-working.html)을 실측해 뽑았고, 승인된 것만 담았다. 주제별 기준은 목차 docs/design-guide/INDEX.md 에서 찾고, 아직 정하지 않은 항목은 docs/design-guide/확인사항.md 에 있다.
 
 코드와 이 문서가 다르면 화면 구성과 흐름은 코드를, 토큰과 스타일은 이 문서를 따르고, 그 차이를 보고한다(2026-09-19 결정). 화면 상태와 분기, 고정 문구, 신별 콘텐츠는 이 문서가 다루지 않는다.
 

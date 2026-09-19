@@ -9,7 +9,9 @@
 
 UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
 
-그다음 목차 `docs/design-guide/INDEX.md` 에서 필요한 주제와 부품 문서만 골라 읽는다.
+그다음 목차 `docs/design-guide/INDEX.md` 에서 필요한 주제와 부품 문서만 골라 읽는다. 화면 작업이면 `docs/design-guide/화면별 대응표.md` 에서 그 화면의 문서부터 읽는다.
+
+와이어프레임을 받아 화면을 만들 때는 `docs/design-guide/workflows/화면 구현.md`, 사람이 정한 변경을 넣을 때는 `docs/design-guide/workflows/승인된 변경 반영.md` 순서를 따른다. 와이어프레임은 무엇이 어떤 순서로 놓이는지를 정하고, 모양은 DESIGN.md 를 따른다.
 
 | 필요한 것 | 정본 |
 |---|---|
@@ -17,7 +19,7 @@ UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
 | 화면 구성, CTA, 인터랙션 | `prototype/todaktodak-working.html` |
 | 화면 고정 문구 | Copy Master (Notion). 문구를 새로 정의하지 않는다 |
 | 신별 콘텐츠, 매칭, 상태 분기 | 구현 기준·기능명세 (Notion) |
-| 아직 정하지 않은 것 | `docs/design-guide/FOLLOWUP.md` |
+| 아직 정하지 않은 것 | `docs/design-guide/확인사항.md` |
 
 읽지 않는 것: `docs/design-guide/이전/`, `STYLESEED.md`, `docs/신별_동적화_설계.md` (지난 결정의 기록).
 
@@ -53,7 +55,7 @@ UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
 
 ## 화면 정본 주의
 
-`prototype/todaktodak-working.html`을 바꾸면 공유용 단일 파일의 SHA-256이 달라진다. 단일 파일은 `python3 tools/build_bundle.py`로 다시 만들고, 끝에 출력되는 해시를 사용자에게 알린다. 문구 관리 문서에 등록된 해시도 갱신해야 하므로 사용자에게 알린다. 바꿀 일은 `docs/design-guide/FOLLOWUP.md`의 "화면 정본을 고칠 때 한 번에 할 것"에 모아 한 번에 반영한다.
+`prototype/todaktodak-working.html`을 바꾸면 공유용 단일 파일의 SHA-256이 달라진다. 단일 파일은 `python3 tools/build_bundle.py`로 다시 만들고, 끝에 출력되는 해시를 사용자에게 알린다. 문구 관리 문서에 등록된 해시도 갱신해야 하므로 사용자에게 알린다. 바꿀 일은 `docs/design-guide/확인사항.md`의 "정본" 절에 모아 한 번에 반영한다.
 
 공유용 단일 파일과 `전달/`은 빌드 산출물이라 깃에서 추적하지 않는다.
 
@@ -67,9 +69,12 @@ UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
 .claude/CLAUDE.md            이 문서 (진입점)
 docs/design-guide/           디자인 가이드 (.styleseed/rulesets/todaktodak/ 의 심링크)
   DESIGN.md                  판단 기준 (frontmatter 값 + 본문)
+  README.md                  사람용 안내 (정본 배분, 파일 역할)
   INDEX.md                   목차
+  화면별 대응표.md             화면 16종별로 읽을 문서
+  workflows/                 화면 구현 · 승인된 변경 반영 순서
   카테고리/ · 컴포넌트/        주제별 기준 · 부품별 문서
-  checks.md · FOLLOWUP.md    검증 체크리스트 · 확인사항
+  checks.md · 확인사항.md    검증 체크리스트 · 확인사항
   이전/                      나누기 전 통합본 (읽지 않음)
 tools/build_bundle.py        공유용 단일 파일 빌더 (자산 내장, SHA 출력)
 prototype/
