@@ -4,7 +4,7 @@
 사용: python3 tools/build_bundle.py
 출력: prototype/토닥토닥_프로토타입_단일파일.html (깃 추적 안 함) + SHA-256
 
-assets/ 전 파일을 data URI로 내장하고 런타임에 blob URL로 바꾼다.
+assets/ 전 파일을 data URI로 내장하고 그대로 쓴다. blob URL로 바꾸면 미리보기·샌드박스 뷰어에서 막힌다.
 경로가 템플릿 리터럴로 조립되는 곳이 있어 문자열 단위 치환이 필요하다.
 
 용량 규칙 (공유가 목적이라 파일 하나가 메일·메신저를 통과해야 한다)
@@ -15,7 +15,7 @@ assets/ 전 파일을 data URI로 내장하고 런타임에 blob URL로 바꾼�
 주의
   - 시트(openSheet, openDeityPicker)를 연 뒤 innerHTML을 다시 쓰면 방금 붙인 클릭
     핸들러가 날아가 버튼이 죽는다(2026-08-02 회귀). 시트는 deityMap[].icon만 참조하고
-    그건 미리 blob으로 바꾸므로 시트 내용은 건드리지 않는다.
+    그건 미리 data URI로 바꾸므로 시트 내용은 건드리지 않는다.
   - 결과 파일이 바뀌면 SHA-256도 바뀐다. 문구 관리 문서에 등록된 해시를 갱신한다.
 """
 import base64, hashlib, json, os, struct, subprocess, sys, tempfile, unicodedata, zlib
@@ -107,11 +107,8 @@ for p, key in files:
 
 patch = """
 const __ASSETS=%s;
-const __URL={};
-function __blob(d){const c=d.indexOf(','),h=d.slice(0,c),b=atob(d.slice(c+1)),a=new Uint8Array(b.length);
-  for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);
-  return URL.createObjectURL(new Blob([a],{type:h.slice(5,h.indexOf(';'))}))}
-for(const k in __ASSETS) __URL[k]=__blob(__ASSETS[k]);
+/* blob URL은 메신저·첨부 미리보기·샌드박스 뷰어가 막아 엑박이 된다(2026-09-19). data URI를 그대로 쓴다. */
+const __URL=__ASSETS;
 const __RES=p=>__URL[p]||__URL[p.normalize?p.normalize('NFC'):p]||p;
 const __fixStr=s=>typeof s==='string'
   ? s.replace(/assets\\/[A-Za-z0-9@._\\-\\/가-힣]+?\\.(png|svg|jpg)/g,m=>__RES(m)) : s;
