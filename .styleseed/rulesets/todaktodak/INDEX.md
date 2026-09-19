@@ -79,7 +79,7 @@ AI는 화면을 만들기 전에 이 파일을 먼저 읽고, 필요한 파일�
 * [tokens.json](./tokens.json): DESIGN.md frontmatter를 그대로 옮긴 사본. 값은 frontmatter를 먼저 고친다.
 * [시각 보드](./reference-board.html): 토큰, 부품, 그림 72종을 눈으로 본다. 브라우저로 연다.
 * [토큰 정리 초안](./TOKEN-MAPPING.draft.md): 옛 별칭을 SEED로 모으는 안. 검수 전이다.
-* [빌드 정보](./adapter.json): 공유용 단일 파일을 만드는 방법.
+* [빌드 정보](./adapter.json): 공유용 단일 파일을 만드는 방법. 실행은 저장소의 tools/build_bundle.py 다.
 
 ---
 

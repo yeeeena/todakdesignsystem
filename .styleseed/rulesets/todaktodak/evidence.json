@@ -35,6 +35,13 @@
       "date": "2026-09-19",
       "kind": "AI 진입점",
       "note": "Astryx 미팅 어시스턴트 규칙이 남아 있던 것을 토닥토닥 진입점으로 교체"
+    },
+    {
+      "id": "R6",
+      "source": "prototype/토닥토닥_프로토타입_단일파일.html (tools/build_bundle.py)",
+      "date": "2026-09-19",
+      "kind": "화면 정본 일괄 수정 후 재빌드",
+      "note": "SHA-256 68521da64fbf1b542d0134e369ef8eb4f2fda99ee0db7db72d23ea2c83f7327e (이전 bbcd1ee7…). 문구 관리 문서 등록 갱신 필요"
     }
   ],
   "confidence": {
@@ -49,13 +56,11 @@
     "designMd": "high — 2026-09-19 최종본 52회 렌더링 실측 + frontmatter 72값 코드 대조 불일치 0"
   },
   "unresolved": [
-    "간격 토큰 --spacing-2~32(13개)는 DESIGN.md frontmatter·tokens.json에만 있고 :root에 없음 — 화면 정본 일괄 수정 때 추가. 그 전까지 var()로 쓰면 값이 비어 깨짐",
+    "04 빈 입력 허용 여부는 기능명세 결정 대기. 기본 신은 2026-09-19에 서낭신으로 통일해 화면마다 신이 달라지던 문제는 해소",
     "접근성 현황: 아이콘 버튼 레이블이 11 닫기 외엔 없음(9개 화면) · 05 선택 카드가 div · reduced-motion 3곳만 대응 — 개선 여부 결정 필요",
     "제목 크기 예외 — 신단 23px · 로딩 21px이 page-title(24)과 다름. 의도 여부 확인 필요",
-    "04 빈 입력 진행 시 신 불일치 — 추천 신이 정해지지 않아 08 서낭신 / 10 산신 / 11 서낭신(화면별 기본값이 다름). 빈 입력 허용 여부는 기능명세 결정 대상, 기본값 통일은 어느 쪽이든 필요 (2026-09-19 프로토타입에서 확인)",
     "Copy Master 내보내기에서 copy_id 21건이 http:// 로 오염 (예: http://share.cta.primary.save). 원본/내보내기 중 어디서 생긴 것인지 확인 필요",
     "토큰 정리 매핑 초안(TOKEN-MAPPING.draft.md) 검수 대기 — 판단 4건: ink-83 병합, fg-quaternary 처리, 흰 글자 통일, 씬 토큰 범위",
-    "09 부적 생성 중 문구 2건이 Copy Master V1.2(2026-08-14) 교정본과 다름 — talismanLoading.hero.body.description / talismanLoading.check.image. '생성'→'조합'으로 의미가 바뀌므로 로더 연출도 함께 볼지 결정 필요. 화면 정본 수정 시 등록 SHA-256도 갱신해야 함",
     "다국어 레이아웃 기준 부재 — Copy Master의 EN/JA가 전부 not_started이고 max_length가 비어 있음. 번역 반영 시 문구 길이 상한·줄바꿈 규칙을 디자인에서 제시할지 결정 필요",
     "키보드 포커스 링 미정의 — :focus-visible 규칙 없음(텍스트영역 포커스 테두리만 존재). 접근성 기준으로 추가할지 결정 필요",
     "작은 실천 제목 5신분은 실천 문단 요약 초안 — 팀 확정 대상 (deityResult.silcheonTitle)",

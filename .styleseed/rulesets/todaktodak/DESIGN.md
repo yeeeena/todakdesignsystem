@@ -66,7 +66,7 @@ typography:
   hud:           { fontFamily: Pretendard Variable, fontSize: 12px, fontWeight: 600, lineHeight: 1.6 }
 spacing:
   # 2026-09-19 신설. 코드의 간격 선언 189곳에서 쓰인 값 중 상위 13개(91.5%)를 척도로 삼았다.
-  # ⚠️ 아직 :root에 없다 — 화면 정본 일괄 수정 때 추가된다. 그 전까지 var()로 쓰지 말 것(값이 비어 레이아웃이 깨짐)
+  # 2026-09-19 화면 정본 일괄 수정 때 :root 에 추가했다
   --spacing-2: 2px
   --spacing-4: 4px
   --spacing-6: 6px
@@ -116,7 +116,7 @@ layout:
 
 ## Colors
 
-새 코드는 semantic 의 SEED 역할 토큰만 쓴다. atomic 은 SEED가 참조하는 값이라 직접 쓰지 않는다. :root 에 남은 옛 별칭(grey, blue, text 계열)은 정리 대상이므로 새로 쓰지 않는다.
+새 코드는 semantic 의 SEED 역할 토큰만 쓴다. atomic 은 SEED가 참조하는 값이라 직접 쓰지 않는다. :root 에 남은 옛 별칭 여섯 개(grey 계열 넷, fg-quaternary, border-secondary)는 판단을 기다리는 정리 대상이므로 새로 쓰지 않는다.
 
 밝은 배경의 글자는 fg-neutral, fg-neutral-muted, fg-neutral-subtle 세 단계로 위계를 나눈다. 강조하려고 유채색을 쓰지 않고, 순검정도 쓰지 않는다.
 
@@ -136,7 +136,7 @@ layout:
 
 캔버스는 phone-w 폭을 기준으로 하고, 최소 360 폭에서도 글자가 넘치거나 겹치지 않아야 한다(2026-09-19 결정). 본문 좌우 여백은 spacing-24, 카드 안쪽 여백은 spacing-18, 카드 사이는 spacing-12 다. 간격은 spacing 척도 안의 값만 쓰고, 척도 밖 값을 새로 만들지 않는다.
 
-spacing 토큰은 아직 :root 에 없다. 화면 정본을 일괄 수정할 때 추가된다. 그 전까지 var(--spacing-24) 처럼 쓰면 값이 비어 레이아웃이 깨지므로, 척도의 값을 그대로 쓴다.
+새 코드의 간격은 var(--spacing-24) 처럼 spacing 토큰으로 쓴다.
 
 고민 정리 3단계(04~06)의 하단 시트는 상단 위치를 화면 폭에 비례시킨다. 높이 기준으로 두면 기기마다 일러스트와 시트가 겹치는 정도가 달라진다.
 

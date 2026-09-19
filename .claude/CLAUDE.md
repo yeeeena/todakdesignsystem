@@ -53,7 +53,7 @@ UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
 
 ## 화면 정본 주의
 
-`prototype/todaktodak-working.html`을 바꾸면 공유용 단일 파일의 SHA-256이 달라진다. 문구 관리 문서에 등록된 해시도 갱신해야 하므로 사용자에게 알린다. 바꿀 일은 `docs/design-guide/FOLLOWUP.md`의 "화면 정본을 고칠 때 한 번에 할 것"에 모아 한 번에 반영한다.
+`prototype/todaktodak-working.html`을 바꾸면 공유용 단일 파일의 SHA-256이 달라진다. 단일 파일은 `python3 tools/build_bundle.py`로 다시 만들고, 끝에 출력되는 해시를 사용자에게 알린다. 문구 관리 문서에 등록된 해시도 갱신해야 하므로 사용자에게 알린다. 바꿀 일은 `docs/design-guide/FOLLOWUP.md`의 "화면 정본을 고칠 때 한 번에 할 것"에 모아 한 번에 반영한다.
 
 공유용 단일 파일과 `전달/`은 빌드 산출물이라 깃에서 추적하지 않는다.
 
@@ -71,6 +71,7 @@ docs/design-guide/           디자인 가이드 (.styleseed/rulesets/todaktodak
   카테고리/ · 컴포넌트/        주제별 기준 · 부품별 문서
   checks.md · FOLLOWUP.md    검증 체크리스트 · 확인사항
   이전/                      나누기 전 통합본 (읽지 않음)
+tools/build_bundle.py        공유용 단일 파일 빌더 (자산 내장, SHA 출력)
 prototype/
   todaktodak-working.html    화면 정본 소스 (단일 파일, 화면 16종)
   assets/                    일러스트·캐릭터 72종
