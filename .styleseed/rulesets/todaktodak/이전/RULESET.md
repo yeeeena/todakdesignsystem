@@ -1,5 +1,9 @@
 # 토닥토닥 — 프로젝트 디자인 룰셋 (reference:todaktodak)
 
+> 이 문서는 2026-09-19에 주제별 파일로 나누기 전의 통합본이다. 화면을 만들 때는 읽지 않는다.
+> 현재 기준은 [판단 기준](../DESIGN.md)과 [목차](../INDEX.md)에서 찾는다. 코드와 다른 문장이 섞여 있어 그대로 옮기지 않았다.
+
+
 > 출처: `prototype/todaktodak-working.html` (증거 R1, 2026-08-02 기준 작업본)
 > 어댑터: mobile-app product-ui · 390×844 고정 캔버스
 > 폴백 그래머: consumer-service · 신뢰도: **high** (실제 구현 화면 16종에서 직접 측정)

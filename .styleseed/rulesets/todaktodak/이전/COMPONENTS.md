@@ -1,5 +1,9 @@
 # 토닥토닥 — 컴포넌트 인벤토리
 
+> 이 문서는 2026-09-19에 주제별 파일로 나누기 전의 통합본이다. 화면을 만들 때는 읽지 않는다.
+> 현재 기준은 [판단 기준](../DESIGN.md)과 [목차](../INDEX.md)에서 찾는다. 코드와 다른 문장이 섞여 있어 그대로 옮기지 않았다.
+
+
 > 소스: `prototype/todaktodak-working.html` (단일 파일 · CSS 클래스 152종 · 화면 16종)
 > 화면 번호는 Copy Master의 `screen_order`(01–16)를 따른다.
 > 시각 사양은 [reference-board.html](reference-board.html)에서 실제 렌더로 확인.

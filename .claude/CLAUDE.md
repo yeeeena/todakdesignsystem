@@ -8,8 +8,7 @@
 | 작업 | 먼저 읽을 것 |
 |---|---|
 | **UI를 만들거나 고치기 전에 (항상)** | `docs/design-guide/DESIGN.md` — frontmatter = 토큰 값, 본문 = 언제·왜 |
-| 새 화면을 설계할 때 | `docs/design-guide/RULESET.md` (판단 기준 12축) |
-| 화면·컴포넌트를 만들거나 고칠 때 | `docs/design-guide/COMPONENTS.md` · `tokens.json` |
+| 주제별 기준이 필요할 때 | `docs/design-guide/INDEX.md` — 목차. 필요한 주제·부품 파일만 골라 읽는다 |
 | 작업을 끝냈을 때 | `docs/design-guide/checks.md` (필수·금지·회귀 시나리오) |
 | 화면 구성·CTA·인터랙션 | `prototype/todaktodak-working.html` — 화면 정본의 소스 |
 | 화면 고정 문구 | **Copy Master (Notion)** — 문구를 새로 정의하지 않는다 |
@@ -20,6 +19,7 @@
 ## 디자인 하네스 — UI 작업 순서
 
 UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
+그다음 @docs/design-guide/INDEX.md 에서 필요한 주제와 부품 문서만 추가로 읽는다. `이전/`과 과거 배경 자료(STYLESEED.md, docs/신별_동적화_설계.md)는 읽지 않는다.
 
 읽은 다음 구현을 시작하기 전에 멈추고 아래를 보고한다.
 - 이번 화면의 핵심 행동
@@ -58,7 +58,11 @@ UI를 만들기 전에 @docs/design-guide/DESIGN.md 를 읽는다.
 ```
 .claude/CLAUDE.md            ← 이 문서 (진입점)
 STYLESEED.md                 브랜드 락 (과거 결정 기록 — 주색 표기가 현재와 다름)
-docs/design-guide/           디자인 가이드 (DESIGN · RULESET · COMPONENTS · checks · tokens …)
+docs/design-guide/           디자인 가이드
+  DESIGN.md                  판단 기준 (frontmatter 값 + 본문)
+  INDEX.md                   목차
+  카테고리/ · 컴포넌트/        주제별 기준 · 부품별 명세
+  이전/                      나누기 전 통합본 (읽지 않음)
 prototype/
   todaktodak-working.html    화면 정본 소스 (단일 파일, 화면 16종)
   assets/                    일러스트·캐릭터 72종
