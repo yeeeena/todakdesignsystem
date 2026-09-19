@@ -94,6 +94,6 @@ AI는 화면을 만들기 전에 이 파일을 먼저 읽고, 필요한 파일�
 
 @docs/design-guide/이전/ 과 과거 배경 자료(@STYLESEED.md, @docs/신별_동적화_설계.md)는 화면을 만들 때 읽지 않는다. 이전/ 은 주제별로 나누기 전의 통합본이고, 배경 자료는 지난 결정의 기록이다. 공유 패키지에서는 배경 자료가 참고자료 폴더에 들어 있다.
 
-화면 구성의 정본은 @prototype/todaktodak-working.html , 고정 문구의 정본은 Copy Master, 신별 콘텐츠와 상태 분기의 정본은 구현 기준 문서다.
+화면 구성의 정본은 @prototype/todaktodak-working.html , 고정 문구의 정본은 Copy Master, 신별 콘텐츠와 상태 분기의 정본은 구현 기준 문서다. 문구의 목소리와 용어는 별도 라이팅 문서가 정하며, 확정되면 여기에 연결한다.
 
 옵시디언에서는 이 폴더를 @docs/design-guide/ 경로로 연다. 숨김 폴더인 .styleseed 는 옵시디언이 읽지 못한다.
