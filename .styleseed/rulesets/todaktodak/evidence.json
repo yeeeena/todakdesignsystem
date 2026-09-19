@@ -73,6 +73,7 @@
     "캔버스 기준 폭 390, 최소 폭 360",
     "시작 화면(01)의 두 진입 버튼은 주 행동 하나 규칙의 예외",
     "코드와 DESIGN.md가 다르면 구성과 흐름은 코드, 토큰과 스타일은 DESIGN.md를 따르고 차이를 보고",
-    "문서 안 파일 경로에 @를 쓰지 않음. CLAUDE.md의 @DESIGN.md 하나만 자동 불러오기"
+    "문서 안 파일 경로에 @를 쓰지 않음. CLAUDE.md의 @DESIGN.md 하나만 자동 불러오기",
+    "글자 역할 16개: list-title · quote-sm · link · link-sm 추가, 시트 부제는 body-sm · 태그 줄은 caption 에 합침"
   ]
 }

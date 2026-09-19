@@ -51,12 +51,16 @@ typography:
   page-title:    { fontFamily: Pretendard Variable, fontSize: 24px, fontWeight: 700, lineHeight: 1.3,  letterSpacing: -0.02em }
   sheet-title:   { fontFamily: Pretendard Variable, fontSize: 20px, fontWeight: 700, lineHeight: 1.3,  letterSpacing: -0.015em }
   quote-lg:      { fontFamily: Pretendard Variable, fontSize: 20px, fontWeight: 700, lineHeight: 1.45, letterSpacing: -0.015em }
+  quote-sm:      { fontFamily: Pretendard Variable, fontSize: 14px, fontWeight: 600, lineHeight: 1.55 }
   card-title:    { fontFamily: Pretendard Variable, fontSize: 17px, fontWeight: 600, lineHeight: 1.45, letterSpacing: -0.01em }
+  list-title:    { fontFamily: Pretendard Variable, fontSize: 15px, fontWeight: 700, lineHeight: 1.45 }
   body:          { fontFamily: Pretendard Variable, fontSize: 15px, fontWeight: 500, lineHeight: 1.5,  letterSpacing: -0.005em }
   body-sm:       { fontFamily: Pretendard Variable, fontSize: 14px, fontWeight: 500, lineHeight: 1.6 }
   section-label: { fontFamily: Pretendard Variable, fontSize: 14px, fontWeight: 600, lineHeight: 1.3 }
   mini-title:    { fontFamily: Pretendard Variable, fontSize: 13px, fontWeight: 600, lineHeight: 1.25 }
   caption:       { fontFamily: Pretendard Variable, fontSize: 12px, fontWeight: 500, lineHeight: 1.4 }
+  link:          { fontFamily: Pretendard Variable, fontSize: 14px, fontWeight: 600 }
+  link-sm:       { fontFamily: Pretendard Variable, fontSize: 12px, fontWeight: 600 }
   button-lg:     { fontFamily: Pretendard Variable, fontSize: 18px, fontWeight: 700, lineHeight: 1.33 }
   button-md:     { fontFamily: Pretendard Variable, fontSize: 16px, fontWeight: 700 }
   hud:           { fontFamily: Pretendard Variable, fontSize: 12px, fontWeight: 600, lineHeight: 1.6 }
@@ -126,7 +130,7 @@ layout:
 
 글꼴은 Pretendard 하나다. 굵기는 500, 600, 700만 쓰고 Regular(400)는 쓰지 않는다. 크림 바탕에서 400은 흐리게 읽힌다. 자간은 0 이하로 두고, 양수 자간과 대문자 오버라인을 쓰지 않는다.
 
-역할이 정해진 스타일을 쓴다. 화면 제목은 page-title, 시트 제목은 sheet-title, 신의 한마디는 quote-lg 다. 카드 제목은 card-title, 본문은 body, 보조 문단과 칩은 body-sm 이다. 입력 섹션 이름은 section-label, 카드 안 작은 제목은 mini-title, 면책과 힌트는 caption 이다. 단독 CTA 라벨은 button-lg, 나란히 놓인 두 버튼의 라벨은 button-md, 일러스트 위 진행 표시는 hud 다. 맞는 스타일이 없으면 새로 만들지 말고 먼저 묻는다.
+역할이 정해진 스타일을 쓴다. 화면 제목은 page-title, 시트 제목은 sheet-title, 신의 한마디는 quote-lg, 신의 짧은 말투 인용은 quote-sm 이다. 카드 제목은 card-title, 목록 안의 이름은 list-title, 본문은 body 다. 보조 문단과 시트 제목 아래 설명, 칩은 body-sm 이다. 입력 섹션 이름은 section-label, 카드 안 작은 제목은 mini-title, 면책과 힌트와 태그 줄은 caption 이다. 텍스트 링크는 link, 카드 안의 작은 링크는 link-sm 이고 둘 다 밑줄을 긋는다. 단독 CTA 라벨은 button-lg, 나란히 놓인 두 버튼의 라벨은 button-md, 일러스트 위 진행 표시는 hud 다(역할 16개, 2026-09-19 결정). 맞는 스타일이 없으면 새로 만들지 말고 먼저 묻는다.
 
 ## Layout & Spacing
 
