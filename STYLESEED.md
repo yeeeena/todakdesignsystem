@@ -1,3 +1,4 @@
+<!-- 2026-09-19: 이 파일은 과거 결정 기록이다. 현재 디자인 기준은 docs/design-guide/DESIGN.md 이며, 주색(테라코타)과 아래 Grammar path는 현재와 다르다. StyleSeed 스킬이 이 파일을 읽더라도 DESIGN.md가 우선한다(.claude/CLAUDE.md). -->
 # StyleSeed — Design Lock
 <!-- Locked design decisions for this project. The agent re-reads this every prompt and
      must obey it. Change a value here to change it project-wide. -->
