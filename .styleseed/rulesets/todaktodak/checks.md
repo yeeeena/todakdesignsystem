@@ -12,8 +12,8 @@
 * 360 폭에서도 글자가 넘치거나 겹치지 않는다.
 * 간격은 spacing 척도 안의 값이다.
 * 주 행동 버튼은 화면당 하나이고 차콜로 채웠다. 시작 화면(01)의 두 진입 버튼만 예외다.
-* 카드는 표면 색, 1px stroke-neutral 테두리, r-xl 반경, spacing-18 안쪽 여백이다. 딥컬러 배경 위의 결과 카드만 2px 차콜 테두리다.
-* 글자 위계는 fg-neutral, fg-neutral-muted, fg-neutral-subtle 로 나눴다.
+* 카드는 표면 색, 1px stroke-neutral-primary 테두리, r-xl 반경, spacing-18 안쪽 여백이다. 딥컬러 배경 위의 결과 카드만 2px 차콜 테두리다.
+* 글자 위계는 fg-neutral-primary, fg-neutral-secondary, fg-neutral-tertiary 로 나눴다.
 * 자간은 0 이하다. 어두운 배경의 제목과 좁은 폭의 이름은 어절 중간에서 끊기지 않는다.
 * 신 이름 뒤 조사(이, 가)는 받침에 따라 자동으로 고른다.
 * 몰입 화면(01, 02, 04~06, 08, 11)은 뒤에 일러스트, 앞에 코드로 만든 텍스트다.

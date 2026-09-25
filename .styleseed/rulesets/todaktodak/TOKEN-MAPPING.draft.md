@@ -1,5 +1,7 @@
 # 토큰 정리 매핑표 — 초안 (검수 전)
 
+> 이 문서의 토큰 이름은 2026-09-25 개편 전의 옛 이름이다. 지난 판단의 기록으로 남겨 두며, 지금 쓰는 이름은 DESIGN.md 의 frontmatter 를 본다.
+
 > 2026-09-19 부분 적용: 판단이 필요 없는 부분(① 미사용 삭제, ② 값이 같은 치환, ③ 원시 토큰 치환)을 코드에 반영했다. 이름만 바꾼 104곳은 화면 67개 상태에서 계산된 스타일이 한 곳도 달라지지 않았다. 옛 별칭은 25개를 지우고 6개가 남았다.
 > 남은 것은 아래 🔶 판단 4가지와 그에 달린 치환, 씬 토큰 신설이다.
 > 토큰 이름은 판단이고 판단은 사람의 것이라, 🔶 표시 항목을 검수받은 뒤 적용합니다.
@@ -59,9 +61,9 @@ SEED 역할 (20)    --seed-color-{fg|bg|stroke}-{역할}-{변형}     ← 새 �
 |---|---|---|
 | `--blue-600` · `--blue-700` | 차콜 | 이름은 파랑 |
 | `--grey-700` · `--grey-600` | SEED 보조 텍스트 | |
-| `--red-500` | critical | `--seed-color-fg-critical`로 충분 |
+| `--red-500` | critical | `--fg-critical-primary`로 충분 |
 | `--green-500` | **차콜** | 이름은 초록 |
-| `--orange-500` | warning | `--seed-color-fg-warning`과 같은 값 |
+| `--orange-500` | warning | `--fg-warning-primary`과 같은 값 |
 | `--yellow-500` · `--yellow-300` · `--orange-300` | **크림** | 이름은 노랑·주황 |
 | `--line-subtle` · `--fill-secondary` | 3% · 4% | |
 
@@ -73,22 +75,22 @@ SEED 역할 (20)    --seed-color-{fg|bg|stroke}-{역할}-{변형}     ← 새 �
 
 | 지금 | → SEED | 사용 | 주의 |
 |---|---|---|---|
-| `--text-primary` | `--seed-color-fg-neutral` | 18 | |
-| `--text-secondary` | `--seed-color-fg-neutral-muted` | 15 | |
-| `--fg-tertiary` | `--seed-color-fg-neutral-subtle` | 9 | |
-| `--grey-500` | `--seed-color-fg-neutral-subtle` | 1 | |
-| `--grey-900` | `--seed-color-fg-neutral` | 3 | |
-| `--text-brand` | `--seed-color-fg-brand` | 6 | |
-| `--border-secondary` | `--seed-color-stroke-neutral` | 6 | |
-| `--grey-200` | `--seed-color-stroke-neutral` | 2 | |
-| `--grey-400` · `--grey-300` | `--seed-color-stroke-neutral-strong` | 3 | |
-| `--grey-50` | `--seed-color-bg-layer-fill` | 6 | |
-| `--grey-100` | `--seed-color-bg-neutral-weak` | 1 | |
-| `--white` | `--seed-color-bg-neutral-solid` | 5 | ⚠️ 이름은 흰색, 실제는 표면색 `#FFFDFC` |
-| `--blue-50` | `--seed-color-bg-neutral-weak` | 4 | ⚠️ 이름은 파랑, 실제는 차콜 4% |
-| `--blue-500` | `--seed-color-stroke-brand-solid` | 2 | ⚠️ 이름은 파랑, 실제는 **차콜** |
-| `--fill-brand` | `--seed-color-bg-brand-solid` | 2 | |
-| `--bg-overlay` | `--seed-color-bg-overlay` | 1 | 같은 값이 두 이름으로 정의돼 있었음 |
+| `--text-primary` | `--fg-neutral-primary` | 18 | |
+| `--text-secondary` | `--fg-neutral-secondary` | 15 | |
+| `--fg-tertiary` | `--fg-neutral-tertiary` | 9 | |
+| `--grey-500` | `--fg-neutral-tertiary` | 1 | |
+| `--grey-900` | `--fg-neutral-primary` | 3 | |
+| `--text-brand` | `--fg-brand-primary` | 6 | |
+| `--border-secondary` | `--stroke-neutral-primary` | 6 | |
+| `--grey-200` | `--stroke-neutral-primary` | 2 | |
+| `--grey-400` · `--grey-300` | `--stroke-neutral-secondary` | 3 | |
+| `--grey-50` | `--bg-layer-secondary` | 6 | |
+| `--grey-100` | `--bg-neutral-secondary` | 1 | |
+| `--white` | `--bg-neutral-primary` | 5 | ⚠️ 이름은 흰색, 실제는 표면색 `#FFFDFC` |
+| `--blue-50` | `--bg-neutral-secondary` | 4 | ⚠️ 이름은 파랑, 실제는 차콜 4% |
+| `--blue-500` | `--stroke-brand-primary` | 2 | ⚠️ 이름은 파랑, 실제는 **차콜** |
+| `--fill-brand` | `--bg-brand-primary` | 2 | |
+| `--bg-overlay` | `--bg-overlay-primary` | 1 | 같은 값이 두 이름으로 정의돼 있었음 |
 | `--grey-800` | 🔶 아래 판단 1 | 2 | |
 | `--fg-quaternary` | 🔶 아래 판단 2 | 2 | |
 
@@ -99,12 +101,12 @@ SEED 역할 (20)    --seed-color-{fg|bg|stroke}-{역할}-{변형}     ← 새 �
 | 지금 | → SEED | 사용 |
 |---|---|---|
 | `--charcoal` | 글자면 `fg-neutral` · 채움이면 `bg-brand-solid` · 선이면 `stroke-brand-solid` | 13 |
-| `--surface` | `--seed-color-bg-neutral-solid` (글자로 쓰인 곳은 `fg-neutral-inverted`) | 10 |
-| `--ink-04` | `--seed-color-bg-neutral-weak` | 3 |
-| `--ink-82` | `--seed-color-fg-neutral-muted` | 2 |
-| `--muted` | `--seed-color-fg-neutral-subtle` | 2 |
-| `--ink-08` | `--seed-color-stroke-neutral` | 1 |
-| `--ink-03` | `--seed-color-bg-layer-fill` | 1 |
+| `--surface` | `--bg-neutral-primary` (글자로 쓰인 곳은 `fg-neutral-inverted`) | 10 |
+| `--ink-04` | `--bg-neutral-secondary` | 3 |
+| `--ink-82` | `--fg-neutral-secondary` | 2 |
+| `--muted` | `--fg-neutral-tertiary` | 2 |
+| `--ink-08` | `--stroke-neutral-primary` | 1 |
+| `--ink-03` | `--bg-layer-secondary` | 1 |
 | `--ink-83` | 🔶 아래 판단 1 | 1 |
 
 `--charcoal`·`--surface`는 **쓰인 속성(`color`/`background`/`border`)을 보고** 대상을 고릅니다. 기계 치환이 아니라 한 곳씩 확인합니다.
@@ -120,8 +122,8 @@ SEED 역할 (20)    --seed-color-{fg|bg|stroke}-{역할}-{변형}     ← 새 �
 | `.btn-pill` | `#fffdfa` | **신규** `--scene-landing-pill` (`sceneColor.neoBrutalSurface`) |
 | `.landing` 그라디언트 | `#e7d0d0` · `#e4c9c9` … | **신규** `--scene-landing-from` · `--scene-landing-to` 🔶 판단 4 |
 | `.loader-avatar` | `#e9e6df` | 🔶 판단 4 |
-| `.toast` · `.step-hud b` | `#fff` | `--seed-color-fg-neutral-inverted` 🔶 판단 3 |
-| `.shelf-dark .icon-btn` · `.shelf-dark .h-page` | `#fffdfc` | `--seed-color-fg-neutral-inverted` 🔶 판단 3 |
+| `.toast` · `.step-hud b` | `#fff` | `--fg-neutral-inverted` 🔶 판단 3 |
+| `.shelf-dark .icon-btn` · `.shelf-dark .h-page` | `#fffdfc` | `--fg-neutral-inverted` 🔶 판단 3 |
 | `.talisman-art` · `.landing-grad` | `#eee9dc` · `#e3c5a7` | **클래스째 삭제** — 마크업에서 쓰이지 않는 레거시 |
 | `body` · `.navchips button.active` | `#efece3` · `#fff` | 제외 — 프로토타입 셸(화면 선택 칩), 제품 아님 |
 

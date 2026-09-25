@@ -17,27 +17,23 @@ colors:
     --ink-04: "rgba(28,28,28,0.04)"
     --ink-03: "rgba(28,28,28,0.03)"
   semantic:
-    --seed-color-fg-neutral: "var(--charcoal)"
-    --seed-color-fg-neutral-muted: "var(--ink-82)"
-    --seed-color-fg-neutral-subtle: "var(--muted)"
-    --seed-color-fg-neutral-inverted: "var(--offwhite)"
-    --seed-color-fg-brand: "var(--charcoal)"
-    --seed-color-fg-critical: "#fa342c"
-    --seed-color-fg-critical-contrast: "#921708"
-    --seed-color-fg-warning: "oklch(0.748 0.183 56)"
-    --seed-color-bg-layer-default: "var(--cream)"
-    --seed-color-bg-layer-fill: "var(--ink-03)"
-    --seed-color-bg-neutral-solid: "var(--surface)"
-    --seed-color-bg-neutral-weak: "var(--ink-04)"
-    --seed-color-bg-brand-solid: "var(--charcoal)"
-    --seed-color-bg-brand-solid-pressed: "#33302a"
-    --seed-color-bg-critical-weak: "#fdf0f0"
-    --seed-color-bg-warning-weak: "oklch(0.968 0.025 80)"
-    --seed-color-bg-overlay: "rgba(0,0,0,0.56)"
-    --seed-color-stroke-neutral: "var(--ink-08)"
-    --seed-color-fg-neutral-placeholder: "var(--ink-40)"
-    --seed-color-stroke-neutral-strong: "var(--ink-40)"
-    --seed-color-stroke-brand-solid: "var(--charcoal)"
+    --fg-brand-primary: "var(--charcoal)"
+    --fg-critical-primary: "#fa342c"
+    --fg-neutral-primary: "var(--charcoal)"
+    --fg-neutral-secondary: "var(--ink-82)"
+    --fg-neutral-tertiary: "var(--muted)"
+    --fg-neutral-quaternary: "var(--ink-40)"
+    --fg-neutral-inverted: "var(--offwhite)"
+    --fg-warning-primary: "oklch(0.748 0.183 56)"
+    --bg-brand-primary: "var(--charcoal)"
+    --bg-layer-primary: "var(--cream)"
+    --bg-layer-secondary: "var(--ink-03)"
+    --bg-neutral-primary: "var(--surface)"
+    --bg-neutral-secondary: "var(--ink-04)"
+    --bg-overlay-primary: "rgba(0,0,0,0.56)"
+    --stroke-brand-primary: "var(--charcoal)"
+    --stroke-neutral-primary: "var(--ink-08)"
+    --stroke-neutral-secondary: "var(--ink-40)"
   # 신별 색 — CSS 변수가 아니라 코드 데이터 deityResult[id].bg / .label. 화면에는 --dbg / --dlabel로 주입된다
   deity:
     seonang:   { bg: "#497dba", label: "#4478b4" }
@@ -122,9 +118,9 @@ layout:
 
 ## Colors
 
-새 코드는 semantic 의 SEED 역할 토큰만 쓴다. atomic 은 SEED가 참조하는 값이라 직접 쓰지 않는다. :root 에 남은 옛 별칭 다섯 개(grey 계열 넷, border-secondary)는 판단을 기다리는 정리 대상이므로 새로 쓰지 않는다. fg-quaternary 는 2026-09-25에 지웠다.
+새 코드는 semantic 역할 토큰만 쓴다. atomic 은 역할 토큰이 참조하는 값이라 직접 쓰지 않는다. 역할 토큰의 이름은 용도와 역할과 변형 세 자리이고 변형은 primary 부터 quaternary 까지 서수다(2026-09-25 결정). 옛 별칭은 같은 날 모두 지웠다.
 
-밝은 배경의 글자는 fg-neutral, fg-neutral-muted, fg-neutral-subtle 세 단계로 위계를 나눈다. 강조하려고 유채색을 쓰지 않고, 순검정도 쓰지 않는다.
+밝은 배경의 글자는 fg-neutral-primary, fg-neutral-secondary, fg-neutral-tertiary 세 단계로 위계를 나눈다. 강조하려고 유채색을 쓰지 않고, 순검정도 쓰지 않는다.
 
 신별 딥컬러(deity 의 bg)는 상담 결과와 저장/공유 화면의 배경에만 쓴다. 그 화면을 그 신의 공간으로 바꾸는 장치라서, 버튼이나 테두리로 흩어 쓰면 몰입 전환이 약해진다. 여러 신을 나란히 비교하는 목록에는 신별 색을 쓰지 않고 이름도 차콜로 둔다. 한 신만 튀면 추천을 강요하는 것처럼 읽힌다.
 
@@ -136,7 +132,7 @@ layout:
 
 글꼴은 Pretendard 하나다. 굵기는 500, 600, 700만 쓰고 Regular(400)는 쓰지 않는다. 크림 바탕에서 400은 흐리게 읽힌다. 자간은 0 이하로 두고, 양수 자간과 대문자 오버라인을 쓰지 않는다.
 
-어두운 바탕 위 흰 글자는 두 단계다(2026-09-25 결정). 불투명한 글자는 표면 색을 쓰고, 보조 문장은 같은 색의 82퍼센트를 쓴다. 순백은 쓰지 않는다. 입력창 안내 문구는 전용 토큰 fg-neutral-placeholder 를 쓴다.
+어두운 바탕 위 흰 글자는 두 단계다(2026-09-25 결정). 불투명한 글자는 표면 색을 쓰고, 보조 문장은 같은 색의 82퍼센트를 쓴다. 순백은 쓰지 않는다. 입력창 안내 문구는 전용 토큰 fg-neutral-quaternary 를 쓴다.
 
 역할이 정해진 스타일을 쓴다. 화면 제목은 page-title, 시트 제목은 sheet-title, 신의 한마디는 quote-lg, 신의 짧은 말투 인용은 quote-sm 이다. 카드 제목은 card-title, 목록 안의 이름은 list-title, 본문은 body 다. 보조 문단과 시트 제목 아래 설명, 칩은 body-sm 이다. 입력 섹션 이름은 section-label, 카드 안 작은 제목과 상단바의 화면 이름은 mini-title, 면책과 힌트와 태그 줄은 caption 이다(상단바 이름은 2026-09-25 에 이 역할로 정했다). 텍스트 링크는 link, 카드 안의 작은 링크는 link-sm 이고 둘 다 밑줄을 긋는다. 단독 CTA 라벨은 button-lg, 나란히 놓인 두 버튼의 라벨은 button-md, 일러스트 위 진행 표시는 hud 다(역할 16개, 2026-09-19 결정). 카드 안에서 답을 묻는 질문은 card-title 이다. 시작 화면과 신단은 글자가 일러스트 위에 얹히거나 남은 자리에 들어가야 해서 역할을 벗어난다(2026-09-25 결정). 그 둘 말고는 벗어나지 않는다. 맞는 스타일이 없으면 새로 만들지 말고 먼저 묻는다.
 
@@ -195,7 +191,7 @@ Copy Master에서 안전 검토 대상으로 잠긴 문구가 붙는 자리는 �
 
 * Do: 새 화면은 가장 가까운 기존 화면 유형을 찾아 그 하단 영역과 버튼 위계를 따른다.
 * Do: 신별로 달라지는 화면은 여섯 신 모두에서 확인한다.
-* Don't: 순검정, 옛 별칭 토큰, 척도 밖 간격과 반경을 새로 쓰지 않는다.
+* Don't: 순검정, 척도 밖 간격과 반경, 서수가 아닌 변형 이름을 새로 쓰지 않는다.
 * Don't: 신별 딥컬러를 배경 밖에 쓰거나, 신 비교 목록에 신별 색을 넣지 않는다.
 * Don't: 한 화면에 주 행동 버튼을 둘 이상 두지 않는다.
 * Do: 누를 수 있는 것은 버튼 요소로 만들고, 키보드로 이동할 때 보이는 표시를 둔다.
