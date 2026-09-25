@@ -131,7 +131,7 @@ body{
 }
 .icon-btn svg{width:24px;height:24px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .icon-btn:active{background:var(--seed-color-bg-neutral-weak)}
-.topbar .ctx{flex:1 1 auto;min-width:0;text-align:center;font-size:13px;font-weight:600;color:var(--seed-color-fg-neutral-subtle);padding:0 12px}
+.topbar .ctx{flex:1 1 auto;min-width:0;text-align:center;font-size:13px;font-weight:600;line-height:1.25;color:var(--seed-color-fg-neutral-subtle);padding:0 12px} /* mini-title 역할 (2026-09-25 결정) */
 .topbar .tb-side{flex:0 0 auto;width:40px} /* 라벨을 가운데 두기 위한 균형 자리 (2026-09-25 결정) */
 
 /* ---------- typography (TDS ramp) ---------- */
@@ -266,8 +266,8 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
 @keyframes dot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-4px);background:var(--seed-color-bg-brand-solid)}}
 .checklist{display:grid;gap:8px;margin:14px 0}
-.check{display:flex;gap:10px;align-items:center;background:var(--seed-color-bg-neutral-weak);border-radius:var(--r-l);padding:13px 14px;font-size:14px;font-weight:500;color:var(--seed-color-fg-neutral);line-height:1.45}
-.check .tick{width:20px;height:20px;border-radius:var(--r-full);background:var(--seed-color-bg-brand-solid);color:var(--seed-color-fg-neutral-inverted);display:grid;place-items:center;font-size:11px;font-weight:700;flex:0 0 auto}
+.check{display:flex;gap:10px;align-items:center;background:var(--seed-color-bg-neutral-weak);border-radius:var(--r-l);padding:13px 14px;font-size:14px;font-weight:500;color:var(--seed-color-fg-neutral);line-height:1.6}
+.check .tick{width:20px;height:20px;border-radius:var(--r-full);background:var(--seed-color-bg-brand-solid);color:var(--seed-color-fg-neutral-inverted);display:grid;place-items:center;font-size:12px;font-weight:500;flex:0 0 auto}
 
 /* ---------- talisman art (일러스트 그라디언트 — 문서화된 예외 3) ---------- */
 .talisman-art{
@@ -292,15 +292,15 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 
 /* ---------- toast ---------- */
 .toast{
-  position:absolute;bottom:22px;left:20px;right:20px;z-index:20;
+  position:absolute;bottom:var(--spacing-20);left:var(--spacing-20);right:var(--spacing-20);z-index:20;
   background:var(--seed-color-bg-brand-solid);color:#fff;border-radius:var(--r-l);
-  padding:14px 16px;font-size:14px;font-weight:500;line-height:1.45;
+  padding:14px 16px;font-size:14px;font-weight:500;line-height:1.6;
   box-shadow:var(--shadow-toast);display:flex;gap:10px;align-items:center;
   opacity:0;transform:translateY(8px);pointer-events:none;
   transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out);
 }
 .toast.show{opacity:1;transform:none}
-.toast .tick{width:20px;height:20px;border-radius:var(--r-full);background:var(--seed-color-fg-neutral-inverted);color:var(--seed-color-fg-neutral);display:grid;place-items:center;font-size:11px;font-weight:700;flex:0 0 auto}
+.toast .tick{width:20px;height:20px;border-radius:var(--r-full);background:var(--seed-color-fg-neutral-inverted);color:var(--seed-color-fg-neutral);display:grid;place-items:center;font-size:12px;font-weight:500;flex:0 0 auto}
 
 /* ---------- loading — figma 183:3050 반영: 차오르는 링 + 신 이미지 순환 ---------- */
 .loader-wrap{position:relative;width:160px;height:160px;margin:32px auto 30px;flex:0 0 auto;align-self:center}
@@ -359,7 +359,6 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .shelf-dark .h-page{color:#fffdfc;word-break:keep-all}
 .shelf-dark .lead{color:rgba(255,253,252,.82);line-height:1.6;margin-bottom:0;font-weight:500}
 .screen.shelf-dark{position:relative}
-.shelf-dark .topbar{height:48px} /* 신단 위 빈 공간(~206px)에 타이틀+카피가 들어가도록 높이만 압축. 위 여백은 28로 통일(2026-09-25 결정) */
 .shelf-dark .h-page{margin:2px 0 6px;font-size:23px}
 .shelf-dark .lead{font-size:14px}
 .shelf-dark .body{position:relative;z-index:1;pointer-events:none} /* 텍스트는 배경 위, 탭은 아래 셀로 통과 */
@@ -523,7 +522,6 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .body:has(.flip-scene){padding-bottom:20px}
 .body:has(.flip-scene) .h-page{margin:0 0 6px}
 .body:has(.flip-scene) .lead{margin-bottom:2px}
-.screen:has(.flip-scene) .topbar{height:44px}
 
 /* ---------- 11 저장/공유 — figma 235:2181 (신별 부적 카드 + 블러 배경) ---------- */
 /* overflow는 배경 래퍼에만 — .share-screen에 걸면 하단 버튼 sticky가 죽는다 */
