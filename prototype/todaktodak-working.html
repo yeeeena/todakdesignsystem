@@ -122,8 +122,8 @@ body{
 .body{flex:1;padding:0 24px 8px;display:flex;flex-direction:column}
 .topbar{
   position:sticky;top:0;z-index:5;flex:0 0 auto;
-  height:56px;margin-top:28px;padding:0 8px;
-  display:flex;align-items:center;justify-content:space-between;background:var(--seed-color-bg-layer-default);
+  height:56px;margin-top:var(--spacing-28);padding:0 8px;
+  display:flex;align-items:center;background:var(--seed-color-bg-layer-default);
 }
 .icon-btn{
   width:40px;height:40px;border:0;background:transparent;border-radius:var(--r-m);
@@ -131,7 +131,8 @@ body{
 }
 .icon-btn svg{width:24px;height:24px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .icon-btn:active{background:var(--seed-color-bg-neutral-weak)}
-.topbar .ctx{font-size:13px;font-weight:600;color:var(--seed-color-fg-neutral-subtle);padding:0 12px}
+.topbar .ctx{flex:1 1 auto;min-width:0;text-align:center;font-size:13px;font-weight:600;color:var(--seed-color-fg-neutral-subtle);padding:0 12px}
+.topbar .tb-side{flex:0 0 auto;width:40px} /* 라벨을 가운데 두기 위한 균형 자리 (2026-09-25 결정) */
 
 /* ---------- typography (TDS ramp) ---------- */
 .h-page{font-size:24px;line-height:1.3;letter-spacing:-0.02em;font-weight:700;margin:8px 0 8px;color:var(--seed-color-fg-neutral)}
@@ -218,7 +219,7 @@ h3{font-size:17px;line-height:1.45;font-weight:600;margin:0 0 6px;letter-spacing
 .chip{
   min-height:36px;padding:8px 14px;border-radius:var(--r-full);
   border:1px solid var(--seed-color-stroke-neutral);background:var(--seed-color-bg-neutral-solid);
-  font-size:14px;font-weight:500;color:var(--seed-color-fg-neutral);cursor:pointer;font-family:inherit;
+  font-size:14px;font-weight:500;line-height:1.6;color:var(--seed-color-fg-neutral);cursor:pointer;font-family:inherit;
   display:inline-flex;align-items:center;letter-spacing:-0.005em;
   transition:background var(--dur-base) var(--ease),color var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease);
 }
@@ -358,7 +359,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .shelf-dark .h-page{color:#fffdfc;word-break:keep-all}
 .shelf-dark .lead{color:rgba(255,253,252,.82);line-height:1.6;margin-bottom:0;font-weight:500}
 .screen.shelf-dark{position:relative}
-.shelf-dark .topbar{margin-top:24px;height:48px} /* 신단 위 빈 공간(~206px)에 타이틀+카피가 들어가도록 압축 */
+.shelf-dark .topbar{height:48px} /* 신단 위 빈 공간(~206px)에 타이틀+카피가 들어가도록 높이만 압축. 위 여백은 28로 통일(2026-09-25 결정) */
 .shelf-dark .h-page{margin:2px 0 6px;font-size:23px}
 .shelf-dark .lead{font-size:14px}
 .shelf-dark .body{position:relative;z-index:1;pointer-events:none} /* 텍스트는 배경 위, 탭은 아래 셀로 통과 */
@@ -522,7 +523,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .body:has(.flip-scene){padding-bottom:20px}
 .body:has(.flip-scene) .h-page{margin:0 0 6px}
 .body:has(.flip-scene) .lead{margin-bottom:2px}
-.screen:has(.flip-scene) .topbar{margin-top:14px;height:44px}
+.screen:has(.flip-scene) .topbar{height:44px}
 
 /* ---------- 11 저장/공유 — figma 235:2181 (신별 부적 카드 + 블러 배경) ---------- */
 /* overflow는 배경 래퍼에만 — .share-screen에 걸면 하단 버튼 sticky가 죽는다 */
@@ -530,7 +531,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .share-bgwrap{position:absolute;inset:0;overflow:hidden}
 .share-bg{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(48px);transform:scale(1.15)}
 .share-dim{position:absolute;inset:0;background:var(--dbg);opacity:.5}
-.share-screen .topbar{position:relative;z-index:1;margin-top:32px;height:56px;background:transparent;justify-content:flex-start;padding:0 16px}
+.share-screen .topbar{position:relative;z-index:1;height:56px;background:transparent;padding:0 16px}
 .share-screen .icon-btn{color:var(--surface)}
 .share-screen .icon-btn:active{background:rgba(255,253,252,.14)}
 .share-head{position:relative;z-index:1;padding:0 24px}
@@ -595,7 +596,7 @@ const backSvg='<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>';
 /* 닫기도 뒤로가기와 같은 아이콘 문법(24px stroke 1.8 SVG)으로 — 문자 ✕는 굵기·정렬이 폰트에 끌려간다 */
 const closeSvg='<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const homeSvg='<svg viewBox="0 0 24 24"><path d="M3 11.5L12 4l9 7.5"/><path d="M5.5 10v9h13v-9"/></svg>';
-function topbar(backGo,ctx,home){return `<div class="topbar">${backGo?`<button class="icon-btn" data-go="${backGo}">${home?homeSvg:backSvg}</button>`:'<span style="width:40px"></span>'}<span class="ctx">${ctx||''}</span></div>`}
+function topbar(backGo,ctx,home){return `<div class="topbar">${backGo?`<button class="icon-btn" data-go="${backGo}">${home?homeSvg:backSvg}</button>`:'<span class="tb-side"></span>'}<span class="ctx">${ctx||''}</span><span class="tb-side"></span></div>`}
 function cta(label,go,opts={}){return `<div class="cta-bar"><button class="btn btn-xl btn-primary" ${opts.disabled?'disabled':''} ${go?`data-go="${go}"`:''} ${opts.toast?`data-toast="${opts.toast}"`:''}>${label}</button></div>`}
 /* 고민 정리 단계 표시 — 일러스트 위 상단 오버레이 (figma 207:2224) */
 function stepHud(step){return `<div class="step-hud"><b><span>고민정리</span><span>${step}/3</span></b><div class="step-bar"><i style="width:${step*60}px"></i></div></div>`}
