@@ -127,7 +127,7 @@ body{
 }
 .icon-btn{
   width:40px;height:40px;border:0;background:transparent;border-radius:var(--r-m);
-  display:grid;place-items:center;cursor:pointer;color:var(--grey-800);
+  display:grid;place-items:center;cursor:pointer;color:var(--seed-color-fg-neutral-muted);
 }
 .icon-btn svg{width:24px;height:24px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .icon-btn:active{background:var(--seed-color-bg-neutral-weak)}
@@ -168,7 +168,7 @@ h3{font-size:17px;line-height:1.45;font-weight:600;margin:0 0 6px;letter-spacing
 .btn-ghost::after{background:oklch(0 0 0 / 0.06)}
 .btn[disabled]{opacity:var(--disabled-opacity);pointer-events:none}
 .btn + .btn{margin-top:10px}
-.btn-row{display:flex;gap:9px}.btn-row .btn{flex:1;font-size:16px}.btn-row .btn+.btn{margin-top:0} /* 페어 버튼은 t5(16) — 긴 한글 라벨 줄바꿈 방지 */
+.btn-row{display:flex;gap:var(--spacing-12)}.btn-row .btn{flex:1;font-size:16px}.btn-row .btn+.btn{margin-top:0} /* 페어 버튼은 t5(16) — 긴 한글 라벨 줄바꿈 방지 */
 
 /* bottom CTA — 보호 그라디언트(문서화된 예외 1) */
 .cta-bar{
@@ -354,7 +354,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .screen.shelf-dark{background:#5c281e}
 .shelf-dark .topbar{background:#5c281e}
 .shelf-dark .icon-btn{color:#fffdfc}
-.shelf-dark .icon-btn:active{background:rgba(255,253,252,.12)}
+.shelf-dark .icon-btn:active{background:rgba(255,253,252,.14)}
 .shelf-dark .h-page{color:#fffdfc;word-break:keep-all}
 .shelf-dark .lead{color:rgba(255,253,252,.82);line-height:1.6;margin-bottom:0;font-weight:500}
 .screen.shelf-dark{position:relative}
@@ -477,7 +477,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .deity-ctx-name b{font-size:15px;font-weight:700;color:var(--dlabel)}
 .deity-ctx-swap{
   flex:0 0 auto;border:0;background:transparent;padding:6px 2px;cursor:pointer;font-family:inherit;
-  font-size:12px;font-weight:600;color:var(--seed-color-fg-neutral-subtle);text-decoration:underline;text-underline-offset:2px;
+  font-size:12px;font-weight:600;color:var(--seed-color-fg-neutral);text-decoration:underline;text-underline-offset:2px;
 }
 .deity-ctx-fit{margin:10px 0 0;font-size:12px;line-height:1.4;font-weight:500;color:var(--seed-color-fg-neutral-subtle)}
 .deity-ctx-line{
@@ -848,12 +848,12 @@ const screens=[
       <p class="flip-hint" id="flipHint">부적을 탭하면 뒷면을 볼 수 있어요</p>
     </div>
     <div class="card" style="margin-top:20px;margin-bottom:0"><div class="mini-title" style="color:${r.label}">부적에 담은 의미</div><p class="sub-text" style="font-size:14px">${r.talismanMeaning}</p></div>
-    <div class="card gilsang-card" style="margin-top:12px;margin-bottom:0">
+    <div class="card" style="margin-top:12px;margin-bottom:0">
       <div class="mini-title" style="color:${r.label}">배경에 담긴 그림 · ${r.gilsang.name}</div>
       <p class="sub-text" style="font-size:14px">${r.gilsang.body}</p>
       <p class="gilsang-closing">${r.gilsang.closing}</p>
     </div>
-    <div class="card card-tint" style="margin-top:12px;margin-bottom:0"><div class="mini-title" style="color:${r.label}">오늘 다시 기억할 작은 실천</div><p class="body-text">${practiceMap[id]}</p></div>
+    <div class="card card-brand" style="margin-top:12px;margin-bottom:0"><div class="mini-title" style="color:${r.label}">오늘 다시 기억할 작은 실천</div><p class="body-text">${practiceMap[id]}</p></div>
     <button class="landing-link" data-go="talismanFeedback" style="margin-top:12px">부적 피드백 남기기</button>
   </div>
   <div class="bottom-bar">
