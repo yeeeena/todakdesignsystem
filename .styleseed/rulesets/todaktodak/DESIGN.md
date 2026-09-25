@@ -3,7 +3,7 @@
 # 출처: prototype/todaktodak-working.html (화면 정본 SHA-256 bbcd1ee7…와 같은 소스) · 2026-09-19 실측
 title: 토닥토닥 디자인
 last_updated: 2026-09-19
-figma_file: ZnDrdZztaeO9qjmG3ckgL5
+figma_file: ow7XywHI2I3ucWMc13002C   # 디자인 시스템 파일(Foundation·Element·Component). 화면 시안 파일은 ZnDrdZztaeO9qjmG3ckgL5 다
 colors:
   atomic:
     --cream: "#f7f4ed"
@@ -134,7 +134,7 @@ layout:
 
 ## Layout & Spacing
 
-캔버스는 phone-w 폭을 기준으로 하고, 최소 360 폭에서도 글자가 넘치거나 겹치지 않아야 한다(2026-09-19 결정). 본문 좌우 여백은 spacing-24, 카드 안쪽 여백은 spacing-18, 카드 사이는 spacing-12 다. 간격은 spacing 척도 안의 값만 쓰고, 척도 밖 값을 새로 만들지 않는다.
+캔버스는 phone-w 폭을 기준으로 하고, 최소 360 폭에서도 글자가 넘치거나 겹치지 않아야 한다(2026-09-19 결정). 본문 좌우 여백은 spacing-24, 카드 안쪽 여백은 spacing-18, 카드 사이는 spacing-12 다. 카드 안에서는 작은 제목과 질문 사이가 spacing-8, 질문과 답하는 자리 사이가 spacing-12 다(2026-09-25 결정). 간격은 spacing 척도 안의 값만 쓰고, 척도 밖 값을 새로 만들지 않는다.
 
 새 코드의 간격은 var(--spacing-24) 처럼 spacing 토큰으로 쓴다.
 
