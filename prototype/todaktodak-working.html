@@ -190,7 +190,11 @@ h3{font-size:17px;line-height:1.45;font-weight:600;margin:0 0 6px;letter-spacing
 .body-text .dim{color:var(--seed-color-fg-neutral-subtle);font-size:13px;font-weight:500}
 .quote{font-size:17px;line-height:1.5;font-weight:600;letter-spacing:-0.01em;margin:0;color:var(--seed-color-fg-neutral)}
 .big-quote{font-size:20px;line-height:1.45;font-weight:700;letter-spacing:-0.015em;margin:0;color:var(--seed-color-fg-neutral)}
-.card.tappable{cursor:pointer;transition:background var(--dur-base) var(--ease)}
+.card.tappable{
+  cursor:pointer;transition:background var(--dur-base) var(--ease);
+  /* button 요소로 쓰므로 기본 스타일을 카드와 맞춘다 (2026-09-25 결정) */
+  display:block;width:100%;text-align:left;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:inherit;color:inherit;
+}
 .card.tappable:active{background:var(--seed-color-bg-layer-fill)}
 
 /* ---------- hero (landing) ---------- */
@@ -234,6 +238,9 @@ textarea{
 }
 textarea::placeholder{color:var(--fg-quaternary)}
 textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED text-input focus */
+/* 키보드로 이동할 때만 보이는 공통 표시 (2026-09-25 결정) */
+:focus-visible{outline:2px solid var(--seed-color-stroke-brand-solid);outline-offset:2px}
+.shelf-dark :focus-visible,.result-screen :focus-visible,.share-screen :focus-visible,.has-bg-art :focus-visible{outline-color:var(--seed-color-fg-neutral-inverted)}
 
 /* ---------- deity list ---------- */
 .deity-card{
@@ -736,9 +743,9 @@ const screens=[
         <div style="height:8px"></div>
         <p class="lead">작은 실천은 지금 마음의 여력에 맞춰 제안할게요. 무리하게 바꾸라는 말은 하지 않아요.</p>
         <div style="height:20px"></div>
-        <div class="card tappable" data-go="summary"><h3>읽기만 해도 괜찮아요</h3><p class="body-text" style="color:var(--seed-color-fg-neutral-muted);font-size:14px">오늘은 행동보다 마음 정리가 먼저 필요해요.</p></div>
-        <div class="card tappable" data-go="summary"><h3>한 문장 정도는 써볼 수 있어요</h3><p class="body-text" style="color:var(--seed-color-fg-neutral-muted);font-size:14px">보내지 않을 문장, 메모 한 줄처럼 작게 시작해요.</p></div>
-        <div class="card tappable" data-go="summary"><h3>3분 정도 정리해볼 수 있어요</h3><p class="body-text" style="color:var(--seed-color-fg-neutral-muted);font-size:14px">감정이나 내 몫/상대 몫을 짧게 나눠봐요.</p></div>
+        <button class="card tappable" data-go="summary"><h3>읽기만 해도 괜찮아요</h3><p class="body-text" style="color:var(--seed-color-fg-neutral-muted);font-size:14px">오늘은 행동보다 마음 정리가 먼저 필요해요.</p></button>
+        <button class="card tappable" data-go="summary"><h3>한 문장 정도는 써볼 수 있어요</h3><p class="body-text" style="color:var(--seed-color-fg-neutral-muted);font-size:14px">보내지 않을 문장, 메모 한 줄처럼 작게 시작해요.</p></button>
+        <button class="card tappable" data-go="summary"><h3>3분 정도 정리해볼 수 있어요</h3><p class="body-text" style="color:var(--seed-color-fg-neutral-muted);font-size:14px">감정이나 내 몫/상대 몫을 짧게 나눠봐요.</p></button>
         <button class="btn btn-m btn-ghost" data-go="loading">바로 결과 보기</button>
       </div>
       <div class="sheet-foot">
@@ -1153,7 +1160,8 @@ function render(id='landing'){
   if(autoTimer){clearTimeout(autoTimer);autoTimer=null}
   if(loaderCycle){clearInterval(loaderCycle);loaderCycle=null}
   const li=document.getElementById('loaderImg');
-  if(li){let i=0;loaderCycle=setInterval(()=>{i=(i+1)%loaderImgs.length;li.src=loaderImgs[i];},1000)}
+  /* 움직임 줄이기를 켠 기기에서는 아바타를 순환시키지 않는다 — 스스로 반복되는 움직임 (2026-09-25 결정) */
+  if(li&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){let i=0;loaderCycle=setInterval(()=>{i=(i+1)%loaderImgs.length;li.src=loaderImgs[i];},1000)}
   const next={loading:'result',talismanLoading:'talisman'}[s.id];
   if(next){autoTimer=setTimeout(()=>render(next),4800)} /* 신 순환이 보이도록 로딩 체류 연장 */
 }
