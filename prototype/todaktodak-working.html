@@ -17,7 +17,6 @@
   --charcoal: #1c1c1c;   /* primary text, headings, dark buttons — not pure black */
   --offwhite: #fcfbf8;   /* text on dark, subtle highlight */
   /* neutral scale (opacity-based) */
-  --ink-83: rgba(28,28,28,0.83);   /* strong secondary text */
   --ink-82: rgba(28,28,28,0.82);   /* body copy */
   --muted:  #5f5f5d;               /* secondary text, descriptions, captions */
   --ink-40: rgba(28,28,28,0.40);   /* interactive borders, button outlines */
@@ -44,20 +43,22 @@
   /* stroke */
   --seed-color-stroke-brand-solid:      var(--charcoal);
   --seed-color-stroke-neutral:          var(--ink-08);   /* [확장] SEED 문서 외 — 네이밍 규칙 준수 */
-  --seed-color-stroke-neutral-strong:   var(--ink-40);   /* [확장] */
+  --seed-color-stroke-neutral-strong:   var(--ink-40);
+  --seed-color-fg-neutral-placeholder:  var(--ink-40);   /* [확장] 입력창 안내 문구 전용 (2026-09-25 결정) */
   /* layer/overlay [확장] */
   --seed-color-bg-layer-default:        var(--cream);
   --seed-color-bg-layer-fill:           var(--ink-03);
   --seed-color-bg-overlay:              rgba(0,0,0,0.56);
   /* legacy TDS token names → new palette (컴포넌트 CSS 호환 유지) */
-  --grey-800: var(--ink-83);
+  --grey-800: var(--ink-82);
   --grey-400: var(--seed-color-stroke-neutral-strong);
   --grey-300: var(--seed-color-stroke-neutral-strong);
   --grey-200: var(--seed-color-stroke-neutral);
   /* semantic — 안전/실패 화면 전용으로만 유지 */
   /* alpha */
-  --fg-quaternary: var(--seed-color-stroke-neutral-strong);
-  --press-overlay: rgba(0,0,0,0.08);
+  --press-overlay: rgba(0,0,0,0.08);            /* 밝은 면 위 */
+  --press-overlay-inverted: rgba(252,251,248,0.16); /* 어두운 면 위 */
+  --press-overlay-subtle: rgba(0,0,0,0.06);     /* 면이 없는 버튼 */
   --disabled-opacity: 0.30;
   /* semantic alias */
   --border-secondary: var(--seed-color-stroke-neutral);
@@ -163,10 +164,10 @@ h3{font-size:17px;line-height:1.45;font-weight:600;margin:0 0 6px;letter-spacing
 .btn-xl{height:52px;border-radius:12px;font-size:18px;font-weight:700;line-height:1.33} /* SEED ActionButton large: x13(52) · r3(12) · t6(18) */
 .btn-m{height:40px;border-radius:8px;font-size:14px;font-weight:700;line-height:1.36} /* SEED medium: x10(40) · r2(8) · t4(14) */
 .btn-primary{background:var(--seed-color-bg-brand-solid);color:var(--seed-color-fg-neutral-inverted)}
-.btn-primary::after{background:rgba(252,251,248,.16)} /* 다크 버튼 pressed는 밝은 오버레이 */
+.btn-primary::after{background:var(--press-overlay-inverted)}
 .btn-secondary{background:var(--seed-color-bg-neutral-solid);color:var(--seed-color-fg-neutral);box-shadow:inset 0 0 0 1px var(--seed-color-stroke-neutral-strong)}
 .btn-ghost{background:transparent;color:var(--seed-color-fg-brand)}
-.btn-ghost::after{background:oklch(0 0 0 / 0.06)}
+.btn-ghost::after{background:var(--press-overlay-subtle)}
 .btn[disabled]{opacity:var(--disabled-opacity);pointer-events:none}
 .btn + .btn{margin-top:10px}
 .btn-row{display:flex;gap:var(--spacing-12)}.btn-row .btn{flex:1;font-size:16px}.btn-row .btn+.btn{margin-top:0} /* 페어 버튼은 t5(16) — 긴 한글 라벨 줄바꿈 방지 */
@@ -236,7 +237,7 @@ textarea{
   font-size:15px;line-height:1.55;letter-spacing:-0.005em;color:var(--seed-color-fg-neutral);
   resize:none;outline:0;transition:border-color var(--dur-base) var(--ease);
 }
-textarea::placeholder{color:var(--fg-quaternary)}
+textarea::placeholder{color:var(--seed-color-fg-neutral-placeholder)}
 textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED text-input focus */
 /* 키보드로 이동할 때만 보이는 공통 표시 (2026-09-25 결정) */
 :focus-visible{outline:2px solid var(--seed-color-stroke-brand-solid);outline-offset:2px}
@@ -300,7 +301,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 /* ---------- toast ---------- */
 .toast{
   position:absolute;bottom:var(--spacing-20);left:var(--spacing-20);right:var(--spacing-20);z-index:20;
-  background:var(--seed-color-bg-brand-solid);color:#fff;border-radius:var(--r-l);
+  background:var(--seed-color-bg-brand-solid);color:var(--seed-color-bg-neutral-solid);border-radius:var(--r-l);
   padding:14px 16px;font-size:14px;font-weight:500;line-height:1.6;
   box-shadow:var(--shadow-toast);display:flex;gap:10px;align-items:center;
   opacity:0;transform:translateY(8px);pointer-events:none;
@@ -345,7 +346,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 .landing-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;transform:translateY(14px)} /* 390×844 풀블리드 아트 — 카피와 겹쳐 보이지 않게 14px 내림 */
 .landing-grad{position:absolute;left:0;right:0;bottom:0;height:196px;background:linear-gradient(180deg,rgba(227,197,167,0) 0,#e3c5a7 23%);pointer-events:none}
 .landing-title{position:relative;font-size:24px;line-height:1.35;letter-spacing:-0.02em;font-weight:700;color:var(--seed-color-fg-neutral);text-align:center;margin:0 0 12px}
-.landing-lead{position:relative;font-size:15px;line-height:1.4;font-weight:600;color:var(--ink-83);text-align:center;margin:0}
+.landing-lead{position:relative;font-size:15px;line-height:1.4;font-weight:600;color:var(--ink-82);text-align:center;margin:0}
 .landing-spacer{flex:1}
 .landing-btns{position:relative;display:flex;gap:10px}
 .btn-pill{
@@ -518,7 +519,7 @@ textarea:focus{border:2px solid var(--seed-color-stroke-brand-solid)} /* SEED te
 /* 말투 예시는 기존 .line-sample(14/600 grey-50 박스)을 그대로 재사용 — 03 상세·신 소개 시트와 같은 부품 */
 .picker-item .line-sample{margin:10px 0 0} /* .sheet .line-sample의 하단 12px 무효화 */
 .picker-item.current .line-sample{background:var(--seed-color-bg-neutral-solid)}
-.picker-go{width:20px;height:20px;flex:0 0 auto;margin-top:10px;color:var(--fg-quaternary)}
+.picker-go{width:20px;height:20px;flex:0 0 auto;margin-top:10px;color:var(--seed-color-stroke-neutral-strong)} /* 안내 문구가 아니라 아이콘이라 선 토큰을 쓴다 */
 .picker-go svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform:rotate(180deg)}
 
 /* 10 길상화 해설 — 유래(본문) + 당신에게(강조 인용). 강조는 굵기로만, 좌측 라인 없음 */
