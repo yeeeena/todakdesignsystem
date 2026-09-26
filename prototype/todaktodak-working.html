@@ -510,7 +510,7 @@ textarea:focus{border:2px solid var(--stroke-brand-primary)} /* SEED text-input 
       <div class="screen" id="screen"></div>
       <div class="toast" id="toast"><span class="tick">✓</span><span id="toastMsg"></span></div>
       <div class="sheet-veil" id="sheetVeil"></div>
-      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="토착신 소개"></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" tabindex="-1" aria-label="토착신 소개"></div>
     </div>
   </div>
 </div>
@@ -1037,9 +1037,9 @@ function openSheet(id){
   sheetEl.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>{
     const deity=el.getAttribute('data-deity');
     if(deity){appState.selectedDeity=deity;appState.deityEntry=true}
-    closeSheet();render(el.getAttribute('data-go'));
+    closeSheet(false);render(el.getAttribute('data-go'));
   }));
-  sheetVeil.classList.add('open');sheetEl.classList.add('open');sheetEl.scrollTop=0;
+  showSheet(`${d.name} 소개`);
 }
 /* 04 — '다른 신 의견 듣기' 시트.
    6신을 한 목록으로 보여주고, 고르면 그 신으로 확정한 뒤 입력 화면을 다시 그린다.
@@ -1065,17 +1065,47 @@ function openDeityPicker(currentId){
   sheetEl.querySelectorAll('[data-pick]').forEach(el=>el.addEventListener('click',()=>{
     appState.selectedDeity=el.getAttribute('data-pick');
     appState.matchedDeity=null;
-    closeSheet();render('input');
+    closeSheet(false);render('input');
   }));
-  sheetVeil.classList.add('open');sheetEl.classList.add('open');sheetEl.scrollTop=0;
+  showSheet('다른 신 고르기');
 }
-function closeSheet(){sheetVeil.classList.remove('open');sheetEl.classList.remove('open')}
-sheetVeil.addEventListener('click',closeSheet);
+/* 시트 초점 처리 (2026-09-26 결정)
+   - 열면 시트 자체로 초점을 옮긴다. 첫 버튼에 두면 낭독기가 제목을 건너뛴다.
+   - Tab 은 시트 안에서만 돈다. 뒤 화면으로 넘어가지 않는다.
+   - Esc 로 닫는다. 베일 탭과 짝이 되는 키보드 동작이다.
+   - 닫으면 열었던 자리로 초점을 되돌리되, 화면이 바뀌는 경우는 되돌리지 않는다. */
+const FOCUSABLE='button:not([disabled]),a[href],input,textarea,select,[tabindex]:not([tabindex="-1"])';
+let sheetOpener=null;
+function onSheetKey(e){
+  if(e.key==='Escape'){e.preventDefault();closeSheet();return}
+  if(e.key!=='Tab')return;
+  const f=[...sheetEl.querySelectorAll(FOCUSABLE)];
+  if(!f.length){e.preventDefault();sheetEl.focus();return}
+  const first=f[0],last=f[f.length-1],at=document.activeElement;
+  if(e.shiftKey&&(at===first||at===sheetEl)){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&at===last){e.preventDefault();first.focus()}
+}
+function showSheet(label){
+  sheetOpener=document.activeElement;
+  sheetEl.setAttribute('aria-label',label);
+  sheetVeil.classList.add('open');sheetEl.classList.add('open');sheetEl.scrollTop=0;
+  sheetEl.focus();
+  document.addEventListener('keydown',onSheetKey);
+}
+function closeSheet(restore=true){
+  if(!sheetEl.classList.contains('open')){sheetOpener=null;return}
+  sheetVeil.classList.remove('open');sheetEl.classList.remove('open');
+  document.removeEventListener('keydown',onSheetKey);
+  const back=sheetOpener;sheetOpener=null;
+  if(restore&&back&&document.contains(back))back.focus();
+  else if(sheetEl.contains(document.activeElement))document.activeElement.blur(); /* 숨은 시트에 초점을 남기지 않는다 */
+}
+sheetVeil.addEventListener('click',()=>closeSheet());
 
 let autoTimer=null,loaderCycle=null;
 function render(id='landing'){
   const s=screens.find(x=>x.id===id)||screens[0];
-  closeSheet();
+  closeSheet(false);
   renderNav(s.id);
   screenEl.classList.toggle('shelf-dark',!!s.dark);
   screenEl.classList.toggle('has-bg-art',!!s.bgArt);
