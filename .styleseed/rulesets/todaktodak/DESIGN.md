@@ -31,6 +31,7 @@ colors:
     --bg-neutral-primary: "var(--surface)"
     --bg-neutral-secondary: "var(--ink-04)"
     --bg-overlay-primary: "rgba(0,0,0,0.56)"
+    --bg-overlay-scrim: "rgba(0,0,0,0.32)"
     --stroke-brand-primary: "var(--charcoal)"
     --stroke-neutral-primary: "var(--ink-08)"
     --stroke-neutral-secondary: "var(--ink-40)"
